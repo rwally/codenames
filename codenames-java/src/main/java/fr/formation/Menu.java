@@ -112,9 +112,9 @@ public class Menu {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
 
-		Boolean ok = false;
+		Boolean mdpOk = false;
 
-		while (!ok) {
+		while (!mdpOk) {
 			System.out.println("1. Connection 2. Inscription");
 
 			int choix = Application.sc.nextInt();
@@ -129,16 +129,16 @@ public class Menu {
 				for (Utilisateur u : listeUtilisateurs) {
 					if (u.getUsername().equals(nom) && u.getPassword().contentEquals(mdp)) {
 						// CONNEXION
-						ok = true;
+						mdpOk = true;
 					}
 				}
 
-				if (!ok) {
+				if (!mdpOk) {
 					System.out.println("Votre login ou votre mot de passe est incorrect.");
 				}
 
 			} else if (choix == 2) {
-				ok = true;
+				mdpOk = true;
 				Application.sc.nextLine();
 				inscription();
 			}
@@ -148,7 +148,7 @@ public class Menu {
 	public void inscription() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
-		boolean ok = false;
+		boolean usernameOk = false;
 
 		System.out.println("Veuillez entrer votre nom");
 		String nom = Application.sc.nextLine();
@@ -156,20 +156,35 @@ public class Menu {
 		String prenom = Application.sc.nextLine();
 		String username = null;
 
-		while (!ok) {
-			ok = true;
+		// Vérification de l'username unique
+		while (!usernameOk) {
+			usernameOk = true;
 			System.out.println("Entrez votre login");
 			username = Application.sc.nextLine();
 			for (Utilisateur u : listeUtilisateurs) {
 				if (u.getUsername().equals(username)) {
-					ok = false;
+					usernameOk = false;
 					System.out.println("Ce login existe déjà");
 				}
 			}
 		}
 
-		System.out.println("Entrez votre mot de passe");
-		String password = Application.sc.nextLine();
+		boolean mdpOK = false;
+		String password = null;
+
+		// Vérification de la bonne saise du mot de passe
+		while (!mdpOK) {
+			System.out.println("Entrez votre mot de passe");
+			password = Application.sc.nextLine();
+			System.out.println("Entrez à nouveau votre mot de passe");
+			String password2 = Application.sc.nextLine();
+
+			if (password.equals(password2)) {
+				mdpOK = true;
+			} else {
+				System.out.println("Les deux mots de passe ne correspondent pas");
+			}
+		}
 
 		Utilisateur utilisateur = new Joueur(0, nom, prenom, username, password);
 		daoUtilisateur.save(utilisateur);
