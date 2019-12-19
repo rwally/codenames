@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.formation.model.Joueur;
 import fr.formation.model.Utilisateur;
 
 public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisateur{
@@ -33,20 +34,40 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 		return listeUtilisateurs;
 	}
 	
+	@Override
+	public Utilisateur findById(Integer id) throws SQLException {
+		Utilisateur entity = new Joueur();
 
+		try {
+			if (db != null) {
+				Statement myStatement = db.createStatement();
+				ResultSet myResult = myStatement.executeQuery(
+						"SELECT * FROM utilisateur WHERE id = " + id);
+
+				while (myResult.next()) {
+					entity = em.getUtilisateur(myResult);	
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("ERR : Création de l'utilisateur échouée");
+			e.printStackTrace();
+		}
+		return entity;
+	}
+	
 	@Override
 	public Utilisateur save(Utilisateur entity) {
 		try {
 			PreparedStatement myStatement = null;
 			if (entity.getId() != 0) { // UPDATE
 				myStatement = db.prepareStatement("UPDATE utilisateur"
-						+ " SET nom = ?, prenom = ?, username = ?, password = ?" + " WHERE PRO_ID = ?");
+						+ " SET nom = ?, prenom = ?, username = ?, password = ?" + " WHERE id = ?");
 				myStatement.setInt(5, entity.getId());
 			} else { // INSERT
 				myStatement = db.prepareStatement(
 						"INSERT INTO utilisateur (nom, prenom, username, password) VALUES (?, ?, ?, ?)");
-
 			}
+			
 			myStatement.setString(1, entity.getNom());
 			myStatement.setString(2, entity.getPrenom());
 			myStatement.setString(3, entity.getUsername());
@@ -63,30 +84,21 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 	}
 
 	@Override
-	public void delete(Utilisateur entity) {
+	public void delete(Utilisateur entity) throws SQLException {
+		deleteById(entity.getId());	
+	}
+
+	@Override
+	public void deleteById(Integer id) throws SQLException {
 		try {
-			PreparedStatement myStatement = db.prepareStatement("DELETE FROM utilisateur" + " WHERE PRO_ID = ?");
-			myStatement.setInt(1, entity.getId());
+			PreparedStatement myStatement = db.prepareStatement("DELETE FROM utilisateur" + " WHERE id = ?");
+			myStatement.setInt(1, id);
 			myStatement.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("ERR : Objet non supprimé.");
+			System.out.println("ERR : Utilisateur non supprimé.");
 		}
-		
-	}
-
-
-	@Override
-	public Utilisateur findById(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void deleteById(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
 		
 	}
 

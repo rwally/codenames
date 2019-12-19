@@ -106,8 +106,24 @@ public class DAOMotSQL extends DAOConnectionSQL implements IDAOMot {
 		myStatement.setInt(1,taille);
 		ResultSet myResult = myStatement.executeQuery();
 		
+		int compteur = 0;
+		
 		while(myResult.next()) {
 			mots.add(em.getMot(myResult));
+			myStatement = db.prepareStatement("UPDATE mot SET used = 1 where id = ?");
+			myStatement.setInt(1,myResult.getInt("id"));
+			compteur++;
+		}
+		
+		if (compteur < taille) {
+			mots.clear();
+			myStatement = db.prepareStatement("UPDATE mot SET used = 0");
+			myResult = myStatement.executeQuery("SELECT * FROM mot WHERE used = 0 order by rand() limit " + taille);
+			while (myResult.next()) {
+				mots.add(em.getMot(myResult));
+				myStatement = db.prepareStatement("UPDATE mot SET used = 1 where id = ?");
+				myStatement.setInt(1,myResult.getInt("id"));
+			}
 		}
 		
 		
