@@ -1,8 +1,23 @@
 package fr.formation.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 public class Joueur extends Utilisateur {
 	
+	@OneToMany
+	@JoinColumn(name = "equipe")
 	private Equipe equipe;
+	
+	@Column (name = "role")
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	
 	public Role getRole() {

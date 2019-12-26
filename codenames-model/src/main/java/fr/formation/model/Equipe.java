@@ -3,15 +3,43 @@ package fr.formation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "equipe")
 public class Equipe {
 
-	private List<Joueur> joueurs;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	
+	@Column(name = "nom")
 	private String nom;
+	
+	@OneToMany(mappedBy = "equipe")
+	private List<Joueur> joueurs;
+	
+	@Column(name = "toursGagnes")
 	private int toursGagnes;
 	
 	private static List<Joueur> EquipeBleue = new ArrayList<Joueur>();
 	private static List<Joueur> EquipeRouge = new ArrayList<Joueur>();
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public static List<Joueur> getEquipeBleue() {
 		return EquipeBleue;
 	}
