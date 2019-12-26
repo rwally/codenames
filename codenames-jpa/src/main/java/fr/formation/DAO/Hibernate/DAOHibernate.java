@@ -1,9 +1,8 @@
 package fr.formation.DAO.Hibernate;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import fr.formation.DAO.EntityManager;
 
 public abstract class DAOHibernate {
 	
@@ -17,7 +16,7 @@ public abstract class DAOHibernate {
 	
 	public DAOHibernate() {
 		if(emf == null) {//Création de EMF si non existant
-			emf = Persistence.createEntityManagerFactory("EmusicUnit");
+			emf = Persistence.createEntityManagerFactory("CodeNameUnit");
 		}
 		
 		if(emf != null) {//Création de EM pour chaque instance
