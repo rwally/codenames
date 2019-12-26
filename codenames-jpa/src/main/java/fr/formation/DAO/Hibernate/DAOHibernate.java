@@ -2,6 +2,7 @@ package fr.formation.DAO.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public abstract class DAOHibernate {
@@ -12,7 +13,7 @@ public abstract class DAOHibernate {
 	
 	protected static EntityManagerFactory emf = null;
 	protected EntityManager em = null;
-	
+	protected EntityTransaction tx = null;
 	
 	public DAOHibernate() {
 		if(emf == null) {//Création de EMF si non existant
@@ -21,6 +22,7 @@ public abstract class DAOHibernate {
 		
 		if(emf != null) {//Création de EM pour chaque instance
 			this.em = emf.createEntityManager();
+			this.tx=em.getTransaction();
 		}
 	}
 	

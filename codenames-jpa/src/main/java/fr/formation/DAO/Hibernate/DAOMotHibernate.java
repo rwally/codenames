@@ -18,7 +18,6 @@ import fr.formation.model.Mot;
 
 public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 
-	private EntityTransaction tx = em.getTransaction();
 	
 	@Override
 	public List<Mot> findAll() throws SQLException {
@@ -92,7 +91,7 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 	
 	public List<Mot> creerListeMots(Grille maGrille) throws SQLException{
 		int taille = maGrille.getDifficulte().getValeur()*maGrille.getDifficulte().getValeur();
-		TypedQuery<Mot> myQuery = em.createQuery("select m from Mot m order by random() limit :taille", Mot.class);
+		TypedQuery<Mot> myQuery = em.createQuery("select m from Mot m limit :taille", Mot.class);
 		myQuery.setParameter("taille", taille);
 
 		return myQuery.getResultList();

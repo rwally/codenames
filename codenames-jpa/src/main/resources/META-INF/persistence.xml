@@ -9,10 +9,19 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>fr.formation.model.Utilisateur</class>
 		<class>fr.formation.model.Mot</class>
+		<class>fr.formation.model.Case</class>
+		<class>fr.formation.model.Grille</class>
+		<class>fr.formation.model.Partie</class>
+		<class>fr.formation.model.Joueur</class>
+		<class>fr.formation.model.Participation</class>
+		<class>fr.formation.model.Tour</class>
+		<class>fr.formation.model.Chat</class>
+		<class>fr.formation.model.Equipe</class>
+			
 		
 		<properties>
 			<property name="hibernate.connection.url"
-				value="jdbc:mysql://172.16.44.112:3306/emusic?serverTimezone=UTC" />
+				value="jdbc:mysql://172.16.44.112:3306/code_names?serverTimezone=UTC" />
 			<property name="hibernate.connection.driver"
 				value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.user" value="root" />

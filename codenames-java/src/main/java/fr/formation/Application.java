@@ -28,8 +28,21 @@ public class Application {
 		Menu menu = new Menu();
 		menu.connection();*/
 	 
-		/* TEST CREATION GRILLE
-		   
+		
+		  
+		System.out.println("test");
+		
+		/* TEST REAZ
+		IDAOMot daoMot = new DAOMotHibernate();
+		try {
+			for(Mot m : daoMot.findAll()) {
+				System.out.println(m.getLibelle());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		Grille grilleTest = creationGrille();
 		Case[][] caseTest = grilleTest.getGrille();
 		for(int i=0;i<grilleTest.getDifficulte().getValeur();i++) {
