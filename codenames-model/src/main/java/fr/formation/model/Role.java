@@ -3,6 +3,7 @@ package fr.formation.model;
 import java.util.List;
 import java.util.Random;
 
+
 public enum Role {
 	master, agent;
 	
