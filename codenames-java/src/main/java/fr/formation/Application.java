@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.formation.DAO.IDAOMot;
+import fr.formation.DAO.Hibernate.DAOHibernate;
 import fr.formation.DAO.Hibernate.DAOMotHibernate;
 import fr.formation.model.Case;
 import fr.formation.model.Difficulte;
@@ -32,7 +33,7 @@ public class Application {
 		  
 		System.out.println("test");
 		
-		/* TEST REAZ
+		
 		IDAOMot daoMot = new DAOMotHibernate();
 		try {
 			for(Mot m : daoMot.findAll()) {
@@ -42,6 +43,8 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/*
 	
 		Grille grilleTest = creationGrille();
 		Case[][] caseTest = grilleTest.getGrille();
@@ -53,7 +56,7 @@ public class Application {
 		}
 		*/
 		
-
+		DAOHibernate.close();
 		
 	 
 	}

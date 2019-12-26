@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -12,7 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 public class Joueur extends Utilisateur {
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "equipe")
 	private Equipe equipe;
 	

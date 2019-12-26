@@ -26,11 +26,11 @@ public class Grille {
 	@Enumerated(EnumType.STRING)
 	private Difficulte difficulte;
 	
-	@OneToMany(mappedBy = "grille")
-	private Case grille[][];
+	@OneToMany(mappedBy = "laGrille")
+	private Case[][] grille;
 	
 	private Random random = new Random();
-	int nombreRandom; 
+	int nombreRandom;
 	
 	
 	public Grille(Difficulte difficulte, Case[][] grille) {
