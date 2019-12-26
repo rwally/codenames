@@ -3,17 +3,27 @@ package fr.formation.model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "grille")
 public class Grille {
 
-	Difficulte difficulte;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	private Difficulte difficulte;
 	private Case grille[][];
 	
-	Random random = new Random();
+	private Random random = new Random();
 	int nombreRandom; 
 	
-	
-	
-
 	
 	public Grille(Difficulte difficulte, Case[][] grille) {
 		this.difficulte = difficulte;
@@ -27,6 +37,13 @@ public class Grille {
 	}
 	
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Difficulte getDifficulte() {
 		return difficulte;

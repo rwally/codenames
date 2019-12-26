@@ -1,4 +1,4 @@
-package fr.formation.DAO;
+package fr.formation.DAO.SQL;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.formation.DAO.IDAOUtilisateur;
 import fr.formation.model.Joueur;
 import fr.formation.model.Utilisateur;
 

@@ -1,4 +1,4 @@
-package fr.formation.DAO;
+package fr.formation.DAO.SQL;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import fr.formation.DAO.IDAOMot;
 import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 

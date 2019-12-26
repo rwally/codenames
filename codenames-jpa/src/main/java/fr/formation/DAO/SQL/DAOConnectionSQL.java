@@ -1,10 +1,8 @@
-package fr.formation.DAO;
+package fr.formation.DAO.SQL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import fr.formation.DAO.EntityManager;
 
 public abstract class DAOConnectionSQL {
 	

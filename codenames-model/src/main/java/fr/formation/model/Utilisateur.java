@@ -1,11 +1,32 @@
 package fr.formation.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "utilisateur")
 public abstract class Utilisateur {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	protected int id;
-	protected String username;
-	protected String password;
+	
+	@Column(name = "nom", nullable = false)
 	protected String nom;
+	
+	@Column(name = "prenom", nullable = false)
 	protected String prenom;
+	
+	@Column(name = "username", unique = true, nullable = false)
+	protected String username;
+	
+	@Column(name = "password", nullable = false)
+	protected String password;
 
 
 	public Utilisateur(int id, String nom, String prenom, String username, String password) {

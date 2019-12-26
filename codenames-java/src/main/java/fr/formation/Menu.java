@@ -3,14 +3,11 @@ package fr.formation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import fr.formation.model.Partie;
-import fr.formation.model.Utilisateur;
-import fr.formation.DAO.DAOUtilisateurSQL;
 import fr.formation.DAO.IDAOUtilisateur;
-import fr.formation.model.Equipe;
+import fr.formation.DAO.SQL.DAOUtilisateurSQL;
 import fr.formation.model.Joueur;
+import fr.formation.model.Utilisateur;
 
 public class Menu {
 	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurSQL();
