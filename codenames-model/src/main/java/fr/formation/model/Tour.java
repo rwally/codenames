@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.formation.Application;
+
 
 public class Tour {
 	
@@ -29,7 +29,7 @@ public class Tour {
 
 		while (!saisieOK) {
 			System.out.println("Quel mot choisissez vous ?");
-			String mot = Application.sc.nextLine();
+			String mot = sc.nextLine();
 
 			for (Case[] c : grille.getGrille()) {
 				for (Case ca : c) {

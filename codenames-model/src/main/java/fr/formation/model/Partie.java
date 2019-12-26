@@ -4,17 +4,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.formation.DAO.DAOMotSQL;
+
 
 public class Partie {
-	private List<Case> plateau;
+	private Grille grille;
 	private List<Participation> joueurs;
 	
+	//A FAIRE DANS APPLICATION
+	/*
 	public Grille creationGrille() {
 		// CREATION DE LA GRILLE
 
 		// Init de la liste de mots
-		DAOMotSQL daoMot = new DAOMotSQL();
+		
+		//DAOMotSQL daoMot = new DAOMotSQL();
 		ArrayList<Mot> listeMots = new ArrayList<Mot>();
 
 		// Init de la liste de cases
@@ -44,4 +47,15 @@ public class Partie {
 
 		return grille;
 	}
+	*/
+	
+	public Partie(Grille grille, List<Participation> joueurs) {
+		this.grille = grille;
+		this.joueurs = joueurs;
+	}
+	
+	public Partie() {
+	}
+	
+	
 }

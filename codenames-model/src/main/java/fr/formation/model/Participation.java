@@ -9,6 +9,10 @@ public class Participation {
 		this.role = role;
 		this.joueur = joueur;
 	}
+	
+	public Participation(Role role) {
+		this.role = role;
+	}
 
 	public Participation() {
 		
