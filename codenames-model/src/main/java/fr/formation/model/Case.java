@@ -1,6 +1,7 @@
 package fr.formation.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Case {
 	
@@ -55,7 +56,7 @@ public class Case {
 		this.mot = mot;
 	}
 	
-	public ArrayList<Case> creerListeCases(ArrayList<Mot> listeMots, Grille maGrille){
+	public ArrayList<Case> creerListeCases(List<Mot> listeMots, Grille maGrille){
 		
 		ArrayList<Case> cases = new ArrayList<Case>();
 		int taille = 0, r = 0,b = 0,w = 0; //rouge bleu w=blanc

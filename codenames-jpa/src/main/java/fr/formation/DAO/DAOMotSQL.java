@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fr.formation.model.Grille;
 import fr.formation.model.Mot;
@@ -41,6 +42,7 @@ public class DAOMotSQL extends DAOConnectionSQL implements IDAOMot {
 		return monMot;
 	}
 	
+	/*
 	@Override
 	public ArrayList<Mot> findByNom(String nom) throws SQLException {
 		// TODO Auto-generated method stub
@@ -54,6 +56,7 @@ public class DAOMotSQL extends DAOConnectionSQL implements IDAOMot {
 		}
 		return mesMots;
 	}
+	*/
 
 	@Override
 	public Mot save(Mot entity) throws SQLException {
@@ -128,6 +131,12 @@ public class DAOMotSQL extends DAOConnectionSQL implements IDAOMot {
 		
 		
 		return mots;
+	}
+
+	@Override
+	public Optional<Mot> findByNom(String nom) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
