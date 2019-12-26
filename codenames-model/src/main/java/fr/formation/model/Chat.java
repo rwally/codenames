@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,7 +32,8 @@ public class Chat {
 	private String message;
 
 	
-	@OneToMany(mappedBy = "chats")
+	@ManyToOne
+	@JoinColumn(name = "CHAT_PARTICIPATION")
 	private Participation participation;
 	
 	public int getId() {
