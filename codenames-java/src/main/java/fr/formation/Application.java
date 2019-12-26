@@ -46,15 +46,15 @@ public class Application {
 		
 		/*
 	
-		Grille grilleTest = creationGrille();
-		Case[][] caseTest = grilleTest.getGrille();
-		for(int i=0;i<grilleTest.getDifficulte().getValeur();i++) {
-			System.out.println();
-			for(int j=0;j<grilleTest.getDifficulte().getValeur();j++) {
-				System.out.println(caseTest[i][j].getMot().getLibelle()+"\t");
-			}
-		}
-		*/
+//		Grille grilleTest = creationGrille();
+//		Case[][] caseTest = grilleTest.getGrille();
+//		for(int i=0;i<grilleTest.getDifficulte().getValeur();i++) {
+//			System.out.println();
+//			for(int j=0;j<grilleTest.getDifficulte().getValeur();j++) {
+//				System.out.println(caseTest[i][j].getMot().getLibelle()+"\t");
+//			}
+//		}
+
 		
 		DAOHibernate.close();
 		
