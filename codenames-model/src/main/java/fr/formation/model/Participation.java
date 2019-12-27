@@ -29,6 +29,12 @@ public class Participation {
 	@OneToMany(mappedBy = "saParticipation")
 	private List<Joueur> joueurs;
 	
+	@ManyToOne
+	@JoinColumn(name = "PARTIE_ID")
+	private Partie maPartie;
+	
+	@OneToMany(mappedBy = "participation")
+	private List<Chat> chats;
 	
 	public List<Joueur> getJoueurs() {
 		return joueurs;
@@ -37,13 +43,6 @@ public class Participation {
 	public void setJoueurs(List<Joueur> joueurs) {
 		this.joueurs = joueurs;
 	}
-
-	@ManyToOne
-	@JoinColumn(name = "PARTIE_ID")
-	private Partie maPartie;
-	
-	@OneToMany(mappedBy = "participation")
-	private List<Chat> chats;
 	
 	
 	public Participation(Role role, List<Joueur> joueurs) {

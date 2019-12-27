@@ -14,29 +14,26 @@ import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 
 public class Application {
-	
+
 	public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	
+
 		/*
-	 Menu monMenu = new Menu();
-	 
-	 monMenu.menuPrincipal();
-	 */
+		 * Menu monMenu = new Menu();
+		 * 
+		 * monMenu.menuPrincipal();
+		 */
 		/*
-		Menu menu = new Menu();
-		menu.connection();*/
-	 
-		
-		  
+		 * Menu menu = new Menu(); menu.connection();
+		 */
+
 		System.out.println("test");
-		
-		
+
 		IDAOMot daoMot = new DAOMotHibernate();
 		try {
-			for(Mot m : daoMot.findAll()) {
+			for (Mot m : daoMot.findAll()) {
 				System.out.println(m.getLibelle());
 			}
 		} catch (SQLException e) {
@@ -55,46 +52,7 @@ public class Application {
 //			}
 //		}
 
-		
-		DAOHibernate.close();
-		
-	 
 	}
-	
-	/* A MODIFIER REAZ
-	public static Grille creationGrille() {
-		
-		//Init de la liste de mots
-		IDAOMot daoMot = new DAOMotHibernate();
-		List<Mot> listeMots = new ArrayList<Mot>();
-		
-		//Init de la liste de cases
-		Case maCase=new Case();
-		ArrayList<Case> cases = new ArrayList<Case>();
-		
-		//Init de la grille
-		Grille grille = new Grille();
-		grille.setDifficulte(Difficulte.facile);
-		grille.setGrille(grille.getDifficulte().getValeur());
-		Case[][] maGrille = grille.getGrille();
-		
-		//Creation de la liste de mots
-		try {
-			listeMots=daoMot.creerListeMots(grille);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		//Creation de la liste de cases avec les mots/couleurs
-		cases=maCase.creerListeCases(listeMots,grille);
-		
-		//Affectation de l'attribut grille dans les instances de classe Case
-		for(Case uneCase : cases) {
-			uneCase.setGrille(grille); //Inutile pour l'instant mais peut servir plus tard on sait jamais t'a vu
-		}
-		
-		//Creation de la grille avec les cases remplies
-		maGrille=grille.creerGrille(cases);
 
 		return grille;
 		

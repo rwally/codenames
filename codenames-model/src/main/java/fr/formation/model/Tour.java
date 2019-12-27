@@ -4,12 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
+@Entity
+@Table(name = "tour")
 public class Tour {
-	
-	List<Mot> CodeNames = new ArrayList<Mot>();
-	Scanner sc = new Scanner(System.in);
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	//private List<Mot> CodeNames = new ArrayList<Mot>();
 
 //	public Case voteGlobal(List<Case> votes) {
 //		Case maxCase = null;
@@ -22,10 +32,19 @@ public class Tour {
 //	}
 	
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Case voteJoueur(Grille grille) {
 		Case maCase = new Case();
 		maCase = null;
 		boolean saisieOK = false;
+		Scanner sc = new Scanner(System.in);
 
 		while (!saisieOK) {
 			System.out.println("Quel mot choisissez vous ?");

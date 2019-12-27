@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -22,7 +23,8 @@ public class Chat {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name ="CHAT_JOUEUR")
+	@ManyToOne
+	@JoinColumn(name ="CHAT_JOUEUR")
 	private Participation joueur;
 	
 	@Column(name ="CHAT_DATE")

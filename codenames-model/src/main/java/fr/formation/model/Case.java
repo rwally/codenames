@@ -16,26 +16,27 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "case")
+@Table(name = "[case]")
 public class Case {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	
 	@Column(name = "couleur")
 	@Enumerated(EnumType.STRING)
 	private Couleur couleur;
 	
+	@Column(name = "trouver")
+	private boolean trouver;
+	
 	@OneToOne
-	@JoinColumn(name = "mot_id")
+	@JoinColumn(name = "mot")
 	private Mot mot;
 	
 	@ManyToOne
-	@JoinColumn(name = "grille_id")
+	@JoinColumn(name = "grille")
 	private Grille grille;
-	
-	@Column(name = "trouver")
-	private boolean trouver=false;
 	
 	public int getId() {
 		return id;

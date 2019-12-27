@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +32,8 @@ public class Grille {
 	@OneToMany(mappedBy = "grille")
 	private List<Case> cases;
 	
+	@OneToOne(mappedBy = "grille")
+	private Partie partie;
 	
 	
 	public Grille(Difficulte difficulte, List<Case> cases) {
@@ -44,6 +47,19 @@ public class Grille {
 		
 	}
 	
+	
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
+
 
 	public int getId() {
 		return id;

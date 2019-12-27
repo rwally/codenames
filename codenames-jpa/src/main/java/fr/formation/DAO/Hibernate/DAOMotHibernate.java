@@ -77,7 +77,7 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 	@Override
 	public Optional<Mot> findByNom(String nom) {
 		// TODO Auto-generated method stub
-		TypedQuery<Mot> myQuery = em.createQuery("select p from Produit p where p.libelle = :nom", Mot.class);
+		TypedQuery<Mot> myQuery = em.createQuery("select m from Mot m where m.libelle = :nom", Mot.class);
 		myQuery.setParameter("nom", nom);
 		try {
 			
