@@ -1,14 +1,13 @@
 package fr.formation.DAO.Hibernate;
 
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
-import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import fr.formation.DAO.IDAOMot;
@@ -90,11 +89,22 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 	}
 	
 	public List<Mot> creerListeMots(Grille maGrille){
+		
+		List<Mot> mots = new ArrayList<Mot>();
 		int taille = maGrille.getDifficulte().getValeur()*maGrille.getDifficulte().getValeur();
-		TypedQuery<Mot> myQuery = em.createQuery("select m from Mot m limit :taille", Mot.class);
-		myQuery.setParameter("taille", taille);
+		
+		Random rand = new Random();
+		int min=1, max=698, nombreRandom;
 
-		return myQuery.getResultList();
+		for(int i=0;i<taille;i++) {
+			nombreRandom = rand.nextInt(max-min+1)+min;
+			mots.add(em.createQuery("select m from Mot m where id= :nombreRandom", Mot.class)
+					.setParameter("nombreRandom", nombreRandom)
+					.getSingleResult()
+					);
+		}
+		
+		return mots;
 	}
 
 }

@@ -11,7 +11,7 @@ import fr.formation.model.Grille;
 
 public interface IDAOGrille extends IDAO<Grille, Integer>{
 	public Optional<Grille> findByNom(String nom) throws SQLException;
-	public Grille creerGrille(ArrayList<Case> cases);
+	public Grille creerGrille(List<Case> cases);
 	
 
 }
