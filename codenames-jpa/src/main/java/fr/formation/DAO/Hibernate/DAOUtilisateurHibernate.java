@@ -24,13 +24,13 @@ public class DAOUtilisateurHibernate extends DAOHibernate implements IDAOUtilisa
 		return em.find(Utilisateur.class, id);
 	}
 	
-	public Optional<Joueur> findByNom(String nom) {
+	public Optional<Utilisateur> findByNom(String nom) {
 		// TODO Auto-generated method stub
 		try {
 //			
 //			
 			return  Optional.of(em
-					.createQuery("select u from Utilisateur u where u.nom = :nom", Joueur.class)
+					.createQuery("select u from Utilisateur u where u.nom = :nom", Utilisateur.class)
 					.setParameter("nom", nom)
 					.getSingleResult());
 		}
@@ -41,19 +41,19 @@ public class DAOUtilisateurHibernate extends DAOHibernate implements IDAOUtilisa
 		
 	}
 	
-	public Optional<Joueur> findByUsername(String username) {
+	public Utilisateur findByUsername(String username) {
 		// TODO Auto-generated method stub
 		try {
 //			
 //			
-			return  Optional.of(em
-					.createQuery("select u from Utilisateur u where u.username = :username", Joueur.class)
+			return  em
+					.createQuery("select u from Utilisateur u where u.username = :username", Utilisateur.class)
 					.setParameter("username", username)
-					.getSingleResult());
+					.getSingleResult();
 		}
 		catch (Exception e){
 			e.printStackTrace();
-			return Optional.empty();
+			return null;
 		}
 		
 	}

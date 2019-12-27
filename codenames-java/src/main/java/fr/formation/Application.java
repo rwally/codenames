@@ -15,6 +15,7 @@ import fr.formation.DAO.Hibernate.DAOMotHibernate;
 import fr.formation.model.Case;
 import fr.formation.model.Difficulte;
 import fr.formation.model.Grille;
+import fr.formation.model.Joueur;
 import fr.formation.model.Mot;
 import fr.formation.model.Participation;
 import fr.formation.model.Role;
@@ -32,41 +33,37 @@ public class Application {
 		 * monMenu.menuPrincipal();
 		 */
 		
-
-	
-		
-		
 		DAOHibernate.close();
 		
 		
 	}
-	
+
 	public static Grille creationGrille() {
-		//Init de la liste de mots
+		// Init de la liste de mots
 		IDAOMot daoMot = new DAOMotHibernate();
 		List<Mot> listeMots = new ArrayList<Mot>();
-		
-		//Init de la liste de cases
+
+		// Init de la liste de cases
 		IDAOCase daoCase = new DAOCaseHibernate();
-		Case maCase=new Case();
+		Case maCase = new Case();
 		List<Case> cases = new ArrayList<Case>();
-		
-		//Init de la grille
-		IDAOGrille daoGrille = new DAOGrilleHibernate(); 
+
+		// Init de la grille
+		IDAOGrille daoGrille = new DAOGrilleHibernate();
 		Grille grille = new Grille();
 		grille.setDifficulte(Difficulte.facile);
-		
-		//Creation de la liste de mots
+
+		// Creation de la liste de mots
 		try {
-			listeMots=daoMot.creerListeMots(grille);
+			listeMots = daoMot.creerListeMots(grille);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		//Creation de la liste de cases avec les mots/couleurs
-		cases=daoCase.creerListeCase(listeMots,grille);
-		
-		//affection de la liste de cases � la grille
+
+		// Creation de la liste de cases avec les mots/couleurs
+		cases = daoCase.creerListeCase(listeMots, grille);
+
+		// affection de la liste de cases � la grille
 		grille.setCases(cases);
 		try {
 			daoGrille.save(grille);
@@ -74,11 +71,11 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return grille;
-		
+
 	}
-	
+
 	public static void afficherGrille(Grille grille, Participation participant) {
 		
 			int k=0;
@@ -93,11 +90,10 @@ public class Application {
 					}
 					k++;
 				}
+				k++;
 			}
-		
-	}
-	
+		}
 
-	
-	
+	}
+
 }
