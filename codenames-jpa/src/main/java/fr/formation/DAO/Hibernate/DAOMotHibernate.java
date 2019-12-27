@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -88,21 +89,32 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 		}
 	}
 	
+	@Override
 	public List<Mot> creerListeMots(Grille maGrille){
 		
 		List<Mot> mots = new ArrayList<Mot>();
 		int taille = maGrille.getDifficulte().getValeur()*maGrille.getDifficulte().getValeur();
 		
-		Random rand = new Random();
-		int min=1, max=698, nombreRandom;
+		//Genere une liste de nombres random UNIQUES
+		List<Integer> nombresRandom = new Random()
+				.ints(1,698)
+				.distinct()
+				.limit(taille)
+				.boxed()
+				.collect(Collectors.toList());
+			
+		for(int i : nombresRandom) {
+			System.out.println(i);
+		}
 
 		for(int i=0;i<taille;i++) {
-			nombreRandom = rand.nextInt(max-min+1)+min;
 			mots.add(em.createQuery("select m from Mot m where id= :nombreRandom", Mot.class)
-					.setParameter("nombreRandom", nombreRandom)
+					.setParameter("nombreRandom", nombresRandom.get(i))
 					.getSingleResult()
 					);
 		}
+		
+	
 		
 		return mots;
 	}

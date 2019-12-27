@@ -25,7 +25,7 @@ public class Mot {
 	private boolean used;
 	
 	@OneToOne(mappedBy = "mot")
-	@JoinColumn(name = "case")
+	@JoinColumn(name = "[case]")
 	private Case laCase;
 	
 	public boolean isUsed() {

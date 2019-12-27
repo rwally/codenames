@@ -2,9 +2,11 @@ package fr.formation.DAO.Hibernate;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import fr.formation.DAO.IDAOCase;
@@ -48,6 +50,8 @@ public class DAOCaseHibernate extends DAOHibernate implements IDAOCase{
 		return entity;
 	}
 
+
+	
 	@Override
 	public void delete(Case entity) throws SQLException {
 		// TODO Auto-generated method stub
@@ -136,8 +140,13 @@ public class DAOCaseHibernate extends DAOHibernate implements IDAOCase{
 				cases.add(maCase);
 		}
 		
+		Collections.shuffle(cases);
+		
 		return cases;
 		
 	}
+	
+	
+
 
 }

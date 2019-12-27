@@ -85,19 +85,6 @@ public class DAOGrilleHibernate extends DAOHibernate implements IDAOGrille{
 		}
 	}
 
-	@Override
-	public Grille creerGrille(List<Case> cases) {
-		// TODO Auto-generated method stub
-		Grille grille = new Grille();
-		Collections.shuffle(cases);
-		grille.setCases(cases);
-		try {
-			save(grille);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return grille;
-	}
+
 
 }
