@@ -32,15 +32,12 @@ public class Application {
 		 * 
 		 * monMenu.menuPrincipal();
 		 */
-		
+
 		Grille nouvelleGrille = new Grille();
-		nouvelleGrille=creationGrille();
-	
-		
-		
+		nouvelleGrille = creationGrille();
+
 		DAOHibernate.close();
-		
-		
+
 	}
 
 	public static Grille creationGrille() {
@@ -56,8 +53,8 @@ public class Application {
 		IDAOGrille daoGrille = new DAOGrilleHibernate();
 		Grille grille = new Grille();
 		grille.setDifficulte(Difficulte.moyen);
-		
-		//Creation de la liste de mots
+
+		// Creation de la liste de mots
 		try {
 			listeMots = daoMot.creerListeMots(grille);
 		} catch (SQLException e) {
@@ -71,7 +68,7 @@ public class Application {
 		grille.setCases(cases);
 		try {
 			daoGrille.save(grille);
-			for(Case c : cases) {
+			for (Case c : cases) {
 				c.setGrille(grille);
 				daoCase.save(c);
 			}
@@ -85,21 +82,19 @@ public class Application {
 	}
 
 	public static void afficherGrille(Grille grille, Participation participant) {
-		
-			int k=0;
-			for(int i=0;i<grille.getDifficulte().getValeur();i++) {
-				System.out.println();
-				for(int j=0;j<grille.getDifficulte().getValeur();j++) {
-					System.out.print(grille.getCases().get(k).getMot().getLibelle());
-					if(grille.getCases().get(k).isTrouver() || participant.getRole()==Role.master) {
-						System.out.print(" "+grille.getCases().get(k).getCouleur()+"\t");
-					}else {
-						System.out.print("\t");
-					}
-					k++;
+
+		int k = 0;
+		for (int i = 0; i < grille.getDifficulte().getValeur(); i++) {
+			System.out.println();
+			for (int j = 0; j < grille.getDifficulte().getValeur(); j++) {
+				System.out.print(grille.getCases().get(k).getMot().getLibelle());
+				if (grille.getCases().get(k).isTrouver() || participant.getRole() == Role.master) {
+					System.out.print(" " + grille.getCases().get(k).getCouleur() + "\t");
+				} else {
+					System.out.print("\t");
 				}
 				k++;
 			}
+		}
 	}
-
-
+}

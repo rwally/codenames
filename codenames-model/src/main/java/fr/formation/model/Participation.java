@@ -29,6 +29,7 @@ public class Participation {
 	
 	
 	@OneToOne(mappedBy = "saParticipation")
+	@JoinColumn(name = "JOUEUR_ID")
 	private Joueur joueur;
 	
 	@ManyToOne
