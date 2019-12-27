@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fr.formation.DAO.IDAOUtilisateur;
 import fr.formation.model.Joueur;
@@ -101,6 +102,12 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 			System.out.println("ERR : Utilisateur non supprimé.");
 		}
 		
+	}
+
+	@Override
+	public Optional<Joueur> findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
