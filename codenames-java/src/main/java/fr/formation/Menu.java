@@ -3,25 +3,24 @@ package fr.formation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import fr.formation.DAO.IDAOJoueur;
 import fr.formation.DAO.IDAOUtilisateur;
+import fr.formation.DAO.Hibernate.DAOJoueur;
 import fr.formation.DAO.Hibernate.DAOUtilisateurHibernate;
-import fr.formation.model.Equipe;
 import fr.formation.model.Joueur;
-import fr.formation.model.Participation;
-import fr.formation.model.Role;
 import fr.formation.model.Utilisateur;
 
 public class Menu {
 	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurHibernate();
+	public static IDAOJoueur daoJoueur = new DAOJoueur();
 
 	
 
-	public Optional<Joueur> connection() throws SQLException {
+	public Joueur connection() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
-		Optional<Joueur> joueur = null;
+		Joueur joueur = null;
 
 		Boolean mdpOk = false;
 
@@ -41,7 +40,7 @@ public class Menu {
 					if (u.getUsername().equals(nom) && u.getPassword().contentEquals(mdp)) {
 						// CONNEXION
 						mdpOk = true;
-						joueur = daoUtilisateur.findByUsername(nom);
+						joueur = daoJoueur.findByUsername(nom);
 						
 					}
 				}
@@ -59,7 +58,7 @@ public class Menu {
 		return joueur;
 	}
 
-	public Optional<Joueur> inscription() throws SQLException {
+	public Joueur inscription() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
 		boolean usernameOk = false;
@@ -127,58 +126,58 @@ public class Menu {
 
 		Utilisateur utilisateur = new Joueur(0, nom, prenom, username, password);
 		daoUtilisateur.save(utilisateur);
-		
-		Optional<Joueur> joueur = daoUtilisateur.findByUsername(username);
+		Joueur joueur = daoJoueur.save((Joueur) utilisateur);
+
 		return joueur;
 	}
 	
-	
-	public void menuPrincipal() {
-		System.out.println("-----------------");
-		System.out.println("Bienvenue dans Code Names");
-		System.out.println("-----------------");
-
-		
-		System.out.println("-----------------");
-		System.out.println("MENU PRINCIPAL");
-		System.out.println("-----------------");
-		
-		System.out.println("Saisir 1 pour commencer une nouvelle partie");
-		
-		
-		if( Application.sc.nextInt() == 1) {
-			
-			System.out.println("Saisir 1 pour choisir  l'Equipe Rouge");
-			System.out.println("Saisir 2 pour choisir l'Equipe Bleue)");
-//			System.out.println("Saisir 3 pour être spectateur");
-			
-			int a  = Application.sc.nextInt();
-			Utilisateur monJoueur = new Joueur();
-			monJoueur = daoUtilisateur.findById(0);
-			
-			switch (a) {
-			case 1 :
-				System.out.println("Vous êtes dans l'Equipe Bleue !");
-				Equipe.AjouterJoueurBleu(monJoueur);
-				monJoueur.setEquipe("Bleue");
-				break;
-			case 2 :
-				System.out.println("Vous êtes dans l'Equipe Rouge !");
-				Equipe.AjouterJoueurRouge(monJoueur);
-				monJoueur.setEquipe("Rouge");
-				
-			break;
-			}
-			Participation maParticipation = new Participation(Role.agent, monJoueur);
-			
-			System.out.println();
-			System.out.println("-----------------");
-			System.out.println("Nouvelle Partie");
-			System.out.println("-----------------");
-			
-			
-		}
-		
-		
-	}
+//	
+//	public void menuPrincipal() {
+//		System.out.println("-----------------");
+//		System.out.println("Bienvenue dans Code Names");
+//		System.out.println("-----------------");
+//
+//		
+//		System.out.println("-----------------");
+//		System.out.println("MENU PRINCIPAL");
+//		System.out.println("-----------------");
+//		
+//		System.out.println("Saisir 1 pour commencer une nouvelle partie");
+//		
+//		
+//		if( Application.sc.nextInt() == 1) {
+//			
+//			System.out.println("Saisir 1 pour choisir  l'Equipe Rouge");
+//			System.out.println("Saisir 2 pour choisir l'Equipe Bleue)");
+////			System.out.println("Saisir 3 pour être spectateur");
+//			
+//			int a  = Application.sc.nextInt();
+//			Utilisateur monJoueur = new Joueur();
+//			monJoueur = daoUtilisateur.findById(0);
+//			
+//			switch (a) {
+//			case 1 :
+//				System.out.println("Vous êtes dans l'Equipe Bleue !");
+//				Equipe.AjouterJoueurBleu(monJoueur);
+//				monJoueur.setEquipe("Bleue");
+//				break;
+//			case 2 :
+//				System.out.println("Vous êtes dans l'Equipe Rouge !");
+//				Equipe.AjouterJoueurRouge(monJoueur);
+//				monJoueur.setEquipe("Rouge");
+//				
+//			break;
+//			}
+//			Participation maParticipation = new Participation(Role.agent, monJoueur);
+//			
+//			System.out.println();
+//			System.out.println("-----------------");
+//			System.out.println("Nouvelle Partie");
+//			System.out.println("-----------------");
+//			
+//			
+//		}
+//		
+//		
+//	}
 }

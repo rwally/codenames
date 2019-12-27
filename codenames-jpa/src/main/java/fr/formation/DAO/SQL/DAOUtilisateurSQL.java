@@ -105,7 +105,13 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 	}
 
 	@Override
-	public Optional<Joueur> findByUsername(String username) {
+	public Utilisateur findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Utilisateur> findByNom(String nom) {
 		// TODO Auto-generated method stub
 		return null;
 	}
