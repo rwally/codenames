@@ -135,7 +135,7 @@ public class DAOMotSQL extends DAOConnectionSQL implements IDAOMot {
 	}
 
 	@Override
-	public Optional<Mot> findByNom(String nom) throws SQLException {
+	public Optional<Mot> findByNom(String nom){
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,38 +1,34 @@
 package fr.formation.DAO.Hibernate;
 
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import fr.formation.DAO.IDAOMot;
+import fr.formation.DAO.IDAOGrille;
+import fr.formation.model.Case;
 import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 
+public class DAOGrilleHibernate extends DAOHibernate implements IDAOGrille{
 
-public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
-
-	
 	@Override
-	public List<Mot> findAll() throws SQLException {
+	public List<Grille> findAll() throws SQLException {
 		// TODO Auto-generated method stub
-		return em.createQuery("select m from Mot m", Mot.class).getResultList();
+		return em.createQuery("select g from Grille g", Grille.class).getResultList();
 	}
 
 	@Override
-	public Mot findById(Integer id) throws SQLException {
+	public Grille findById(Integer id) throws SQLException {
 		// TODO Auto-generated method stub
-		return em.find(Mot.class, id);
+		return em.find(Grille.class, id);
 	}
 
 	@Override
-	public Mot save(Mot entity) throws SQLException {
+	public Grille save(Grille entity) throws SQLException {
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
@@ -52,7 +48,7 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 	}
 
 	@Override
-	public void delete(Mot entity) throws SQLException {
+	public void delete(Grille entity) throws SQLException {
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
@@ -68,16 +64,16 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 	@Override
 	public void deleteById(Integer id) throws SQLException {
 		// TODO Auto-generated method stub
-		Mot motASupprimer= new Mot();
-		motASupprimer.setId(id);
-		delete(motASupprimer);
+		Grille grilleASupprimer= new Grille();
+		grilleASupprimer.setId(id);
+		delete(grilleASupprimer);
 		
 	}
 
 	@Override
-	public Optional<Mot> findByNom(String nom) {
+	public Optional<Grille> findByNom(String nom) throws SQLException {
 		// TODO Auto-generated method stub
-		TypedQuery<Mot> myQuery = em.createQuery("select p from Produit p where p.libelle = :nom", Mot.class);
+		TypedQuery<Grille> myQuery = em.createQuery("select g from Grille g where g.libelle = :nom", Grille.class);
 		myQuery.setParameter("nom", nom);
 		try {
 			
@@ -88,13 +84,20 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 			return Optional.empty();
 		}
 	}
-	
-	public List<Mot> creerListeMots(Grille maGrille){
-		int taille = maGrille.getDifficulte().getValeur()*maGrille.getDifficulte().getValeur();
-		TypedQuery<Mot> myQuery = em.createQuery("select m from Mot m limit :taille", Mot.class);
-		myQuery.setParameter("taille", taille);
 
-		return myQuery.getResultList();
+	@Override
+	public Grille creerGrille(ArrayList<Case> cases) {
+		// TODO Auto-generated method stub
+		Grille grille = new Grille();
+		Collections.shuffle(cases);
+		grille.setCases(cases);
+		try {
+			save(grille);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return grille;
 	}
 
 }

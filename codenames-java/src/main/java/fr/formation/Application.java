@@ -44,7 +44,7 @@ public class Application {
 			e.printStackTrace();
 		}
 		
-		/* A MODIFIER REAZ
+		// A MODIFIER REAZ
 	
 //		Grille grilleTest = creationGrille();
 //		Case[][] caseTest = grilleTest.getGrille();
@@ -100,5 +100,5 @@ public class Application {
 		
 	}
 	*/
-
+	
 }

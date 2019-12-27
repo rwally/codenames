@@ -10,6 +10,6 @@ import fr.formation.model.Mot;
 
 
 public interface IDAOMot extends IDAO<Mot, Integer>{
-	public Optional<Mot> findByNom(String nom) throws SQLException;
+	public Optional<Mot> findByNom(String nom);
 	public List<Mot> creerListeMots(Grille maGrille) throws SQLException;
 }

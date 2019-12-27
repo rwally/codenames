@@ -80,16 +80,5 @@ public class Grille {
 
 
 	
-	public Grille creerGrille(ArrayList<Case> cases){
-		Grille grille = new Grille();
-		Collections.shuffle(cases);
-		grille.setCases(cases);
-
-		return grille;
-	}
-	
-	
-
-	
 
 }
