@@ -29,8 +29,7 @@ public class Equipe {
 	@Column(name = "toursGagnes")
 	private int toursGagnes;
 	
-	private static List<Joueur> EquipeBleue = new ArrayList<Joueur>();
-	private static List<Joueur> EquipeRouge = new ArrayList<Joueur>();
+	private static List<Joueur> Equipe = new ArrayList<Joueur>();
 	
 	public int getId() {
 		return id;
@@ -40,28 +39,18 @@ public class Equipe {
 		this.id = id;
 	}
 
-	public static List<Joueur> getEquipeBleue() {
-		return EquipeBleue;
+	public void AjouterMembre(Joueur j) {
+		Equipe.add(j);
 	}
 	
-	public void AjouterJoueurBleu(Joueur j) {
-		EquipeBleue.add(j);
+	public static List<Joueur> getEquipe() {
+		return Equipe;
 	}
-	
-	public void AjouterJoueurRouge(Joueur j) {
-		EquipeRouge.add(j);
+
+	public static void setEquipe(List<Joueur> equipe) {
+		Equipe = equipe;
 	}
-	
-	public void setEquipeBleue(List<Joueur> equipeBleue) {
-		EquipeBleue = equipeBleue;
-	}
-	public static List<Joueur> getEquipeRouge() {
-		return EquipeRouge;
-	}
-	public void setEquipeRouge(List<Joueur> equipeRouge) {
-		EquipeRouge = equipeRouge;
-	}
-	
+
 	public List<Joueur> getJoueurs() {
 		return joueurs;
 	}

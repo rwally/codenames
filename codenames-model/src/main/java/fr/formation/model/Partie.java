@@ -1,8 +1,7 @@
 package fr.formation.model;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +30,8 @@ public class Partie {
 	@OneToMany(mappedBy = "maPartie")
 	private List<Participation> joueurs;
 	
+	
+	private Random randomGenerator;
 
 	public Partie(Grille grille, List<Participation> joueurs) {
 		this.grille = grille;
@@ -65,5 +66,26 @@ public class Partie {
 	}
 	
 	
+	public void setMaster(Equipe equipe) {
+		for( Joueur j : equipe.getEquipe()) {
+			
+			getRandomElement(equipe.getJoueurs());
+			j.setRole(Role.master);
+		}
+		
+	}
+	public Joueur getRandomElement(List<Joueur> list) 
+    { 
+        int randomIndex = randomGenerator.nextInt(list.size());
+        return list.get(randomIndex);
+    } 
 	
+	public void AfficheJoueurs(List<Participation> participations) {
+		
+		for(Participation p : participations){
+			System.out.println(p.getJoueurs().getUsername()+" "
+								+p.getJoueurs().getEquipe()+" "
+								+p.getJoueurs().getRole());
+		}
+	}
 }

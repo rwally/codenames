@@ -29,7 +29,7 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 				}
 			}
 		} catch (SQLException e) {
-			System.out.println("ERR : Création de la liste d'utilisateurs échouée");
+			System.out.println("ERR : Crï¿½ation de la liste d'utilisateurs ï¿½chouï¿½e");
 			e.printStackTrace();
 		}
 
@@ -51,7 +51,7 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 				}
 			}
 		} catch (SQLException e) {
-			System.out.println("ERR : Création de l'utilisateur échouée");
+			System.out.println("ERR : Crï¿½ation de l'utilisateur ï¿½chouï¿½e");
 			e.printStackTrace();
 		}
 		return entity;
@@ -79,7 +79,7 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 		}
 
 		catch (SQLException e) {
-			System.out.println("ERR : Impossible de créer ou de modifier l'utilisateur.");
+			System.out.println("ERR : Impossible de crï¿½er ou de modifier l'utilisateur.");
 			e.printStackTrace();
 		}
 		return entity;
@@ -99,7 +99,7 @@ public class DAOUtilisateurSQL extends DAOConnectionSQL implements IDAOUtilisate
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("ERR : Utilisateur non supprimé.");
+			System.out.println("ERR : Utilisateur non supprimï¿½.");
 		}
 		
 	}

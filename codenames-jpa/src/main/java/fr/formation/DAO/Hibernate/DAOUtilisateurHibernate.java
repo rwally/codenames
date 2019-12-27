@@ -63,19 +63,19 @@ public class DAOUtilisateurHibernate extends DAOHibernate implements IDAOUtilisa
 		// TODO Auto-generated method stub
 		try {
 			if(entity.getId() == 0) {//AJOUT
-				em.getTransaction().begin(); //Démarrage TX
+				em.getTransaction().begin(); //Dï¿½marrage TX
 				em.persist(entity);
 				em.getTransaction().commit();
 			}
 			else {//UPDATE
-				em.getTransaction().begin(); //Démarrage TX
+				em.getTransaction().begin(); //Dï¿½marrage TX
 				entity =  em.merge(entity);
 				em.getTransaction().commit();
 			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			em.getTransaction().rollback(); //Problème => annulation
+			em.getTransaction().rollback(); //Problï¿½me => annulation
 		}
 		
 		return entity;
@@ -91,7 +91,7 @@ public class DAOUtilisateurHibernate extends DAOHibernate implements IDAOUtilisa
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			em.getTransaction().rollback(); //Problème => annulation
+			em.getTransaction().rollback(); //Problï¿½me => annulation
 		}
 		
 	}
