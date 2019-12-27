@@ -3,6 +3,7 @@ package fr.formation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fr.formation.DAO.IDAOUtilisateur;
 import fr.formation.DAO.Hibernate.DAOUtilisateurHibernate;
@@ -17,9 +18,10 @@ public class Menu {
 
 	
 
-	public void connection() throws SQLException {
+	public Optional<Joueur> connection() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
+		Optional<Joueur> joueur = null;
 
 		Boolean mdpOk = false;
 
@@ -39,6 +41,8 @@ public class Menu {
 					if (u.getUsername().equals(nom) && u.getPassword().contentEquals(mdp)) {
 						// CONNEXION
 						mdpOk = true;
+						joueur = daoUtilisateur.findByUsername(nom);
+						
 					}
 				}
 
@@ -49,17 +53,19 @@ public class Menu {
 			} else if (choix == 2) {
 				mdpOk = true;
 				Application.sc.nextLine();
-				inscription();
+				joueur = inscription();
 			}
 		}
+		return joueur;
 	}
 
-	public void inscription() throws SQLException {
+	public Optional<Joueur> inscription() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
 		boolean usernameOk = false;
 		String nom = null;
 		String prenom = null;
+		Optional<Joueur> joueur = null;
 
 		while (!usernameOk) {
 			System.out.println("Veuillez entrer votre nom");
@@ -90,6 +96,7 @@ public class Menu {
 				username = Application.sc.nextLine();
 				if (!username.equals("")) {
 					loginOK = true;
+					joueur = daoUtilisateur.findByUsername(username);
 				}
 				else {
 					System.out.println("Votre login ne peut être nul");
@@ -122,6 +129,7 @@ public class Menu {
 
 		Utilisateur utilisateur = new Joueur(0, nom, prenom, username, password);
 		daoUtilisateur.save(utilisateur);
+		return joueur;
 	}
 	
 	
