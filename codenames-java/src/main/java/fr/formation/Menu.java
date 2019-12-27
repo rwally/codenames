@@ -65,7 +65,6 @@ public class Menu {
 		boolean usernameOk = false;
 		String nom = null;
 		String prenom = null;
-		Optional<Joueur> joueur = null;
 
 		while (!usernameOk) {
 			System.out.println("Veuillez entrer votre nom");
@@ -96,7 +95,6 @@ public class Menu {
 				username = Application.sc.nextLine();
 				if (!username.equals("")) {
 					loginOK = true;
-					joueur = daoUtilisateur.findByUsername(username);
 				}
 				else {
 					System.out.println("Votre login ne peut être nul");
@@ -129,6 +127,8 @@ public class Menu {
 
 		Utilisateur utilisateur = new Joueur(0, nom, prenom, username, password);
 		daoUtilisateur.save(utilisateur);
+		
+		Optional<Joueur> joueur = daoUtilisateur.findByUsername(username);
 		return joueur;
 	}
 	
