@@ -103,15 +103,23 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 				.boxed()
 				.collect(Collectors.toList());
 			
-		for(int i : nombresRandom) {
-			System.out.println(i);
-		}
+
 
 		for(int i=0;i<taille;i++) {
 			mots.add(em.createQuery("select m from Mot m where id= :nombreRandom", Mot.class)
 					.setParameter("nombreRandom", nombresRandom.get(i))
 					.getSingleResult()
 					);
+		}
+		
+		for(Mot m : mots) {
+			m.setUsed(true);
+			try {
+				save(m);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	

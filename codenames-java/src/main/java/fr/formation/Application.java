@@ -33,6 +33,11 @@ public class Application {
 		 * monMenu.menuPrincipal();
 		 */
 		
+		Grille nouvelleGrille = new Grille();
+		nouvelleGrille=creationGrille();
+	
+		
+		
 		DAOHibernate.close();
 		
 		
@@ -45,15 +50,14 @@ public class Application {
 
 		// Init de la liste de cases
 		IDAOCase daoCase = new DAOCaseHibernate();
-		Case maCase = new Case();
 		List<Case> cases = new ArrayList<Case>();
 
 		// Init de la grille
 		IDAOGrille daoGrille = new DAOGrilleHibernate();
 		Grille grille = new Grille();
-		grille.setDifficulte(Difficulte.facile);
-
-		// Creation de la liste de mots
+		grille.setDifficulte(Difficulte.moyen);
+		
+		//Creation de la liste de mots
 		try {
 			listeMots = daoMot.creerListeMots(grille);
 		} catch (SQLException e) {
@@ -63,10 +67,14 @@ public class Application {
 		// Creation de la liste de cases avec les mots/couleurs
 		cases = daoCase.creerListeCase(listeMots, grille);
 
-		// affection de la liste de cases � la grille
+		// affection de la liste de cases a la grille et inverse
 		grille.setCases(cases);
 		try {
 			daoGrille.save(grille);
+			for(Case c : cases) {
+				c.setGrille(grille);
+				daoCase.save(c);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,8 +100,6 @@ public class Application {
 				}
 				k++;
 			}
-		}
-
 	}
 
-}
+
