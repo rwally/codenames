@@ -32,7 +32,7 @@ public class Case {
 	
 	@ManyToOne
 	@JoinColumn(name = "grille_id")
-	private Grille laGrille;
+	private Grille grille;
 	
 	@Column(name = "trouver")
 	private boolean trouver=false;
@@ -51,7 +51,7 @@ public class Case {
 	public Case(Couleur couleur, Mot mot, Grille grille) {
 		this.couleur = couleur;
 		this.mot = mot;
-		this.laGrille = laGrille;
+		this.grille = grille;
 	}
 	
 	public boolean isTrouver() {
@@ -65,13 +65,13 @@ public class Case {
 
 
 	public Grille getGrille() {
-		return laGrille;
+		return grille;
 	}
 
 
 
-	public void setGrille(Grille laGrille) {
-		this.laGrille = laGrille;
+	public void setGrille(Grille grille) {
+		this.grille = grille;
 	}
 
 

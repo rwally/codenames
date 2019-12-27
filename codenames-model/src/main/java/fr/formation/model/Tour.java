@@ -31,13 +31,13 @@ public class Tour {
 			System.out.println("Quel mot choisissez vous ?");
 			String mot = sc.nextLine();
 
-			for (Case[] c : grille.getGrille()) {
-				for (Case ca : c) {
-					if (ca.getMot().getLibelle().equals(mot)) {
-						maCase = ca;
+			for (Case c : grille.getCases()) {
+				
+					if (c.getMot().getLibelle().equals(mot)) {
+						maCase = c;
 						saisieOK = true;
 					}
-				}
+				
 			}
 			if (!saisieOK) {
 				System.out.println("Veuillez écrire un mot de la liste. Respectez la casse");

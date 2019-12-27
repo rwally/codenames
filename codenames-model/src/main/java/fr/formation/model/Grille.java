@@ -1,6 +1,8 @@
 package fr.formation.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import javax.persistence.Column;
@@ -26,16 +28,14 @@ public class Grille {
 	@Enumerated(EnumType.STRING)
 	private Difficulte difficulte;
 	
-	@OneToMany(mappedBy = "laGrille")
-	private Case[][] grille;
-	
-	private Random random = new Random();
-	int nombreRandom;
+	@OneToMany(mappedBy = "grille")
+	private List<Case> cases;
 	
 	
-	public Grille(Difficulte difficulte, Case[][] grille) {
+	
+	public Grille(Difficulte difficulte, List<Case> cases) {
 		this.difficulte = difficulte;
-		this.grille = grille;
+		this.cases = cases;
 	}
 
 
@@ -65,29 +65,29 @@ public class Grille {
 
 
 
-	public Case[][] getGrille() {
+
+
+
+	public List<Case> getCases() {
+		return cases;
+	}
+
+
+
+	public void setCases(List<Case> cases) {
+		this.cases = cases;
+	}
+
+
+	
+	public Grille creerGrille(ArrayList<Case> cases){
+		Grille grille = new Grille();
+		Collections.shuffle(cases);
+		grille.setCases(cases);
+
 		return grille;
 	}
-
-
-	public void setGrille(int difficulte) {
-		Case grille[][] = new Case[difficulte][difficulte];
-		this.grille = grille;
-	}
-
-
-	public Case[][] creerGrille(ArrayList<Case> cases){
-		int taille = difficulte.getValeur();
-		for(int i=0;i<taille;i++) {
-			for(int j=0;j<taille;j++) {
-					nombreRandom = random.nextInt(cases.size());
-					grille[i][j] = cases.get(nombreRandom);
-					cases.remove(nombreRandom);
-			}
-		}
-		
-		return grille;
-	}
+	
 	
 
 	

@@ -44,7 +44,7 @@ public class Application {
 			e.printStackTrace();
 		}
 		
-		/*
+		/* A MODIFIER REAZ
 	
 //		Grille grilleTest = creationGrille();
 //		Case[][] caseTest = grilleTest.getGrille();
@@ -61,6 +61,7 @@ public class Application {
 	 
 	}
 	
+	/* A MODIFIER REAZ
 	public static Grille creationGrille() {
 		
 		//Init de la liste de mots
@@ -98,5 +99,6 @@ public class Application {
 		return grille;
 		
 	}
+	*/
 
 }
