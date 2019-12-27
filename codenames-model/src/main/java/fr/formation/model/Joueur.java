@@ -6,7 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -21,7 +21,7 @@ public class Joueur extends Utilisateur {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "participation")
 	private Participation saParticipation;
 	

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.formation.DAO.IDAOUtilisateur;
+import fr.formation.DAO.Hibernate.DAOUtilisateurHibernate;
 import fr.formation.DAO.SQL.DAOUtilisateurSQL;
 import fr.formation.model.Joueur;
 import fr.formation.model.Utilisateur;
 
 public class Menu {
-	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurSQL();
+	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurHibernate();
 
 //		public void menuPrincipal() {
 //			System.out.println("-----------------");
@@ -102,9 +103,7 @@ public class Menu {
 //			
 //			
 //		}
-	
-	
-	
+
 	public void connection() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
@@ -146,18 +145,43 @@ public class Menu {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
 		boolean usernameOk = false;
+		String nom = null;
+		String prenom = null;
 
-		System.out.println("Veuillez entrer votre nom");
-		String nom = Application.sc.nextLine();
-		System.out.println("Entrez votre prénom");
-		String prenom = Application.sc.nextLine();
+		while (!usernameOk) {
+			System.out.println("Veuillez entrer votre nom");
+			nom = Application.sc.nextLine();
+			if (!nom.equals("")) {
+				usernameOk = true;
+			}
+		}
+		
+		usernameOk = false;
+		while (!usernameOk) {
+			System.out.println("Entrez votre prénom");
+			prenom = Application.sc.nextLine();
+			if (!prenom.equals("")) {
+				usernameOk = true;
+			}
+		}
+		
+		usernameOk = false;
 		String username = null;
+		boolean loginOK = false;
 
 		// Vérification de l'username unique
 		while (!usernameOk) {
 			usernameOk = true;
-			System.out.println("Entrez votre login");
-			username = Application.sc.nextLine();
+			while (!loginOK) {
+				System.out.println("Entrez votre login");
+				username = Application.sc.nextLine();
+				if (!username.equals("")) {
+					loginOK = true;
+				}
+				else {
+					System.out.println("Votre login ne peut être nul");
+				}
+			}
 			for (Utilisateur u : listeUtilisateurs) {
 				if (u.getUsername().equals(username)) {
 					usernameOk = false;

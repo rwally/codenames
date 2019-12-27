@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +27,8 @@ public class Participation {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@OneToMany(mappedBy = "saParticipation")
-	private List<Joueur> joueurs;
+	@OneToOne(mappedBy = "saParticipation")
+	private Joueur joueur;
 	
 	@ManyToOne
 	@JoinColumn(name = "PARTIE_ID")
@@ -36,18 +37,18 @@ public class Participation {
 	@OneToMany(mappedBy = "participation")
 	private List<Chat> chats;
 	
-	public List<Joueur> getJoueurs() {
-		return joueurs;
+	public Joueur getJoueurs() {
+		return joueur;
 	}
 
-	public void setJoueurs(List<Joueur> joueurs) {
-		this.joueurs = joueurs;
+	public void setJoueurs(Joueur joueur) {
+		this.joueur = joueur;
 	}
 	
 	
-	public Participation(Role role, List<Joueur> joueurs) {
+	public Participation(Role role, Joueur joueur) {
 		this.role = role;
-		this.joueurs = joueurs;
+		this.joueur = joueur;
 	}
 	
 	
