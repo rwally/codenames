@@ -64,4 +64,6 @@ public class Partie {
 		this.joueurs = joueurs;
 	}
 	
+	
+	
 }

@@ -27,6 +27,7 @@ public class Participation {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	
 	@OneToOne(mappedBy = "saParticipation")
 	private Joueur joueur;
 	
@@ -52,7 +53,6 @@ public class Participation {
 	}
 	
 	
-	
 	public Participation(Role role) {
 		this.role = role;
 	}
@@ -68,5 +68,6 @@ public class Participation {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
 	
 }

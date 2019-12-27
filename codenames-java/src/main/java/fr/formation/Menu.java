@@ -6,103 +6,16 @@ import java.util.List;
 
 import fr.formation.DAO.IDAOUtilisateur;
 import fr.formation.DAO.Hibernate.DAOUtilisateurHibernate;
-import fr.formation.DAO.SQL.DAOUtilisateurSQL;
+import fr.formation.model.Equipe;
 import fr.formation.model.Joueur;
+import fr.formation.model.Participation;
+import fr.formation.model.Role;
 import fr.formation.model.Utilisateur;
 
 public class Menu {
 	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurHibernate();
 
-//		public void menuPrincipal() {
-//			System.out.println("-----------------");
-//			System.out.println("Bienvenue dans Code Names");
-//			System.out.println("-----------------");
-//			System.out.println("Page de connexion");
-//			 
-//			Scanner sc = new Scanner(System.in);
-//			 
-//			System.out.println("Entrez Votre Nom d'Utilisateur :");
-//			String nomUtilisateur = sc.nextLine();
-//			 
-//			System.out.println("Entrez Votre mot de passe :");
-//			String motPasse = sc.nextLine();
-//			
-//			DAOUtilisateurSQL.findByNom(nomUtilisateur, motPasse);
-//			
-//			
-//			 
-//			 
-//			DAOUtilisateur user = new DAOUtilisateurSQL();
-//			 
-//			if(user.findAll() == null) {
-//				System.out.println("Inscrivez-vous !");
-//				 
-//				System.out.println("Entrez Votre Nom :");
-//				String nouveauNom = sc.nextLine();
-//				 
-//				System.out.println("Entrez Votre Prénom :");
-//				String nouveauPrenom = sc.nextLine();
-//				 
-//				System.out.println("Entrez un Nom d'Utilisateur :");
-//				String nouveauUtilisateur = sc.nextLine();
-//				 
-//				System.out.println("Entrez un mot de passe :");
-//				String nouveauPasse = sc.nextLine();
-//				 
-//				Utilisateur newUser = new Utilisateur();
-//				 
-//				newUser.setNom(nouveauNom);
-//				newUser.setPrenom(nouveauPrenom);
-//				newUser.setUsername(nouveauUtilisateur);
-//				newUser.setPassword(nouveauPasse);
-//				 
-//				user.save(newUser);
-//			}
-//			
-//			System.out.println("-----------------");
-//			System.out.println("MENU PRINCIPAL");
-//			System.out.println("-----------------");
-//			
-//			System.out.println("Saisir 1 pour commencer une nouvelle partie");
-//			
-//			
-//			if( sc.nextInt() == 1) {
-//				
-//				System.out.println("Saisir 1 pour choisir  l'Equipe Rouge");
-//				System.out.println("Saisir 2 pour choisir l'Equipe Bleue)");
-//				System.out.println("Saisir 3 pour être spectateur");
-//				
-//				int a  = sc.nextInt();
-//				
-//				switch (a) {
-//				case 1 :
-//					System.out.println("Vous êtes dans l'Equipe Bleue !");
-//					Equipe.add(monJoueur);
-//					monJoueur.setEquipe("Bleue");
-//				case 2 :
-//					System.out.println("Vous êtes dans l'Equipe Rouge !");
-//					Equipe.add(monJoueur);
-//					monJoueur.setEquipe("Rouge");
-//				}
-//				
-//				System.out.println("");
-//				System.out.println("-----------------");
-//				System.out.println("Nouvelle Partie");
-//				System.out.println("-----------------");
-//				
-//				Partie maPartie = new Partie();
-//			}
-//			
-//			
-//			
-//			
-//				
-//			
-//				
-//			
-//			
-//			
-//		}
+	
 
 	public void connection() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
@@ -209,5 +122,55 @@ public class Menu {
 
 		Utilisateur utilisateur = new Joueur(0, nom, prenom, username, password);
 		daoUtilisateur.save(utilisateur);
+	}
+	
+	
+	public void menuPrincipal() {
+		System.out.println("-----------------");
+		System.out.println("Bienvenue dans Code Names");
+		System.out.println("-----------------");
+
+		
+		System.out.println("-----------------");
+		System.out.println("MENU PRINCIPAL");
+		System.out.println("-----------------");
+		
+		System.out.println("Saisir 1 pour commencer une nouvelle partie");
+		
+		
+		if( Application.sc.nextInt() == 1) {
+			
+			System.out.println("Saisir 1 pour choisir  l'Equipe Rouge");
+			System.out.println("Saisir 2 pour choisir l'Equipe Bleue)");
+//			System.out.println("Saisir 3 pour être spectateur");
+			
+			int a  = Application.sc.nextInt();
+			Utilisateur monJoueur = new Joueur();
+			monJoueur = daoUtilisateur.findById(0);
+			
+			switch (a) {
+			case 1 :
+				System.out.println("Vous êtes dans l'Equipe Bleue !");
+				Equipe.AjouterJoueurBleu(monJoueur);
+				monJoueur.setEquipe("Bleue");
+				break;
+			case 2 :
+				System.out.println("Vous êtes dans l'Equipe Rouge !");
+				Equipe.AjouterJoueurRouge(monJoueur);
+				monJoueur.setEquipe("Rouge");
+				
+			break;
+			}
+			Participation maParticipation = new Participation(Role.agent, monJoueur);
+			
+			System.out.println();
+			System.out.println("-----------------");
+			System.out.println("Nouvelle Partie");
+			System.out.println("-----------------");
+			
+			
+		}
+		
+		
 	}
 }
