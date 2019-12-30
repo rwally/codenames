@@ -24,12 +24,10 @@ public class Equipe {
 	private String nom;
 	
 	@OneToMany(mappedBy = "equipe")
-	private List<Joueur> joueurs;
+	private List<Joueur> joueurs = new ArrayList<Joueur>();
 	
 	@Column(name = "toursGagnes")
 	private int toursGagnes;
-	
-	private static List<Joueur> equipe = new ArrayList<Joueur>();
 	
 	public int getId() {
 		return id;
@@ -40,15 +38,7 @@ public class Equipe {
 	}
 
 	public void AjouterMembre(Joueur j) {
-		equipe.add(j);
-	}
-	
-	public static List<Joueur> getEquipe() {
-		return equipe;
-	}
-
-	public static void setEquipe(List<Joueur> equipe) {
-		equipe = equipe;
+		this.joueurs.add(j);
 	}
 
 	public List<Joueur> getJoueurs() {

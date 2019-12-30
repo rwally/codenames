@@ -17,22 +17,30 @@ public class Joueur extends Utilisateur {
 	@JoinColumn(name = "equipe")
 	private Equipe equipe;
 	
-	@Column (name = "role")
-	@Enumerated(EnumType.STRING)
-	private Role role;
-	
+//	@Column (name = "role")
+//	@Enumerated(EnumType.STRING)
+//	private Role role;
+//	
 	@OneToOne
 	@JoinColumn(name = "participation")
 	private Participation saParticipation;
 	
-	public Role getRole() {
-		return role;
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
+	
+	public Participation getSaParticipation() {
+		return saParticipation;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setSaParticipation(Participation saParticipation) {
+		this.saParticipation = saParticipation;
 	}
-	
+
 	public Joueur(int id, String nom, String prenom, String username, String password) {
 		super(id, nom, prenom, username, password);
 	}

@@ -88,7 +88,7 @@ public class Tour {
 
 		Scanner sc = new Scanner(System.in);
 
-		if (j.getRole() == Role.master) {
+		if (j.getSaParticipation().getRole() == Role.master) {
 
 			System.out.println("Entrez le nom de code :");
 			code = sc.nextLine();

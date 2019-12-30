@@ -90,15 +90,9 @@ public class Menu {
 		// V�rification de l'username unique
 		while (!usernameOk) {
 			usernameOk = true;
-			while (!loginOK) {
-				System.out.println("Entrez votre login");
-				username = Application.sc.nextLine();
-				if (!username.equals("")) {
-					loginOK = true;
-				} else {
-					System.out.println("Votre login ne peut �tre nul");
-				}
-			}
+			System.out.println("Entrez votre login");
+			username = Application.sc.nextLine();
+
 			for (Utilisateur u : listeUtilisateurs) {
 				if (u.getUsername().equals(username)) {
 					usernameOk = false;
@@ -186,7 +180,10 @@ public class Menu {
 				break;
 			}
 
-			lesParticipations.add(new Participation(Role.agent, monJoueur));
+			Participation maParticipation = new Participation(Role.agent, monJoueur);
+			lesParticipations.add(maParticipation);
+			monJoueur.setSaParticipation(maParticipation);
+			
 
 			if (nbJoueurs < 4) {
 				System.out.println("Enregistrez un autre joueur (nombre de joueurs minimum : 4)");
