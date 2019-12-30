@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -90,14 +91,48 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 
 		List<Mot> mots = new ArrayList<Mot>();
 		int taille = maGrille.getDifficulte().getValeur() * maGrille.getDifficulte().getValeur();
+		boolean motsOK = false;
 
-		// Genere une liste de nombres random UNIQUES
-		List<Integer> nombresRandom = new Random().ints(1, 698).distinct().limit(taille).boxed()
-				.collect(Collectors.toList());
+		while (!motsOK) {
+			motsOK = true;
+			try {
+				int compteur = 0;
+				List <Mot> tousLesMots = this.findAll();
+				for (Mot m : tousLesMots) {
+					if (!m.isUsed()) {
+						compteur++;
+					}
+				}
 
-		for (int i = 0; i < taille; i++) {
-			mots.add(em.createQuery("select m from Mot m where id= :nombreRandom", Mot.class)
-					.setParameter("nombreRandom", nombresRandom.get(i)).getSingleResult());
+				if (compteur > taille) {
+					for (int i = 0; i < taille; i++) {
+						boolean motTrouve = false;
+						int nombreRandom = new Random().nextInt(698);
+						
+						while (!motTrouve) {
+							motTrouve = true;
+							try {
+								mots.add(em
+										.createQuery("select m from Mot m where id= :nombreRandom and m.used = 0",
+												Mot.class)
+										.setParameter("nombreRandom", nombreRandom).getSingleResult());
+							} catch (javax.persistence.NoResultException e) {
+								motTrouve = false;
+							}
+						}
+					}
+				} 
+				else {
+					motsOK = false;
+					for (Mot m : tousLesMots) {
+						m.setUsed(false);
+						save(m);
+					}
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		for (Mot m : mots) {
