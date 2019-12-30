@@ -23,19 +23,8 @@ public class Application {
 		Partie unePartie = new Partie();
 		unePartie.setJoueurs(lesParticipants);
 		
-		Equipe equipeBleue = new Equipe();
-		Equipe equipeRouge = new Equipe();
-		
-		// Création des équipes
-		for(Participation p : lesParticipants) {
-			if(p.getJoueurs().getEquipe().getNom()=="Rouge") {
-				equipeRouge.setNom(p.getJoueurs().getEquipe().getNom());
-				equipeRouge.AjouterMembre(p.getJoueurs());
-			} else if(p.getJoueurs().getEquipe().getNom()=="Bleu") {
-				equipeBleue.setNom(p.getJoueurs().getEquipe().getNom());
-				equipeBleue.AjouterMembre(p.getJoueurs());
-			}
-		}
+		Equipe equipeBleue = monMenu.getEquipeBleue();
+		Equipe equipeRouge = monMenu.getEquipeRouge();
 		
 		// Définition des rôles
 		unePartie.setMaster(equipeBleue);

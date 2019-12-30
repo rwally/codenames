@@ -17,6 +17,9 @@ import fr.formation.model.Utilisateur;
 public class Menu {
 	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurHibernate();
 	public static IDAOJoueur daoJoueur = new DAOJoueur();
+	
+	private Equipe equipeBleue = new Equipe();
+	private Equipe equipeRouge = new Equipe();
 
 	public Joueur connection() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
@@ -142,10 +145,7 @@ public class Menu {
 		int nbJoueursBleus = 0;
 		int nbJoueursRouge = 0;
 
-		Equipe equipeRouge = new Equipe();
 		equipeRouge.setNom("Rouge");
-
-		Equipe equipeBleue = new Equipe();
 		equipeBleue.setNom("Bleu");
 
 		while (nouveauJoueur) {
@@ -213,5 +213,21 @@ public class Menu {
 		System.out.println("-----------------");
 
 		return lesParticipations;
+	}
+
+	public Equipe getEquipeBleue() {
+		return equipeBleue;
+	}
+
+	public void setEquipeBleue(Equipe equipeBleue) {
+		this.equipeBleue = equipeBleue;
+	}
+
+	public Equipe getEquipeRouge() {
+		return equipeRouge;
+	}
+
+	public void setEquipeRouge(Equipe equipeRouge) {
+		this.equipeRouge = equipeRouge;
 	}
 }
