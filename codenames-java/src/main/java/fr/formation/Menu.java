@@ -18,8 +18,6 @@ public class Menu {
 	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurHibernate();
 	public static IDAOJoueur daoJoueur = new DAOJoueur();
 
-	
-
 	public Joueur connection() throws SQLException {
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
 		listeUtilisateurs = daoUtilisateur.findAll();
@@ -28,7 +26,7 @@ public class Menu {
 		Boolean mdpOk = false;
 
 		while (!mdpOk) {
-			System.out.println("1. Connection 2. Inscription");
+			System.out.println("Bonjour, veuillez saisir 1 pour vous connecter ou 2 pour vous inscrire.");
 
 			int choix = Application.sc.nextInt();
 
@@ -44,7 +42,7 @@ public class Menu {
 						// CONNEXION
 						mdpOk = true;
 						joueur = daoJoueur.findByUsername(nom);
-						
+
 					}
 				}
 
@@ -75,7 +73,7 @@ public class Menu {
 				usernameOk = true;
 			}
 		}
-		
+
 		usernameOk = false;
 		while (!usernameOk) {
 			System.out.println("Entrez votre prï¿½nom");
@@ -84,7 +82,7 @@ public class Menu {
 				usernameOk = true;
 			}
 		}
-		
+
 		usernameOk = false;
 		String username = null;
 		boolean loginOK = false;
@@ -97,8 +95,7 @@ public class Menu {
 				username = Application.sc.nextLine();
 				if (!username.equals("")) {
 					loginOK = true;
-				}
-				else {
+				} else {
 					System.out.println("Votre login ne peut ï¿½tre nul");
 				}
 			}
@@ -133,68 +130,91 @@ public class Menu {
 
 		return joueur;
 	}
-	
-	
-	public Participation menuPrincipal() {
-		
-		
+
+	public List<Participation> menuPrincipal() {
+
+		List<Participation> lesParticipations = new ArrayList<Participation>();
+
 		System.out.println("-----------------");
 		System.out.println("Bienvenue dans Code Names");
 		System.out.println("-----------------");
 
-		
 		System.out.println("-----------------");
 		System.out.println("MENU PRINCIPAL");
 		System.out.println("-----------------");
-		
-		
-		Joueur monJoueur = new Joueur();
-		try {
-			monJoueur = connection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("ERR de recuperation du Joueur dans Menu Principal !!");
-		}
-		
-		Equipe EquipeRouge = new Equipe();
-		Equipe EquipeBleue = new Equipe();
-		
-		System.out.println("Saisir 1 pour commencer une nouvelle partie");
-		
-		
-		if( Application.sc.nextInt() == 1) {
-			
-			System.out.println("Saisir 1 pour choisir  l'Equipe Rouge");
-			System.out.println("Saisir 2 pour choisir l'Equipe Bleue)");
-//			System.out.println("Saisir 3 pour ï¿½tre spectateur");
-			
-			int a  = Application.sc.nextInt();
-			
-			
-			
+
+		boolean nouveauJoueur = true;
+		int nbJoueurs = 0;
+		int nbJoueursBleus = 0;
+		int nbJoueursRouge = 0;
+
+		Equipe equipeRouge = new Equipe();
+		equipeRouge.setNom("Rouge");
+
+		Equipe equipeBleue = new Equipe();
+		equipeBleue.setNom("Bleu");
+
+		while (nouveauJoueur) {
+			Joueur monJoueur = new Joueur();
+			nbJoueurs++;
+
+			try {
+				monJoueur = connection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("ERR de recuperation du Joueur dans Menu Principal !!");
+			}
+
+			System.out.println("Saisir 1 pour choisir  l'Equipe Bleue");
+			System.out.println("Saisir 2 pour choisir l'Equipe Rouge");
+
+			int a = Application.sc.nextInt();
+
 			switch (a) {
-			case 1 :
-				System.out.println("Vous ï¿½tes dans l'Equipe Bleue !");
-				EquipeBleue.AjouterMembre(monJoueur);
-				monJoueur.setEquipe(EquipeBleue);
+			case 1:
+				System.out.println("Vous êtes dans l'Equipe Bleue !");
+				equipeBleue.AjouterMembre(monJoueur);
+				monJoueur.setEquipe(equipeBleue);
+				nbJoueursBleus++;
 				break;
-			case 2 :
-				System.out.println("Vous ï¿½tes dans l'Equipe Rouge !");
-				EquipeRouge.AjouterMembre(monJoueur);
-				monJoueur.setEquipe(EquipeRouge);
-				
-			break;
+			case 2:
+				System.out.println("Vous êtes dans l'Equipe Rouge !");
+				equipeRouge.AjouterMembre(monJoueur);
+				monJoueur.setEquipe(equipeRouge);
+				nbJoueursRouge++;
+				break;
+			}
+
+			lesParticipations.add(new Participation(Role.agent, monJoueur));
+
+			if (nbJoueurs < 4) {
+				System.out.println("Enregistrez un autre joueur (nombre de joueurs minimum : 4)");
+			} else if (nbJoueursBleus < 2 || nbJoueursRouge < 2) {
+				System.out.println("Il faut au moins deux joueurs dans chaque équipe.");
+				System.out.println("Nombre de joueurs dans l'équipe rouge : " + nbJoueursRouge);
+				System.out.println("Nombre de joueurs dans l'équipe bleue : " + nbJoueursBleus);
+				System.out.println("Enregistrez un autre joueur.");
+			} else {
+
+				System.out.println("Saisir 1 pour entrer un nouveau joueur ou 2 pour commencer la partie.");
+				int choix = Application.sc.nextInt();
+
+				switch (choix) {
+				case 1:
+					break;
+				case 2:
+					nouveauJoueur = false;
+					break;
+				}
 			}
 		}
-		
-		Participation maParticipation = new Participation(Role.agent, monJoueur);
-		
+
 		System.out.println();
 		System.out.println("-----------------");
 		System.out.println("Nouvelle Partie");
 		System.out.println("-----------------");
-		
-		return maParticipation;
+
+		return lesParticipations;
 	}
 }

@@ -27,14 +27,12 @@ public class Application {
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 
-		/*
-		 * Menu monMenu = new Menu();
-		 * 
-		 * monMenu.menuPrincipal();
-		 */
+		Menu monMenu = new Menu();
 
-		Grille nouvelleGrille = new Grille();
-		nouvelleGrille = creationGrille();
+		monMenu.menuPrincipal();
+
+//		Grille nouvelleGrille = new Grille();
+//		nouvelleGrille = creationGrille();
 
 		DAOHibernate.close();
 
