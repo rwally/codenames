@@ -29,7 +29,7 @@ public class Equipe {
 	@Column(name = "toursGagnes")
 	private int toursGagnes;
 	
-	private static List<Joueur> Equipe = new ArrayList<Joueur>();
+	private static List<Joueur> equipe = new ArrayList<Joueur>();
 	
 	public int getId() {
 		return id;
@@ -40,15 +40,15 @@ public class Equipe {
 	}
 
 	public void AjouterMembre(Joueur j) {
-		Equipe.add(j);
+		equipe.add(j);
 	}
 	
 	public static List<Joueur> getEquipe() {
-		return Equipe;
+		return equipe;
 	}
 
 	public static void setEquipe(List<Joueur> equipe) {
-		Equipe = equipe;
+		equipe = equipe;
 	}
 
 	public List<Joueur> getJoueurs() {
