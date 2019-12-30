@@ -106,11 +106,12 @@ public class Tour {
 		return maCase;
 	}
 
-	public boolean CodeName(Joueur j) {
+	public Map<String,List<Case>> CodeName(Joueur j, Grille grille) {
 		String code = null;
 		int nbMots = -1;
 
-		boolean valid = false;
+		Map<String,List<Case>> casesADeviner = new HashMap<String,List<Case>>();
+		List<Case> mesCases = new ArrayList<Case>(); 
 
 		Scanner sc = new Scanner(System.in);
 
@@ -124,48 +125,100 @@ public class Tour {
 			System.out.println("Choisissez les mots à faire deviner :");
 
 			switch (nbMots) {
-
+			
 			case 0:
-
+				System.out.println("La totalité de vos mots sonts à deviner, sans rapport avec votre CODENAME :");
+				
+				for (Case c : grille.getCases()){
+					if(j.getEquipe().getNom().contains(c.getCouleur().toString())){
+						mesCases.add(c);
+						
+					}
+				}
+				
+				casesADeviner.put(code,mesCases);
+				
+				break;
 			case 1:
-				System.out.println("Choisissez le mot à deviner dans la grille :");
+				System.out.println("Entrez LE mot à deviner dans la grille :");
 				String codeName = sc.nextLine();
+				for (Case c : grille.getCases()){
+					if(c.getMot().getLibelle().equals(codeName) && j.getEquipe().getNom().contains(c.getCouleur().toString())){
+						mesCases.add(c);
+					}
+				}
+				
+				casesADeviner.put(code,mesCases);
+				
+				break;
 
 			case 2:
-				System.out.println("Entrez les deux noms de code :");
+				System.out.println("Entrez les DEUX noms de code :");
+				System.out.println("Code Name 1 :");
 				String codeName1 = sc.nextLine();
+				System.out.println("Code Name 2 :");
 				String codeName2 = sc.nextLine();
 
-				if (codeName1.equals(code)) {
-					valid = true;
+				for (Case c : grille.getCases()){
+					if((c.getMot().getLibelle().equals(codeName1)||c.getMot().getLibelle().equals(codeName2)) 
+						&& j.getEquipe().getNom().contains(c.getCouleur().toString()))
+						{
+						mesCases.add(c);
+					}
 				}
+				
+				casesADeviner.put(code,mesCases);
+				
+				break;
+				
+			case 3:
+				System.out.println("Entrez les TROIS noms de code :");
+				System.out.println("Code Name 1 :");
+				String codeName3 = sc.nextLine();
+				System.out.println("Code Name 2 :");
+				String codeName4 = sc.nextLine();
+				System.out.println("Code Name 3 :");
+				String codeName5 = sc.nextLine();
+
+				for (Case c : grille.getCases()){
+					if((c.getMot().getLibelle().equals(codeName3)||c.getMot().getLibelle().equals(codeName4)||c.getMot().getLibelle().equals(codeName5)) 
+						&& j.getEquipe().getNom().contains(c.getCouleur().toString()))
+						{
+						mesCases.add(c);
+					}
+				}
+				
+				casesADeviner.put(code,mesCases);
+				
+				break;
+				
+			case 4:
+				System.out.println("Entrez les TROIS noms de code :");
+				System.out.println("Code Name 1 :");
+				String codeName6 = sc.nextLine();
+				System.out.println("Code Name 2 :");
+				String codeName7 = sc.nextLine();
+				System.out.println("Code Name 3 :");
+				String codeName8 = sc.nextLine();
+				System.out.println("Code Name 4 :");
+				String codeName9 = sc.nextLine();
+
+				for (Case c : grille.getCases()){
+					if((c.getMot().getLibelle().equals(codeName6)||c.getMot().getLibelle().equals(codeName7)||c.getMot().getLibelle().equals(codeName8)||c.getMot().getLibelle().equals(codeName9)) 
+						&& j.getEquipe().getNom().contains(c.getCouleur().toString()))
+						{
+						mesCases.add(c);
+					}
+				}
+				
+				casesADeviner.put(code,mesCases);
+				
+				break;
+			
 			}
+			
 
-		} else {
-			System.out.println(code + " en " + nbMots + " mots.");
-
-			switch (nbMots) {
-
-			case 0:
-
-			case 1:
-				System.out.println("Entrez le nom de code :");
-				String codeName = sc.nextLine();
-
-				if (codeName.equals(code)) {
-					valid = true;
-				}
-
-			case 2:
-				System.out.println("Entrez les deux noms de code :");
-				String codeName1 = sc.nextLine();
-				String codeName2 = sc.nextLine();
-
-				if (codeName1.equals(code)) {
-					valid = true;
-				}
-			}
-		}
-		return valid;
+		} 
+		return casesADeviner;
 	}
 }
