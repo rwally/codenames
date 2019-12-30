@@ -67,13 +67,10 @@ public class Partie {
 	
 	
 	public void setMaster(Equipe equipe) {
-		for( Joueur j : equipe.getEquipe()) {
-			
-			getRandomElement(equipe.getJoueurs());
-			j.setRole(Role.master);
-		}
-		
+		Joueur j = getRandomElement(equipe.getJoueurs());
+		j.setRole(Role.master);
 	}
+	
 	public Joueur getRandomElement(List<Joueur> list) 
     { 
         int randomIndex = randomGenerator.nextInt(list.size());
@@ -84,7 +81,7 @@ public class Partie {
 		
 		for(Participation p : participations){
 			System.out.println(p.getJoueurs().getUsername()+" "
-								+p.getJoueurs().getEquipe()+" "
+								+p.getJoueurs().getEquipe().getNom()+" "
 								+p.getJoueurs().getRole());
 		}
 	}
