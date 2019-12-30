@@ -19,7 +19,7 @@ import fr.formation.model.Role;
 
 public class Jeu {
 	
-	public static Grille creationGrille() {
+	public static  Grille creationGrille() {
 		// Init de la liste de mots
 		IDAOMot daoMot = new DAOMotHibernate();
 		List<Mot> listeMots = new ArrayList<Mot>();

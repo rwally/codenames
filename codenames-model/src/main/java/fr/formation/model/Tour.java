@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +23,31 @@ public class Tour {
 	@Column(name = "id")
 	private int id;
 	// private List<Mot> CodeNames = new ArrayList<Mot>();
+	
+	@ManyToOne
+	@JoinColumn(name="tour_partie")
+	private Partie partie;
+	
+	@Column(name = "tour_nombre")
+	private int nombreTours;
+	
 
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
+	public int getNombreTours() {
+		return nombreTours;
+	}
+
+	public void setNombreTours(int nombreTours) {
+		this.nombreTours = nombreTours;
+	}
 
 	public int getId() {
 		return id;
