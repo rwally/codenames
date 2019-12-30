@@ -107,7 +107,12 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 				if (compteur > taille) {
 					for (int i = 0; i < taille; i++) {
 						boolean motTrouve = false;
-						int nombreRandom = new Random().nextInt(698);
+						List<Integer> nombresRandom = new Random()
+								.ints(1,698)
+								.distinct()
+								.limit(taille)
+								.boxed()
+								.collect(Collectors.toList());
 						
 						while (!motTrouve) {
 							motTrouve = true;
@@ -115,8 +120,9 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 								mots.add(em
 										.createQuery("select m from Mot m where id= :nombreRandom and m.used = 0",
 												Mot.class)
-										.setParameter("nombreRandom", nombreRandom).getSingleResult());
+										.setParameter("nombreRandom", nombresRandom.get(i)).getSingleResult());
 							} catch (javax.persistence.NoResultException e) {
+								nombresRandom.remove(i);
 								motTrouve = false;
 							}
 						}
