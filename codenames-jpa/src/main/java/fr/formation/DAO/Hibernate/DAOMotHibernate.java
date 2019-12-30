@@ -1,6 +1,5 @@
 package fr.formation.DAO.Hibernate;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +14,8 @@ import fr.formation.DAO.IDAOMot;
 import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 
+public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 
-public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
-
-	
 	@Override
 	public List<Mot> findAll() throws SQLException {
 		// TODO Auto-generated method stub
@@ -36,18 +33,17 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 		// TODO Auto-generated method stub
 		try {
 			tx.begin();
-			if(entity.getId()==0) {
+			if (entity.getId() == 0) {
 				em.persist(entity);
-			}
-			else {
-				entity=em.merge(entity);
+			} else {
+				entity = em.merge(entity);
 			}
 			tx.commit();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			tx.rollback();
 		}
-		
+
 		return entity;
 	}
 
@@ -58,20 +54,20 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 			tx.begin();
 			em.remove(em.merge(entity));
 			tx.commit();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			tx.rollback();
 		}
-		
+
 	}
 
 	@Override
 	public void deleteById(Integer id) throws SQLException {
 		// TODO Auto-generated method stub
-		Mot motASupprimer= new Mot();
+		Mot motASupprimer = new Mot();
 		motASupprimer.setId(id);
 		delete(motASupprimer);
-		
+
 	}
 
 	@Override
@@ -80,39 +76,31 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 		TypedQuery<Mot> myQuery = em.createQuery("select m from Mot m where m.libelle = :nom", Mot.class);
 		myQuery.setParameter("nom", nom);
 		try {
-			
+
 			return Optional.of(myQuery.getSingleResult());
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			return Optional.empty();
 		}
 	}
-	
+
 	@Override
-	public List<Mot> creerListeMots(Grille maGrille){
-		
+	public List<Mot> creerListeMots(Grille maGrille) {
+
 		List<Mot> mots = new ArrayList<Mot>();
-		int taille = maGrille.getDifficulte().getValeur()*maGrille.getDifficulte().getValeur();
-		
-		//Genere une liste de nombres random UNIQUES
-		List<Integer> nombresRandom = new Random()
-				.ints(1,698)
-				.distinct()
-				.limit(taille)
-				.boxed()
+		int taille = maGrille.getDifficulte().getValeur() * maGrille.getDifficulte().getValeur();
+
+		// Genere une liste de nombres random UNIQUES
+		List<Integer> nombresRandom = new Random().ints(1, 698).distinct().limit(taille).boxed()
 				.collect(Collectors.toList());
-			
 
-
-		for(int i=0;i<taille;i++) {
+		for (int i = 0; i < taille; i++) {
 			mots.add(em.createQuery("select m from Mot m where id= :nombreRandom", Mot.class)
-					.setParameter("nombreRandom", nombresRandom.get(i))
-					.getSingleResult()
-					);
+					.setParameter("nombreRandom", nombresRandom.get(i)).getSingleResult());
 		}
-		
-		for(Mot m : mots) {
+
+		for (Mot m : mots) {
 			m.setUsed(true);
 			try {
 				save(m);
@@ -121,9 +109,7 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot{
 				e.printStackTrace();
 			}
 		}
-		
-	
-		
+
 		return mots;
 	}
 
