@@ -103,33 +103,22 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 						compteur++;
 					}
 				}
-
-				if (compteur >= taille) {
-					for (int i = 0; i < taille; i++) {
-						boolean motTrouve = false;
+					
+					if (compteur >= taille) {
+						List<Mot> motsNotUsed = em.createQuery("select m from Mot m where m.used = 0", Mot.class).getResultList();
+						
 						List<Integer> nombresRandom = new Random()
-								.ints(1,698)
+								.ints(1,motsNotUsed.size())
 								.distinct()
 								.limit(taille)
 								.boxed()
 								.collect(Collectors.toList());
-						
-						while (!motTrouve) {
-							motTrouve = true;
-							try {
-								Mot mot = em
-										.createQuery("select m from Mot m where id= :nombreRandom and m.used = 0",
-												Mot.class)
-										.setParameter("nombreRandom", nombresRandom.get(i)).getSingleResult();
+					
+					for (int i = 0; i < taille; i++) {
+								Mot mot = motsNotUsed.get((nombresRandom.get(i)));
 								mots.add(mot);
 								mot.setUsed(true);
 								save(mot);
-								
-							} catch (javax.persistence.NoResultException e) {
-								nombresRandom.remove(i);
-								motTrouve = false;
-							}
-						}
 					}
 				} 
 				else {
@@ -145,14 +134,14 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 			}
 		}
 
-		for (Mot m : mots) {
-			try {
-				save(m);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		for (Mot m : mots) {
+//			try {
+//				save(m);
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 
 		return mots;
 	}
