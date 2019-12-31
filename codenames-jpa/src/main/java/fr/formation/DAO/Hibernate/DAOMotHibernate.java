@@ -104,7 +104,7 @@ public class DAOMotHibernate extends DAOHibernate implements IDAOMot {
 					}
 				}
 					
-					if (compteur >= taille) {
+					if (compteur > taille) {
 						List<Mot> motsNotUsed = em.createQuery("select m from Mot m where m.used = 0", Mot.class).getResultList();
 						
 						List<Integer> nombresRandom = new Random()
