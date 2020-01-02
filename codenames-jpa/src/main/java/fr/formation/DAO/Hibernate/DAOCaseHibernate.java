@@ -90,61 +90,7 @@ public class DAOCaseHibernate extends DAOHibernate implements IDAOCase{
 		}
 	}
 
-	@Override
-	public List<Case> creerListeCase(List<Mot> listeMots, Grille maGrille) {
-		// TODO Auto-generated method stub
-		ArrayList<Case> cases = new ArrayList<Case>();
-		int taille = 0, r = 0,b = 0,w = 0; //rouge bleu w=blanc
-		
-		switch(maGrille.getDifficulte().getValeur()) {
-			case 4: taille=16;
-					r=6;
-					b=11;
-					w=16;
-					break;
-					
-			case 5: taille=25;
-					r=9;
-					b=17;
-					w=24;
-					break;
-					
-			case 6 :taille=36;
-					r=12;
-					b=23;
-					w=33;
-					break;
-		} 
-		
-		
-		for(int i = 0; i < taille; i++) {
-				Case maCase = new Case();
-				maCase.setMot(listeMots.get(0));
-				listeMots.remove(0);
-				if(i<r) {
-					maCase.setCouleur(Couleur.rouge);
-				}else if(i<b) {
-					maCase.setCouleur(Couleur.bleu);
-				}else if(i<w) {
-					maCase.setCouleur(Couleur.blanc);
-				}else {
-					maCase.setCouleur(Couleur.noir);
-				}			
-				
-				try {
-					save(maCase);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				cases.add(maCase);
-		}
-		
-		Collections.shuffle(cases);
-		
-		return cases;
-		
-	}
+
 	
 	
 

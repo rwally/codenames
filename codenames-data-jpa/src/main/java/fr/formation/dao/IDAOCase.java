@@ -10,6 +10,5 @@ import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 
 public interface IDAOCase extends JpaRepository<Case, Integer>{
-	public Optional<Case> findByNom(String nom);
-	public List<Case> creerListeCase(List<Mot> listeMots, Grille maGrille);
+
 }
