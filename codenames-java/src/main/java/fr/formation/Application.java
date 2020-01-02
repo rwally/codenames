@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import fr.formation.DAO.Hibernate.DAOHibernate;
+
 import fr.formation.model.Equipe;
 import fr.formation.model.Grille;
 import fr.formation.model.Joueur;
@@ -87,7 +87,7 @@ public class Application {
 		unePartie.setGrille(nouvelleGrille);
 		Jeu.afficherGrille(nouvelleGrille, lesParticipants.get(0));
 
-		DAOHibernate.close();
+		
 
 	}
 

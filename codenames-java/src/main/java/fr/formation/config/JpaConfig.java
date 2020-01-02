@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.omg.CORBA.Environment;
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -70,3 +70,5 @@ public class JpaConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 	return new PersistenceExceptionTranslationPostProcessor();
 	}
+	
+}
