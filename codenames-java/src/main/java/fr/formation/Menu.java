@@ -4,19 +4,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.formation.DAO.IDAOJoueur;
-import fr.formation.DAO.IDAOUtilisateur;
-import fr.formation.DAO.Hibernate.DAOJoueur;
-import fr.formation.DAO.Hibernate.DAOUtilisateurHibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import fr.formation.dao.IDAOJoueur;
+import fr.formation.dao.IDAOUtilisateur;
 import fr.formation.model.Equipe;
 import fr.formation.model.Joueur;
 import fr.formation.model.Participation;
 import fr.formation.model.Role;
 import fr.formation.model.Utilisateur;
 
+@Service
 public class Menu {
-	public static IDAOUtilisateur daoUtilisateur = new DAOUtilisateurHibernate();
-	public static IDAOJoueur daoJoueur = new DAOJoueur();
+	
+	@Autowired
+	IDAOUtilisateur daoUtilisateur;
+	
+	@Autowired
+	IDAOJoueur daoJoueur;
 	
 	private Equipe equipeBleue = new Equipe();
 	private Equipe equipeRouge = new Equipe();
