@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
 import fr.formation.DAO.Hibernate.DAOHibernate;
 import fr.formation.model.Equipe;
 import fr.formation.model.Grille;
@@ -13,12 +17,24 @@ import fr.formation.model.Participation;
 import fr.formation.model.Partie;
 import fr.formation.model.Role;
 
+
+@Configuration
+@ComponentScan("fr.formation")
 public class Application {
 
 	public static Scanner sc = new Scanner(System.in);
 
+	public void run(String[] args) {
+		
+	}
+
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
+		
+		AnnotationConfigApplicationContext myContext = new AnnotationConfigApplicationContext(Application.class);
+		myContext.getBean(Application.class);
+		//myContext.getBean(Application.class).run(args);
+		myContext.close();
 
 		// ************* Pour les tests ***************************
 		List<Participation> lesParticipants = new ArrayList<Participation>();
