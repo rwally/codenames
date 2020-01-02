@@ -16,6 +16,7 @@ import fr.formation.model.Joueur;
 import fr.formation.model.Participation;
 import fr.formation.model.Partie;
 import fr.formation.model.Role;
+import fr.formation.service.Jeu;
 
 
 @Configuration

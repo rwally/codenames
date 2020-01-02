@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
