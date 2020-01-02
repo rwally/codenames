@@ -3,6 +3,8 @@ package fr.formation.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +21,17 @@ import fr.formation.model.Role;
 
 @Service
 public class Jeu {
-	
+
 	@Autowired
 	IDAOMot daoMot;
-	
+
 	@Autowired
 	IDAOCase daoCase;
-	
+
 	@Autowired
 	IDAOGrille daoGrille;
-	
-	public static  Grille creationGrille() {
+
+	public Grille creationGrille() {
 		// Init de la liste de mots
 		List<Mot> listeMots = new ArrayList<Mot>();
 
@@ -41,33 +43,24 @@ public class Jeu {
 		grille.setDifficulte(Difficulte.moyen);
 
 		// Creation de la liste de mots
-		try {
-			listeMots = daoMot.creerListeMots(grille);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		listeMots = creerListeMots(grille);
 
 		// Creation de la liste de cases avec les mots/couleurs
 		cases = daoCase.creerListeCase(listeMots, grille);
 
 		// affection de la liste de cases a la grille et inverse
 		grille.setCases(cases);
-		try {
-			daoGrille.save(grille);
-			for (Case c : cases) {
-				c.setGrille(grille);
-				daoCase.save(c);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		daoGrille.save(grille);
+		for (Case c : cases) {
+			c.setGrille(grille);
+			daoCase.save(c);
 		}
 
 		return grille;
 
 	}
 
-	public static void afficherGrille(Grille grille, Participation participant) {
+	public void afficherGrille(Grille grille, Participation participant) {
 
 		int k = 0;
 		for (int i = 0; i < grille.getDifficulte().getValeur(); i++) {
@@ -82,6 +75,39 @@ public class Jeu {
 				k++;
 			}
 		}
+	}
+
+	public List<Mot> creerListeMots(Grille maGrille) {
+
+		List<Mot> mots = new ArrayList<Mot>();
+		int taille = maGrille.getDifficulte().getValeur() * maGrille.getDifficulte().getValeur();
+		boolean motsOK = false;
+
+		while (!motsOK) {
+			motsOK = true;
+
+			List<Mot> motsNotUsed = daoMot.findIfNotUsed();
+
+			if (motsNotUsed.size() > taille) {
+				List<Integer> nombresRandom = new Random().ints(1, motsNotUsed.size()).distinct().limit(taille).boxed()
+						.collect(Collectors.toList());
+
+				for (int i = 0; i < taille; i++) {
+					Mot mot = motsNotUsed.get((nombresRandom.get(i)));
+					mots.add(mot);
+					mot.setUsed(true);
+					daoMot.save(mot);
+				}
+			} else {
+				motsOK = false;
+				for (Mot m : daoMot.findAll()) {
+					m.setUsed(false);
+					daoMot.save(m);
+				}
+			}
+		}
+
+		return mots;
 	}
 
 }

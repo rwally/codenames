@@ -12,5 +12,5 @@ import fr.formation.model.Mot;
 
 public interface IDAOMot extends JpaRepository<Mot, Integer>{
 	public Optional<Mot> findByNom(String nom);
-	public List<Mot> creerListeMots(Grille maGrille) throws SQLException;
+	public List<Mot> findIfNotUsed();
 }
