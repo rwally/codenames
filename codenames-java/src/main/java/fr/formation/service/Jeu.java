@@ -88,7 +88,7 @@ public class Jeu {
 		while (!motsOK) {
 			motsOK = true;
 
-			List<Mot> motsNotUsed = daoMot.findIfNotUsed();
+			List<Mot> motsNotUsed = daoMot.findByUsed(false);
 
 			if (motsNotUsed.size() > taille) {
 				List<Integer> nombresRandom = new Random().ints(1, motsNotUsed.size()).distinct().limit(taille).boxed()

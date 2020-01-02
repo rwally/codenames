@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,27 +18,22 @@ import fr.formation.model.Participation;
 import fr.formation.model.Partie;
 import fr.formation.model.Role;
 import fr.formation.service.Jeu;
+import fr.formation.service.Menu;
 
 
 @Configuration
 @ComponentScan("fr.formation")
 public class Application {
+	
+	@Autowired
+	private Jeu jeu;
+	
+	@Autowired
+	private Menu menu;
 
 	public static Scanner sc = new Scanner(System.in);
 
 	public void run(String[] args) {
-		
-	}
-
-	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
-		
-		AnnotationConfigApplicationContext myContext = new AnnotationConfigApplicationContext(Application.class);
-		myContext.getBean(Application.class);
-		//myContext.getBean(Application.class).run(args);
-		myContext.close();
-
-		// ************* Pour les tests ***************************
 		List<Participation> lesParticipants = new ArrayList<Participation>();
 		
 		Joueur adeline = new Joueur(0, "Sinapayen", "Adeline", "Adeline", "09041993");
@@ -84,9 +80,21 @@ public class Application {
 		
 		// Affichage de la grille pour la partie
 		Grille nouvelleGrille = new Grille();
-		nouvelleGrille = Jeu.creationGrille();
+		nouvelleGrille = jeu.creationGrille();
 		unePartie.setGrille(nouvelleGrille);
-		Jeu.afficherGrille(nouvelleGrille, lesParticipants.get(0));
+		jeu.afficherGrille(nouvelleGrille, lesParticipants.get(0));
+	}
+
+	public static void main(String[] args) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		AnnotationConfigApplicationContext myContext = new AnnotationConfigApplicationContext(Application.class);
+//		myContext.getBean(Application.class);
+		myContext.getBean(Application.class).run(args);
+		myContext.close();
+
+		// ************* Pour les tests ***************************
+
 
 		
 

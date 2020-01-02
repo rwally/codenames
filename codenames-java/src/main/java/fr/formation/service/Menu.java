@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.formation.Application;
 import fr.formation.dao.IDAOJoueur;
 import fr.formation.dao.IDAOUtilisateur;
 import fr.formation.model.Equipe;

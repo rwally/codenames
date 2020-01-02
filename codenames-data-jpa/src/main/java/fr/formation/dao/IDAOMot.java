@@ -11,6 +11,5 @@ import fr.formation.model.Mot;
 
 
 public interface IDAOMot extends JpaRepository<Mot, Integer>{
-	public Optional<Mot> findByNom(String nom);
-	public List<Mot> findIfNotUsed();
+	public List<Mot> findByUsed(boolean isUsed);
 }

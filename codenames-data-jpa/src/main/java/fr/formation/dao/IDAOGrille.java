@@ -9,8 +9,6 @@ import fr.formation.model.Grille;
 
 
 public interface IDAOGrille extends JpaRepository<Grille, Integer>{
-	public Optional<Grille> findByNom(String nom) throws SQLException;
-	
-	
+
 
 }

@@ -6,5 +6,4 @@ import fr.formation.model.Equipe;
 
 
 public interface IDAOEquipe extends JpaRepository<Equipe, Integer>{
-	public Equipe findByNom(String username);
 }
