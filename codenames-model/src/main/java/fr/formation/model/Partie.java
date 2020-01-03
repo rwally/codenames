@@ -62,6 +62,10 @@ public class Partie {
 	}
 
 	public void setMaster(Equipe equipe) {
+		for (Joueur j : equipe.getJoueurs()) {
+			j.getSaParticipation().setRole(Role.agent);
+		}
+		
 		Joueur j = getRandomElement(equipe.getJoueurs());
 		j.getSaParticipation().setRole(Role.master);
 	}
