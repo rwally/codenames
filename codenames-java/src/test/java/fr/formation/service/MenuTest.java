@@ -5,7 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.sql.SQLException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -22,7 +24,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import fr.formation.Application;
 import fr.formation.dao.IDAOJoueur;
 import fr.formation.dao.IDAOUtilisateur;
+import fr.formation.model.Equipe;
 import fr.formation.model.Joueur;
+import fr.formation.model.Participation;
+import fr.formation.model.Role;
 import fr.formation.model.Utilisateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -122,4 +127,80 @@ public class MenuTest {
 		}
 
 	}
+	
+	
+	
+	@Test
+	public void TestMenuPrincipal() {
+
+			try {
+				
+				Equipe equipeBleueTest = new Equipe();
+				Equipe equipeRougeTest = new Equipe();
+
+				equipeRougeTest.setNom("RougeTest");
+				equipeBleueTest.setNom("BleuTest");
+				
+				Joueur monJoueur = new Joueur();
+				
+				Menu menuTest = new Menu();
+				menuTest.menuPrincipal();
+				
+				String input = "1\n";
+				InputStream stringStream = new java.io.ByteArrayInputStream(input.getBytes());
+		
+				OutputStream outputStream = new java.io.ByteArrayOutputStream();
+				PrintStream printStream = new PrintStream(outputStream);
+				
+				String result = outputStream.toString();
+				
+				// Vérification du passage à la méthode connection
+				assertEquals(result, "Bonjour, veuillez saisir 1 pour vous connecter ou 2 pour vous inscrire.");
+				
+				
+				equipeBleueTest.AjouterMembre(monJoueur);
+			
+				monJoueur.setEquipe(equipeBleueTest);
+				
+				// Vérification des données de l'équipe bleue
+				assertEquals(1,equipeBleueTest.getJoueurs().size());
+				assertEquals("BleueTest",monJoueur.getEquipe().getNom());
+				
+				equipeBleueTest.AjouterMembre(monJoueur);
+			
+				Joueur monJoueur2 = new Joueur();
+				
+				monJoueur2.setEquipe(equipeRougeTest);
+				
+				// Vérification des données de l'équipe bleue
+				assertEquals(1,equipeBleueTest.getJoueurs().size());
+				assertEquals("RougeTest",monJoueur.getEquipe().getNom());
+				
+				Participation maParticipation = new Participation(Role.agent, monJoueur);
+				Participation maParticipation2 = new Participation(Role.agent, monJoueur2);
+				
+				monJoueur.setSaParticipation(maParticipation);
+				monJoueur2.setSaParticipation(maParticipation2);
+				
+				
+				// Vérification des Participations
+				assertEquals(maParticipation, monJoueur.getSaParticipation());
+				assertEquals(maParticipation2, monJoueur2.getSaParticipation());
+				
+				// Vérification de leur role
+				assertEquals(Role.agent, monJoueur.getSaParticipation().getRole());
+				assertEquals(Role.agent, monJoueur2.getSaParticipation().getRole());
+				
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }
