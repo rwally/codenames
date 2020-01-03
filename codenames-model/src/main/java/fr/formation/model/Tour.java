@@ -56,19 +56,40 @@ public class Tour {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public Case vote(int nbJoueurs, Grille grille) {
+		Case laCase = new Case();
+		List<Case> votes = new ArrayList<Case>();
+		boolean voteOK = false;
+		
+		while (!voteOK) {
+		for (int i = 0; i < nbJoueurs; i++) {
+			votes.add(voteJoueur(grille));
+		}
+		
+		laCase = voteGlobal(votes);
+		if (laCase != null) {
+			voteOK = true;
+		}
+		else {
+			System.out.println("Il y a une égalité pour les votes, revotez");
+		}
+		}
+		
+		return laCase;
+	}
 
-//	/!\ méthode non testée
 	public Case voteGlobal(List<Case> votes) {
 		Map<Case, Integer> map = new HashMap<Case, Integer>();
 		int max = 0;
 		Case laCase = null;
 
 		for (int i = 0; i < votes.size(); i++) {
-			int value = 1;
 			Case key = votes.get(i);
+			int value = 1;
 
 			if (map.containsKey(key)) {
-				value = map.get(key);
+				value = map.get(key) + 1;
 			}
 			map.put(key, value);
 
@@ -76,11 +97,13 @@ public class Tour {
 				max = value;
 				laCase = key;
 			}
+			else if (value == max) {
+				laCase = null;
+			}
 		}
 		return laCase;
 	}
 
-//	/!\ méthode non testée
 	public Case voteJoueur(Grille grille) {
 		Case maCase = new Case();
 		maCase = null;
