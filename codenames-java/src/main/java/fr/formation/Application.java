@@ -34,6 +34,8 @@ public class Application {
 	public static Scanner sc = new Scanner(System.in);
 
 	public void run(String[] args) {
+		
+		// ************* Pour les tests ***************************
 		List<Participation> lesParticipants = new ArrayList<Participation>();
 		
 		Joueur adeline = new Joueur(0, "Sinapayen", "Adeline", "Adeline", "09041993");
@@ -93,7 +95,7 @@ public class Application {
 		myContext.getBean(Application.class).run(args);
 		myContext.close();
 
-		// ************* Pour les tests ***************************
+	
 
 
 		

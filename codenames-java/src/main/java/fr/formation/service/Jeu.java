@@ -20,6 +20,7 @@ import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 import fr.formation.model.Participation;
 import fr.formation.model.Role;
+import fr.formation.service.Jeu;
 
 @Service
 public class Jeu {
@@ -89,6 +90,7 @@ public class Jeu {
 			motsOK = true;
 
 			List<Mot> motsNotUsed = daoMot.findByUsed(false);
+			
 
 			if (motsNotUsed.size() > taille) {
 				List<Integer> nombresRandom = new Random().ints(1, motsNotUsed.size()).distinct().limit(taille).boxed()
