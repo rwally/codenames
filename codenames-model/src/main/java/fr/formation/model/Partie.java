@@ -28,6 +28,9 @@ public class Partie {
 
 	@OneToMany(mappedBy = "maPartie")
 	private List<Participation> joueurs;
+	
+	@OneToMany(mappedBy ="partie")
+	private List<Tour> tours;
 
 	public Partie(Grille grille, List<Participation> joueurs) {
 		this.grille = grille;
@@ -59,6 +62,15 @@ public class Partie {
 
 	public void setJoueurs(List<Participation> joueurs) {
 		this.joueurs = joueurs;
+	}
+	
+	
+	public List<Tour> getTours() {
+		return tours;
+	}
+
+	public void setTours(List<Tour> tours) {
+		this.tours = tours;
 	}
 
 	public void setMaster(Equipe equipe) {
