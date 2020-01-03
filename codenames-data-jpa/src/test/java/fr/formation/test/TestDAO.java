@@ -42,7 +42,7 @@ public class TestDAO {
 	
 	@BeforeClass
 	public static void BeforeClass() {
-		System.out.println("Démarrage TESTS DAO CodeNames");
+		System.out.println("Dï¿½marrage TESTS DAO CodeNames");
 	}
 	
 	
@@ -100,6 +100,24 @@ public class TestDAO {
 		}
 	}
 	
+//	
+//	@Test
+//	@Transactional
+//	@Rollback
+//	public void TestSupressionProduit() {
+//		
+//		try {
+//			daoUtilisateur.deleteById(1);
+//			Optional<Utilisateur> monProduit = daoUtilisateur.findById(1);
+//			assertNotNull(daoUtilisateur);
+//			assertFalse(daoUtilisateur.isPresent());
+//			
+//		}
+//		catch(Exception e) {
+//			fail(e.getMessage());
+//			System.out.println("Err de Test Supression");
+//		}
+//	}
 	
 	@Test
 	@Transactional

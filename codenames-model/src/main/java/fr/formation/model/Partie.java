@@ -28,9 +28,6 @@ public class Partie {
 
 	@OneToMany(mappedBy = "maPartie")
 	private List<Participation> joueurs;
-	
-
-	//private Random randomGenerator;
 
 	public Partie(Grille grille, List<Participation> joueurs) {
 		this.grille = grille;
