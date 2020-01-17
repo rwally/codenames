@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+
+
+
+.centered {
+ 	left: 0;
+    position:absolute;
+    text-align:center;
+    bottom: 30px;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+img {
+	transition: box-shadow .3s;
+}
+
+img:hover {
+	box-shadow: 0 0 20px rgba(33,33,33,.2); 
+}
+
