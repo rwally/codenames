@@ -40,38 +40,28 @@ function creationPlateau(){
 		var imgMot = document.createElement("img");
 		imgMot.src='https://i.imgur.com/LRk4Jee.png';
 		imgMot.style.borderRadius='5%';
-			
 		
-		//////////////////assigner couleurs//////////////
+		/*
+		 * Assigner couleurs
+		 */
+		if(i<9){
+			nouvelleCase.className="bleu";
+		}else if(i<17){
+			nouvelleCase.className="rouge";
+		}else if(i<24){
+			nouvelleCase.className="blanc";
+		}else{
+			nouvelleCase.className="noir";
+		};
+
 		
-		var listeCouleurs=[];
-		
-		for(let i=0;i<25;i++){
-			if(i<9){
-				listeCouleurs.push("bleu");
-			}else if(i<17){
-				listeCouleurs.push("rouge");
-			}else if(i<24){
-				listeCouleurs.push("blanc");
-			}else{
-				listeCouleurs.push("noir");
-			}
-		}
-		
-		let nombreRandom=Math.floor(Math.random()*25);  
-		nouvelleCase.className=listeCouleurs[nombreRandom];
-		console.log(listeCouleurs[nombreRandom]);
-		console.log(nombresRandom);
-		listeCouleurs.splice(nombreRandom,1);
-		//////////////////////////////////////////////////
-			
-		
-		////////////////assigner le texte/////////////////
+		/*
+		 * Assigner mots
+		 */
 		var nouveauMot=document.createElement("text");
 		nouveauMot.innerHTML="Anniversaire";
 		nouveauMot.className="centered";
-		//////////////////////////////////////////////////
-				
+	
 		nouvelleCase.append(imgMot);
 		nouvelleCase.append(nouveauMot);
 		
