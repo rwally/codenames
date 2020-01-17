@@ -12,14 +12,24 @@ const hideSections = () => {
 	});
 }
 hideSections();
+document
+	.querySelector('#presentation')
+	.style.display = 'block'
 
 const ShowSectionJoueur = () => {
+	hideSections();
 	document
 	.querySelector('#listeJoueurs')
 		.style.display = 'block';
 	document
 	.querySelector('#connexion')
 		.style.display = 'none';
+	document
+	.querySelector('#inscription')
+		.style.display = 'none';
+	document
+	.querySelector('#choixEquipe')
+		.style.display = 'none'
 	
 }
 
@@ -37,25 +47,43 @@ document
 		});
 	});
 
+document
+.querySelectorAll('div.link > a')
+.forEach(lien => {
+	lien.addEventListener('click', (event) => {
+		event.preventDefault();
+		hideSections();
+		let sectionId = event.target.getAttribute('href');
+		document.querySelector(sectionId)
+			.style.display = 'block';
+	});
+});
+
+const showSectionChoixEquipe = () => {
+	hideSections();
+	document
+	.querySelector('#choixEquipe')
+		.style.display = 'block';
+}
 
 
-
-const ajouterJoueur = () => {
+const ajouterJoueur = (button) => {
 	let row = document.createElement('tr');
 	let colId = document.createElement('td');
 	let colEquipe = document.createElement('td');
 	
-	
-	colId.innerHTML = document.querySelector('input[name="ID"]').value;
-	colEquipe.innerHTML = "sonEquipe";
+	if (button.id === 'btnConnexion'){
+		colId.innerHTML = document.querySelector('input[name="ID"]').value;
+	}
+	else if (button.id === 'btnInscription') {
+		colId.innerHTML = document.querySelector('input[name="username"]').value;
+	}
+	colEquipe.innerHTML = document.querySelector('select[name="choixEquipe"]').value;
 	
 	row.append(colId);
 	row.append(colEquipe);
 	
 	document.querySelector('tbody').append(row);
-//	if(document.querySelector('input[name="ID"]').value !== "" && document.querySelector('input[name="PASSWORD"]').value !== ""){
-//		ShowSectionJoueur();
-//	}
 	
 	document.querySelector('#navDeconnexion').addEventListener('click',() => {
 		row.remove();
@@ -74,6 +102,7 @@ const disableConnexion = () => {
 	.querySelector('#navDeconnexion')
 		.style.display = 'block';
 }
+
 const deconnexion = () => {
 	document
 	.querySelector('#navConnection')
@@ -91,20 +120,48 @@ const deconnexion = () => {
 	document
 	.querySelector('#navDeconnexion')
 		.style.display = 'none';
+	document
+	.querySelector('#inscription')
+		.style.display = 'none';
 	
 //	document.querySelector('tr:last').remove();
 }
 
-document.querySelector('#btnConnexion').addEventListener('click',(event) => {
-	//event.preventDefault();
-	
-	if(document.querySelector('input[name="ID"]').value !== "" && document.querySelector('input[name="PASSWORD"]').value !== ""){
-		ajouterJoueur();
-		ShowSectionJoueur();
-		disableConnexion();
-		
-	}
-});
+function validation() {
+	'use strict';
+	window.addEventListener('load', function() {
+	    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+	    var forms = document.getElementsByClassName('needs-validation');
+	    // Loop over them and prevent submission
+	    var validation = Array.prototype.filter.call(forms, function(form) {
+	    	let buttons = document.querySelectorAll('input[type="submit"]');
+	    	for (let button of buttons) {
+				button.addEventListener('click', function(event) {
+				    if (form.checkValidity() === false) {
+				      	event.preventDefault();
+				       	event.stopPropagation();
+				    }
+				    else {
+				       	event.preventDefault();				       	
+				    	showSectionChoixEquipe();
+				    	
+				    	document.
+				    		querySelector('#btnChoix')
+				    		.addEventListener('click', function (event) {
+				    			ajouterJoueur(button);
+				    			ShowSectionJoueur();
+				    			disableConnexion();
+				    		})
+				    }
+				    form.classList.add('was-validated');
+				}, false);
+	    	}
+	    });
+	}, false);
+}
+
+validation();
+
 
 //document.querySelector('#btnConnexion').addEventListener('click',ajouterJoueur);
 //document.querySelector('#btnConnexion').addEventListener('click',disableConnexion);

@@ -9,7 +9,7 @@
 		<meta name="viewport" content="width=devide-width, initial-scale=1" />
 		<base href= "/codenames-html/"/>
 		<script type="module" src="listeJoueurs.js"></script>
-		<script defer src="inscription.js"></script>
+		<link rel="stylesheet" type="text/css" href="connexion.css"/>
 		
 	</head>
 	
@@ -17,6 +17,7 @@
 	
 		<nav>
 			<ul class="nav justify-content-center">
+				<li class="nav-item" id = "navPresentation"><a class="nav-link" href="#presentation">Présentation</a></li>
 				<li class="nav-item" id = "navConnection"><a class="nav-link" href="#connexion">Connexion</a></li>
 				<li class="nav-item" id = "navInscription"><a class="nav-link" href="#inscription">Inscription</a></li>
 				<li class="nav-item" id = "navJoueurs"><a class="nav-link" href="#listeJoueurs">Joueurs</a></li>
@@ -24,23 +25,82 @@
 			</ul>
 		</nav>
 		
+		<section id = "presentation">
+		
+			<h1>Trouvez les bons noms de codes</h1>
+			
+			<p>
+				Codenames est un jeu d’association d’idées pour 2 à 8 joueurs (voire plus !) dans lequel, répartis en deux équipes,
+				 vous incarnez soit un maître-espion, soit un agent en mission. Pour retrouver sous quel nom de code se cachent vos
+				  informateurs, écoutez bien les indices donnés par les deux Maîtres-Espions et prenez garde à ne pas contacter un 
+				  informateur ennemi, ou pire… le redoutable assassin !
+			</p>
+			
+			<h1>Principe du jeu</h1>
+			
+			<p>
+				Les deux Maîtres-Espions connaissent l’identité des 25 Informateurs sur la table,
+				 mais leurs Agents, eux, ne voient que leur Nom de Code. Les équipes rivalisent d’ingéniosité
+				  pour être les premiers à prendre contact avec tous leurs Informateurs. Pour cela, les Maîtres-Espions
+				   donnent un et un seul mot d’indice pouvant désigner plusieurs Noms de Code sur la table. Leurs Agents
+				    essayent, dès lors, de deviner les Noms de Code de leur couleur et d’éviter ceux de l’autre équipe.
+				     Et par dessus tout, tout le monde veut éviter l’Assassin !
+
+				La première équipe qui identifie tous ses Informateurs gagne la partie.
+			</p>
+			
+			<h1>Points forts</h1>
+			
+			<ul>
+				<li>Un jeu d’association d’idées fin et original qui fait déjà sensation à l’étranger</li>
+				<li>Vlaada Chvatil, auteur prodige (Through the Ages, Dungeon Lords…) s’attaque enfin aux jeux d’ambiance !</li>
+				<li>400 mots et 160 dispositions possibles pour une rejouabilité infinie</li>
+			</ul>
+			
+			<p>
+				<b>Matériel</b> : 8 tuiles Informateur bleu, 8 tuiles Informateur rouge, 1 tuile Agent Double, 7 tuiles Témoin,
+				 1 tuile Assassin, 200 cartes Nom de Code, 40 cartes Clé, 1 support de carte Clé et 1 livret de règles
+			</p>
+			
+			<p>
+				<b>Auteur</b> : Vlaada Chvátil
+			</p>
+			
+			<p>
+				<b>Illustrateur</b> : Tomáš Kucerovsky
+			</p>
+		</section>
+		
 		<section id ="connexion">
 		
 			<header>
 				<h1  class="display-4 text-center">Connexion</h1>
 			</header>
 		
-			<form class="needs-validation" novalidate>
+			<form class="needs-validation" id="connexionForm" novalidate>
 				<div class="form-group w-75 p-3 mx-auto">
 					
 					<div>
 						<label for="InputId">Identifiant</label>
 						<input  type="text" class="form-control" id="InputId" name="ID" aria-describedby="identifiantHelp" placeholder="Entrez votre identifiant" required="true"/>
 						<small id="identifiantHelp" class="form-text text-muted">Votre "GameTag"</small>
+						<div class="invalid-feedback">
+			        		Veuillez entrer un Identifiant valide
+			      		</div>
+			      		<div class="valid-feedback">
+			       		 	OK !
+			      		</div>
 					</div>
+					
 					<div>
 						<label for="InputPassword">Mot de passe</label>
 						<input type="password" class="form-control required" id="InputPassword" name="PASSWORD" placeholder="Entrez votre mot de passe" required="true"/>
+						<div class="invalid-feedback">
+			        		Veuillez entrer un mot de passe
+			      		</div>
+			      		<div class="valid-feedback">
+			        		OK !
+			      		</div>
 					</div>
 					
 					<div class="link">
@@ -79,15 +139,17 @@
 		</section>
 		
 		<section id="inscription">
-			<h1 class="display-4 text-center form-header mb-3">Inscrivez-vous !</h1>
+			<header>
+				<h1 class="display-4 text-center form-header mb-3">Inscrivez-vous !</h1>
+			</header>
 	
-			<form class="needs-validation" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")' novalidate >
+			<form class="needs-validation" id = "inscriptionForm" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")' novalidate >
 			
-				<div class="form-group w-50 mx-auto p-3">
+				<div class="form-group w-75 mx-auto p-3">
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label class="ml-2" for="inputNom">Nom</label>
-							<input type="text" name="nom"  class="form-control" id="inputNom" placeholder="Entrez votre nom" required/>
+							<input type="text" name="nom"  class="form-control" id="inputNom" placeholder="Entrez votre nom" required="true"/>
 							<div class="invalid-feedback">
 		        				Veuillez entrer votre nom
 		      				</div>
@@ -98,7 +160,7 @@
 					
 						<div class="form-group col-md-6">
 							<label class="ml-2" for="inputPrenom">Prénom</label>
-							<input type="text" name="prenom" class="form-control" id="inputPrenom" placeholder="Entrez votre prénom" required/>
+							<input type="text" name="prenom" class="form-control" id="inputPrenom" placeholder="Entrez votre prénom" required="true"/>
 							<div class="invalid-feedback">
 			        			Veuillez entrer votre prénom
 			      			</div>
@@ -110,7 +172,7 @@
 					
 					<div class="form-group">
 						<label class="ml-2" for="inputUsername">Username</label>
-						<input type="text" name="username" class="form-control" id="inputUsername" placeholder="Entrez votre username" required/>
+						<input type="text" name="username" class="form-control" id="inputUsername" placeholder="Entrez votre identifiant" required="true"/>
 						<div class="invalid-feedback">
 			        			Veuillez entrer un nom d'utilisateur valide
 			      		</div>
@@ -122,7 +184,7 @@
 					<div class="form-row">
 					 	<div class="form-group col-md-6">
 							<label class="ml-2" for="Password">Mot de passe</label>
-							<input type="password" name="passsword" class="form-control" id="password" placeholder="Entrez votre mot de passe" required/>
+							<input type="password" name="passsword" class="form-control" id="password" placeholder="Entrez votre mot de passe" required="true"/>
 							<div class="invalid-feedback">
 			        			Veuillez entrer un mot de passe
 			      			</div>
@@ -136,7 +198,7 @@
 						
 			  			<div class="form-group col-md-6">
 							<label class="ml-2" for="inputPasswordAgain">Confirmation mot de passe</label>
-							<input type="password" class="form-control" name="password2" id="password2" placeholder="Entrez à nouveau votre mot de passe" required/>
+							<input type="password" class="form-control" name="password2" id="password2" placeholder="Entrez à nouveau votre mot de passe" required="true"/>
 							<div class="invalid-feedback">
 			        			Les deux mots de passe doivent être identiques
 			      			</div>
@@ -147,15 +209,34 @@
 					</div>
 
 					<div>
-						<button type="submit" class="btn btn-outline-primary">S'inscrire</button>
+						<input class="btn btn-outline-primary mt-3" type="submit" id="btnInscription" Value="Inscription" />
 					</div>
 				</div>
 		</form>
 		</section>
 		
+		<section id="choixEquipe">
+			<header>
+				<h1 class="display-4 text-center form-header mb-3">Choisis ton équipe !</h1>
+			</header>
+			
+			<form>
+				<div class="form-group w-75 mx-auto p-3">
+					<select name="choixEquipe" class="custom-select custom-select-lg mb-3" required>
+						<option value="Rouge">Rouge</option>
+	  					<option value="Bleue">Bleue</option>
+					</select>
+					
+					<div>
+						<input class="btn btn-outline-primary mt-3" type="submit" id="btnChoix" Value="Submit" />
+					</div>
+				</div>
+			</form>
+		</section>
+		
 		
 		<div class="footer-copyright text-center py-3 fixed-bottom">© 2020 Copyright:
-    		<a href="https://iello.fr/fr/fiche/codenames">Achètes le vrai Codenames</a>
+    		<a href="https://iello.fr/fr/fiche/codenames">Achète le vrai Codenames</a>
   		</div>
 		
 		

@@ -9,7 +9,8 @@ function validation() {
 	    var forms = document.getElementsByClassName('needs-validation');
 	    // Loop over them and prevent submission
 	    var validation = Array.prototype.filter.call(forms, function(form) {
-	      form.addEventListener('submit', function(event) {
+	      let button = document.querySelector('input[type="submit"]');
+	      button.addEventListener('submit', function(event) {
 	        if (form.checkValidity() === false) {
 	          event.preventDefault();
 	          event.stopPropagation();
