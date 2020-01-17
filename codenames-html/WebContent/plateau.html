@@ -4,13 +4,72 @@
 <meta charset="ISO-8859-1">
 <title>Plateau</title>
 <script defer src="plateau.js"></script>
+<script defer src="mots.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="plateau.css"/>
 </head>
 <body>
-
-<div class="container" id="plateau" >
-</div>
+		<nav>
+			<ul class="nav justify-content-center">
+				<li class="nav-item" id = "navConnection"><a class="nav-link" href="#connexion">Lien 1</a></li>
+				<li class="nav-item" id = "navInscription"><a class="nav-link" href="#inscription">Lien 2</a></li>
+				<li class="nav-item" id = "navJoueurs"><a class="nav-link" href="#listeJoueurs">Lien 3</a></li>
+				<li class="nav-item" id = "navDeconnexion"><a class="nav-link" href="#Deconnexion">Lien 4</a></li>
+			</ul>
+		</nav>
+		
+		<header>
+			<h1  class="display-4 text-center">Codenames</h1>
+			<h3  class="display-8 text-center">Equipe bleue, à vous de jouer !</h3>
+		</header>
+		
+		
+		<div class="container">
+		   <div class="row justify-content-center" style="margin-bottom:20px">		    
+		      <button type="button" class="btn btn-dark btn-lg" id="boutonMaster">Master</button>
+			  <button type="button" class="btn btn-outline-secondary btn-lg" id="boutonAgent" style="margin-left:20px">Agent</button>	
+			  
+			  	  
+		  </div>
+		  
+		<form style="visibility: hidden ; margin-bottom:20px">
+		  <div class="form-row">
+			    <div class="col">
+			      <input type="text" class="form-control" placeholder="Indice">
+			    </div>
+			    
+			    <div class="col">
+			      <select class="form-control">
+			      	<option selected>Nb de mots</option>
+  					<option>0</option>
+  					<option>1</option>
+  					<option>2</option>
+  					<option>3</option>
+  					<option>4</option>
+  					<option>5</option>
+  					<option>6</option>
+  					<option>7</option>
+  					<option>8</option>
+  					<option>&infin;</option>
+			 	</select>
+			   </div>
+			   
+			   <div class="col">
+			    	 <button type="submit" class="btn btn-primary ">Envoyer</button>
+			   </div>
+			   
+		  </div>
+		</form>
+		
+		     
+		      
+		  </div>
+		  
+		</div>
+		
+		<div class="container" id="plateau" >
+		
+		</div>
 	
 </body>
 </html>
