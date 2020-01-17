@@ -1,3 +1,9 @@
+document
+.querySelector('#navDeconnexion')
+	.style.display = 'none';
+
+
+
 const hideSections = () => {
 	document
 	.querySelectorAll('section')
@@ -5,6 +11,7 @@ const hideSections = () => {
 		section.style.display = 'none';
 	});
 }
+hideSections();
 
 const ShowSectionJoueur = () => {
 	document
@@ -15,7 +22,7 @@ const ShowSectionJoueur = () => {
 		.style.display = 'none';
 	
 }
-hideSections();
+
 
 
 document
@@ -33,7 +40,7 @@ document
 
 
 
-const afficherJoueur = () => {
+const ajouterJoueur = () => {
 	let row = document.createElement('tr');
 	let colId = document.createElement('td');
 	let colEquipe = document.createElement('td');
@@ -56,10 +63,6 @@ const afficherJoueur = () => {
 	
 }
 
-document
-.querySelector('#navDeconnexion')
-	.style.display = 'none';
-
 const disableConnexion = () => {
 	document
 	.querySelector('#navConnection')
@@ -78,9 +81,7 @@ const deconnexion = () => {
 	document
 	.querySelector('#navInscription')
 		.style.display = 'block';
-	document
-	.querySelector('#navInscription')
-		.style.display = 'block';
+	
 	document
 	.querySelector('#listeJoueurs')
 		.style.display = 'none';
@@ -94,9 +95,17 @@ const deconnexion = () => {
 //	document.querySelector('tr:last').remove();
 }
 
+document.querySelector('#btnConnexion').addEventListener('click',(event) => {
+	event.preventDefault();
+	
+	if(document.querySelector('input[name="ID"]').value !== "" && document.querySelector('input[name="PASSWORD"]').value !== ""){
+		ajouterJoueur();
+		ShowSectionJoueur();
+		disableConnexion();
+		
+	}
+});
 
-
-document.querySelector('#btnConnexion').addEventListener('click',ShowSectionJoueur);
-document.querySelector('#btnConnexion').addEventListener('click',afficherJoueur);
-document.querySelector('#btnConnexion').addEventListener('click',disableConnexion);
+//document.querySelector('#btnConnexion').addEventListener('click',ajouterJoueur);
+//document.querySelector('#btnConnexion').addEventListener('click',disableConnexion);
 document.querySelector('#navDeconnexion').addEventListener('click',deconnexion);
