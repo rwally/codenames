@@ -96,7 +96,7 @@ const deconnexion = () => {
 }
 
 document.querySelector('#btnConnexion').addEventListener('click',(event) => {
-	event.preventDefault();
+	//event.preventDefault();
 	
 	if(document.querySelector('input[name="ID"]').value !== "" && document.querySelector('input[name="PASSWORD"]').value !== ""){
 		ajouterJoueur();
