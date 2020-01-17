@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=devide-width, initial-scale=1" />
 		<base href= "/codenames-html/"/>
 		<script type="module" src="listeJoueurs.js"></script>
+		<script defer src="inscription.js"></script>
 		
 	</head>
 	
@@ -17,7 +18,7 @@
 		<nav>
 			<ul class="nav justify-content-center">
 				<li class="nav-item" id = "navConnection"><a class="nav-link" href="#connexion">Connexion</a></li>
-				<li class="nav-item" id = "navInscription"><a class="nav-link" href="inscription.html">Inscription</a></li>
+				<li class="nav-item" id = "navInscription"><a class="nav-link" href="#inscription">Inscription</a></li>
 				<li class="nav-item" id = "navJoueurs"><a class="nav-link" href="#listeJoueurs">Joueurs</a></li>
 				<li class="nav-item" id = "navDeconnexion"><a class="nav-link" href="#Deconnexion">Me Deconnecter</a></li>
 			</ul>
@@ -43,7 +44,7 @@
 					</div>
 					
 					<div class="link">
-	    				<a href="inscription.html">Pas de compte ? Inscrivez-vous !</a>
+	    				<a href="#inscription">Pas de compte ? Inscrivez-vous !</a>
 	  				</div>
 					
 					<div>
@@ -75,6 +76,81 @@
 					  </tbody>
 				</table>
 			</div>
+		</section>
+		
+		<section id="inscription">
+			<h1 class="display-4 text-center form-header mb-3">Inscrivez-vous !</h1>
+	
+			<form class="needs-validation" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")' novalidate >
+			
+				<div class="form-group w-50 mx-auto p-3">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label class="ml-2" for="inputNom">Nom</label>
+							<input type="text" name="nom"  class="form-control" id="inputNom" placeholder="Entrez votre nom" required/>
+							<div class="invalid-feedback">
+		        				Veuillez entrer votre nom
+		      				</div>
+		      				<div class="valid-feedback">
+		        				OK !
+		      				</div>
+						</div>
+					
+						<div class="form-group col-md-6">
+							<label class="ml-2" for="inputPrenom">Prénom</label>
+							<input type="text" name="prenom" class="form-control" id="inputPrenom" placeholder="Entrez votre prénom" required/>
+							<div class="invalid-feedback">
+			        			Veuillez entrer votre prénom
+			      			</div>
+			      			<div class="valid-feedback">
+			        			OK !
+			      			</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="ml-2" for="inputUsername">Username</label>
+						<input type="text" name="username" class="form-control" id="inputUsername" placeholder="Entrez votre username" required/>
+						<div class="invalid-feedback">
+			        			Veuillez entrer un nom d'utilisateur valide
+			      		</div>
+			      		<div class="valid-feedback">
+			        			OK !
+			      		</div>
+					</div>
+					
+					<div class="form-row">
+					 	<div class="form-group col-md-6">
+							<label class="ml-2" for="Password">Mot de passe</label>
+							<input type="password" name="passsword" class="form-control" id="password" placeholder="Entrez votre mot de passe" required/>
+							<div class="invalid-feedback">
+			        			Veuillez entrer un mot de passe
+			      			</div>
+			      			<div class="valid-feedback">
+			        			OK !
+			      			</div>
+			      			<div class="link">
+		    					<a href="#connexion">Déjà inscris ? Connectez-vous !</a>
+		  					</div>
+						</div>
+						
+			  			<div class="form-group col-md-6">
+							<label class="ml-2" for="inputPasswordAgain">Confirmation mot de passe</label>
+							<input type="password" class="form-control" name="password2" id="password2" placeholder="Entrez à nouveau votre mot de passe" required/>
+							<div class="invalid-feedback">
+			        			Les deux mots de passe doivent être identiques
+			      			</div>
+			      			<div class="valid-feedback">
+			        			OK !
+			      			</div>
+						</div>
+					</div>
+
+					<div>
+						<button type="submit" class="btn btn-outline-primary">S'inscrire</button>
+					</div>
+				</div>
+		</form>
 		</section>
 		
 		

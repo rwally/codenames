@@ -61,7 +61,7 @@ function creationPlateau(){
 		let nombreRandom=Math.floor(Math.random()*25);  
 		nouvelleCase.className=listeCouleurs[nombreRandom];
 		console.log(listeCouleurs[nombreRandom]);
-		console.log(nombresRandom);
+		console.log(nombreRandom);
 		listeCouleurs.splice(nombreRandom,1);
 		//////////////////////////////////////////////////
 			
