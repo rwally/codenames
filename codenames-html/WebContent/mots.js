@@ -702,5 +702,5 @@ var mots = [{"mot":"Accident"},
 	{"mot":"Zoo"}]
 
 export function choisirMot(){
-	return mots[Math.floor(Math.random()*699)].mot;
+	return mots[Math.floor(Math.random()*698)].mot;
 }
