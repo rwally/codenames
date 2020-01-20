@@ -1,7 +1,7 @@
 /**
  * 		
  */
-import {choisirMot} from 'mots.js';
+import {choisirMot} from './mots.js';
 
 function shuffle(array) {
 	  array.sort(() => Math.random() - 0.5);

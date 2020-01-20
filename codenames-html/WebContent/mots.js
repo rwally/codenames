@@ -2,7 +2,7 @@
  * 
  */
 
-mots = [{"mot":"Accident"},
+var mots = [{"mot":"Accident"},
 	{"mot":"Achat"},
 	{"mot":"Acné"},
 	{"mot":"Action"},
