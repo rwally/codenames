@@ -7,7 +7,8 @@ const envoyerMessage = () => {
 	var message = document.querySelector('input[name="monMessage"]').value;
 	
 	let dateActuelle = new Date();
-	date.innerHTML = dateActuelle;
+	const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour:'numeric', minute:'numeric', second:'numeric' };
+	date.innerHTML = dateActuelle.toLocaleDateString();
 	contenu.innerHTML = message;
 	
 	msg.append(date);

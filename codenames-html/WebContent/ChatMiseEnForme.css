@@ -30,7 +30,7 @@
 	margin: 0 auto;
   width: 300px;
   max-width: 300px;
-  heigth: 80%;
+/*   heigth: 80%; */
   padding: 10px;
   background-color: #e8e8e8;
   
@@ -64,6 +64,9 @@
 }
 
 /* Add some hover effects to buttons */
+#openBtn {
+  opacity: 0.3;
+}
 .btn:hover, #openBtn:hover {
   opacity: 1;
 }
