@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Liste des Joueurs</title>
+	</head>
+	
+	<body>
+		
+		<section id="listeJoueurs">
+			<header>
+				<h1  class="display-4 text-center">Liste des joueurs</h1>
+			</header>
+		
+			<div>
+				<table class="table table-striped mt-3 w-75 p-3 mx-auto">
+					  <thead>
+					    <tr>
+					      <th scope="col">Nom</th>
+					      <th scope="col">Equipe</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+						 
+						 <tr>
+					      <td scope="col">Adeline</th>
+					      <td scope="col">Bleu</th>
+					    </tr>
+					    
+					     <tr>
+					      <td scope="col">Reaz</th>
+					      <td scope="col">Rouge</th>
+					    </tr>
+					    
+					     <tr>
+					      <td scope="col">Adrian</th>
+					      <td scope="col">Bleu</th>
+					    </tr>
+					    
+					     <tr>
+					      <td scope="col">Marcellin</th>
+					      <td scope="col">Rouge</th>
+					    </tr>
+					   
+					  </tbody>
+				</table>
+			</div>
+		</section>
+		
+		
+	</body>
+</html>

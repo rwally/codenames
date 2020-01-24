@@ -88,7 +88,6 @@ const ajouterJoueur = (button) => {
 	document.querySelector('#navDeconnexion').addEventListener('click',() => {
 		row.remove();
 	});
-	
 }
 
 const disableConnexion = () => {
