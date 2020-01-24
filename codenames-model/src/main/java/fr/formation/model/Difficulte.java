@@ -1,7 +1,7 @@
 package fr.formation.model;
 
 public enum Difficulte {
-	facile(4), moyen(5), difficile(6);
+	facile(24), moyen(22), difficile(20);
 
 	private int valeur;
 

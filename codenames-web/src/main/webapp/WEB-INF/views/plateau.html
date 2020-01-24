@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
+<head>
+	<title>Plateau HTML</title>
+</head>
+<body>
+	<section>
+	<!-- Haut de page -->
+	<header>
+			<h1  class="display-4 text-center">Codenames</h1>
+			<h3  class="display-8 text-center">Equipe bleue, à vous de jouer !</h3> <!-- Master/Equipe active -->
+	</header>
+	
+	<!-- Si master -->
+	<form style="visibility: hidden ; margin-bottom:20px">
+		  <div class="form-row">
+			    <div class="col">
+			      <input type="text" class="form-control" placeholder="Indice">
+			    </div>
+			    
+			    <div class="col">
+			      <select class="form-control">
+			      	<option selected>Nb de mots</option>
+  					<option>0</option>
+  					<option>1</option>
+  					<option>2</option>
+  					<option>3</option>
+  					<option>4</option>
+  					<option>5</option>
+  					<option>6</option>
+  					<option>7</option>
+  					<option>8</option>
+  					<option>&infin;</option>
+			 	</select>
+			   </div>
+			   
+			   <div class="col">
+			    	 <button type="submit" class="btn btn-primary ">Envoyer</button>
+			   </div>
+			   
+		  </div>
+		</form>
+		
+		<!-- Le plateau -->
+		<div class="container" id="plateau">
+			<div class="row">
+				<div class="col">
+					<div th:each=" case : ${cases}">
+						<img th:src="https://i.imgur.com/LRk4Jee.png" />
+						<img th:src="https://i.imgur.com/LRk4Jee.png" />
+						<img th:src="https://i.imgur.com/LRk4Jee.png" />
+						<img th:src="https://i.imgur.com/LRk4Jee.png" />
+						
+						<h1 th:if="${produit.id == 0}">Ajouter un produit</h1>
+	<h1 th:if="${produit.id != 0}">Modifier le produit</h1>
+	
+					</div>
+				</div>
+			</div>
+		  	
+		
+		</div>
+	</section>
+</body>
+</html>
