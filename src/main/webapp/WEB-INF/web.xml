@@ -19,7 +19,7 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>fr.formation.config.AppConfig</param-value>
+			<param-value>fr.formation.Application</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
