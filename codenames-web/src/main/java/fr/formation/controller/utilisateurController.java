@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.formation.dao.IDAOUtilisateur;
 import fr.formation.model.Joueur;
+import fr.formation.validator.UtilisateurValidator;
 
 @Controller
 public class utilisateurController {
@@ -31,24 +32,22 @@ public class utilisateurController {
 	
 	@GetMapping("/inscription")
 	public String ajouterUtilisateur(Model model) {
-		model.addAttribute("utilisateur",  new Joueur());
-		
-			return "inscription";
+		model.addAttribute("joueur",  new Joueur());
+		return "inscription";
 	}
 	
 	@PostMapping("/inscription")
 	public String ajouterUtilisateur(
 			@Valid
-			@ModelAttribute Joueur monJoueur,
+			@ModelAttribute Joueur joueur,
 			BindingResult result, Model model) {
+		new UtilisateurValidator().validate(joueur, result);
 		
 		if(result.hasErrors ()) {
 			return "redirect:/inscription";
 		}
-
-
-		daoUtilisateur.save(monJoueur);
-		return "redirect:/listeJoueurs";
+		daoUtilisateur.save(joueur);
+		return "redirect:/connexion";
 	}
 	
 	@GetMapping("/supprimerUtilisateur")
@@ -78,12 +77,6 @@ public class utilisateurController {
 		daoUtilisateur.save(monJoueur);
 		return "redirect:/listeJoueurs";
 	}
-	
-
-	
-	
-	
-	
 	
 	
 }

@@ -12,7 +12,7 @@ import fr.formation.model.Grille;
 import fr.formation.model.Partie;
 import fr.formation.model.Tour;
 
-@Service
+//@Service
 public class TourService {
 	
 	@Autowired

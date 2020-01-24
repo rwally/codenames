@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Table(name = "utilisateur")
@@ -20,15 +23,19 @@ public class Utilisateur {
 	protected int id;
 	
 	@Column(name = "nom", nullable = false)
+	@NotEmpty(message="Veuillez entrer votre nom")
 	protected String nom;
 	
 	@Column(name = "prenom", nullable = false)
+	@NotEmpty(message="Veuillez entrer votre prénom")
 	protected String prenom;
 	
 	@Column(name = "username", unique = true, nullable = false)
+	//@UniqueElements(message="Cet identifiant existe déjà")
 	protected String username;
 	
 	@Column(name = "password", nullable = false)
+	@NotEmpty(message="Veuillez entrer un mot de passe")
 	protected String password;
 
 
