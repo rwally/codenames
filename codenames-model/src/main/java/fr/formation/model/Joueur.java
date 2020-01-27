@@ -21,7 +21,7 @@ public class Joueur extends Utilisateur {
 //	@Enumerated(EnumType.STRING)
 //	private Role role;
 //	
-	@OneToOne
+	@OneToOne(mappedBy = "joueur")
 	@JoinColumn(name = "participation")
 	private Participation saParticipation;
 	

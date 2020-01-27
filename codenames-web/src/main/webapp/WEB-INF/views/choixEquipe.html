@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+		th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Choisis ton équipe</title>
+
 </head>
 <body>
+	<section id="choixEquipe">
+		<header>
+			<h1 class="display-4 text-center form-header mb-3">Choisis ton équipe !</h1>
+		</header>
+		
+		<form method="POST">
+			<div class="form-group w-75 mx-auto p-3">
+				<select name="nom" class="custom-select custom-select-lg mb-3" required>
+					<option th:value="Rouge">Rouge</option>
+  					<option th:value="Bleu">Bleu</option>
+				</select>
+				
+				<div>
+					<input class="btn btn-outline-primary mt-3" type="submit" id="btnChoix" Value="Submit" />
+				</div>
+			</div>
+		</form>
+	</section>
 
 </body>
 </html>

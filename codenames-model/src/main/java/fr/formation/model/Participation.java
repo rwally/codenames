@@ -22,13 +22,13 @@ public class Participation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="PARTICIP_ID",nullable = false)
 	private int id;
-	
+
 	@Column(name ="ROLE_JOUEUR",nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
 	
-	@OneToOne(mappedBy = "saParticipation")
+	@OneToOne
 	@JoinColumn(name = "JOUEUR_ID")
 	private Joueur joueur;
 	
@@ -68,6 +68,38 @@ public class Participation {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Joueur getJoueur() {
+		return joueur;
+	}
+
+	public void setJoueur(Joueur joueur) {
+		this.joueur = joueur;
+	}
+
+	public Partie getMaPartie() {
+		return maPartie;
+	}
+
+	public void setMaPartie(Partie maPartie) {
+		this.maPartie = maPartie;
+	}
+
+	public List<Chat> getChats() {
+		return chats;
+	}
+
+	public void setChats(List<Chat> chats) {
+		this.chats = chats;
 	}
 	
 	

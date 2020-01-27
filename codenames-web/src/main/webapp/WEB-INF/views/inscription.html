@@ -11,42 +11,43 @@
 			<h1 class="display-4 text-center form-header mb-3">Inscrivez-vous !</h1>
 		</header>
 	
-		<form method="POST" id = "inscriptionForm">
+		<form method="POST">
 			
 			<div class="form-group w-75 mx-auto p-3">
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label class="ml-2" for="inputNom">Nom</label>
-						<input type="text" name="nom"  class="form-control" id="inputNom" placeholder="Entrez votre nom"/>
-						<div th:errors="${joueur.nom}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
+						<label class="ml-2" for="nom">Nom</label>
+						<input id="nom" class="form-control" type="text" name="nom"/>
+						<div th:errors="${utilisateurForm.nom}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 					</div>
 				
 					<div class="form-group col-md-6">
-						<label class="ml-2" for="inputPrenom">Prénom</label>
-						<input type="text" name="prenom" class="form-control" id="inputPrenom" placeholder="Entrez votre prénom"/>
-						<div th:errors="${joueur.prenom}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
+						<label class="ml-2" for="prenom">Prénom</label>
+						<input id="prenom" class="form-control" type="text" name="prenom"/>
+						<div th:errors="${utilisateurForm.prenom}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 					</div>
 				</div>
 					
 				<div class="form-group">
-					<label class="ml-2" for="inputUsername">Username</label>
-					<input type="text" name="username" class="form-control" id="inputUsername" placeholder="Entrez votre identifiant"/>
-					<div th:errors="${joueur.username}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
+					<label class="ml-2" for="username">Username</label>
+					<input id="username" class="form-control" type="text" name="username"/>
+					<div th:errors="${utilisateurForm.username}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 				</div>
 				
 				<div class="form-row">
 				 	<div class="form-group col-md-6">
 						<label class="ml-2" for="password">Mot de passe</label>
-						<input type="password" name="passsword" class="form-control" id="password" placeholder="Entrez votre mot de passe"/>
-						<div th:errors="${joueur.password}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
+						<input id="password" class="form-control" type="password" name="password"/>
+						<div th:errors="${utilisateurForm.password}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 		      			<div class="link">
 		   					<a th:href="@{connexion}">Déjà inscris ? Connectez-vous !</a>
 						</div>
 					</div>
 						
 		  			<div class="form-group col-md-6">
-						<label class="ml-2" for="inputPasswordAgain">Confirmation mot de passe</label>
-						<input type="password" class="form-control" name="password2" id="password2" placeholder="Entrez à nouveau votre mot de passe"/>
+						<label class="ml-2" for="password2">Confirmation mot de passe</label>
+						<input id="password2" class="form-control" type="password" name="password2"/>
+						<div th:errors="${utilisateurForm.password2}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 					</div>
 				</div>
 
