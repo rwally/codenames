@@ -23,11 +23,11 @@ public class Utilisateur {
 	protected int id;
 	
 	@Column(name = "nom", nullable = false)
-	@NotEmpty(message="Veuillez entrer votre nom")
+//	@NotEmpty(message="Veuillez entrer votre nom")
 	protected String nom;
 	
 	@Column(name = "prenom", nullable = false)
-	@NotEmpty(message="Veuillez entrer votre prénom")
+//	@NotEmpty(message="Veuillez entrer votre prénom")
 	protected String prenom;
 	
 	@Column(name = "username", unique = true, nullable = false)
@@ -35,7 +35,7 @@ public class Utilisateur {
 	protected String username;
 	
 	@Column(name = "password", nullable = false)
-	@NotEmpty(message="Veuillez entrer un mot de passe")
+//	@NotEmpty(message="Veuillez entrer un mot de passe")
 	protected String password;
 
 

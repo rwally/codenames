@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
 		th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
 	<head>
-		<meta charset="ISO-8859-1">
 		<title>Connexion</title>
 	</head>
 	<body>
@@ -10,37 +9,32 @@
 		<section id ="connexion">
 		
 			<header>
-				<h1  class="display-4 text-center">Connexion</h1>
+				<h1  h1 class="display-4 text-center form-header mb-3">Connexion</h1>
 			</header>
 		
-			<form class="needs-validation" id="connexionForm" novalidate>
+			<form method="POST" id="connexionForm">
 				<div class="form-group w-75 p-3 mx-auto">
 					
 					<div>
 						<label for="InputId">Identifiant</label>
-						<input  type="text" class="form-control" id="InputId" name="ID" aria-describedby="identifiantHelp" placeholder="Entrez votre identifiant" required="true"/>
+						<input  type="text" class="form-control" id="InputId" name="username" aria-describedby="identifiantHelp" placeholder="Entrez votre identifiant"/>
 						<small id="identifiantHelp" class="form-text text-muted">Votre "GameTag"</small>
-						<div class="invalid-feedback">
-			        		Veuillez entrer un Identifiant valide
-			      		</div>
+
 			      		<div class="valid-feedback">
 			       		 	OK !
 			      		</div>
+			      		<div  th:errors="${joueur.username}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 					</div>
 					
 					<div>
 						<label for="InputPassword">Mot de passe</label>
-						<input type="password" class="form-control required" id="InputPassword" name="PASSWORD" placeholder="Entrez votre mot de passe" required="true"/>
-						<div class="invalid-feedback">
-			        		Veuillez entrer un mot de passe
-			      		</div>
-			      		<div class="valid-feedback">
-			        		OK !
-			      		</div>
+						<input type="password" class="form-control" id="InputPassword" name="password" placeholder="Entrez votre mot de passe"/>
+
+			      		<div th:errors="${joueur.password}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 					</div>
 					
 					<div class="link">
-	    				<a href="#inscription">Pas de compte ? Inscrivez-vous !</a>
+	    				<a th:href="@{inscription}">Pas de compte ? Inscrivez-vous !</a>
 	  				</div>
 					
 					<div>
