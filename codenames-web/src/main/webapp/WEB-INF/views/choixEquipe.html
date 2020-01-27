@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Choix de l'Equipe</title>
-	</head>
-	<body>
+<html xmlns:th="http://www.thymeleaf.org"
+		th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
+<head>
+<title>Choisis ton ï¿½quipe</title>
+
+</head>
+<body>
+	<section id="choixEquipe">
+		<header>
+			<h1 class="display-4 text-center form-header mb-3">Choisis ton ï¿½quipe !</h1>
+		</header>
 		
-		<section id="choixEquipe">
-			<header>
-				<h1 class="display-4 text-center form-header mb-3">Choisis ton équipe !</h1>
-			</header>
-			
-			<form>
-				<div class="form-group w-75 mx-auto p-3">
-					<select name="choixEquipe" class="custom-select custom-select-lg mb-3" required>
-						<option value="Rouge">Rouge</option>
-	  					<option value="Bleue">Bleue</option>
-					</select>
-					
-					<div>
-						<input class="btn btn-outline-primary mt-3" type="submit" id="btnChoix" Value="Submit" />
-					</div>
+		<form method="POST">
+			<div class="form-group w-75 mx-auto p-3">
+				<select name="nom" class="custom-select custom-select-lg mb-3" required>
+					<option th:value="Rouge">Rouge</option>
+  					<option th:value="Bleu">Bleu</option>
+				</select>
+				
+				<div>
+					<input class="btn btn-outline-primary mt-3" type="submit" id="btnChoix" Value="Submit" />
 				</div>
-			</form>
-		</section>
-		
-	</body>
+			</div>
+		</form>
+	</section>
+
+</body>
 </html>
