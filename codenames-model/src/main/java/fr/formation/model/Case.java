@@ -3,6 +3,7 @@ package fr.formation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,6 +39,12 @@ public class Case {
 	@JoinColumn(name = "grille")
 	private Grille grille;
 	
+	@Column(name="image")
+	private String image;
+	
+	@Column(name="imageMaster")
+	private String imageMaster;
+	
 	public int getId() {
 		return id;
 	}
@@ -55,6 +62,24 @@ public class Case {
 		this.grille = grille;
 	}
 	
+	
+	
+	public String getImageMaster() {
+		return imageMaster;
+	}
+
+	public void setImageMaster(String imageMaster) {
+		this.imageMaster = imageMaster;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public boolean isTrouver() {
 		return trouver;
 	}

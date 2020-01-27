@@ -3,6 +3,7 @@
 	th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
 <head>
 	<title>Plateau HTML</title>
+
 </head>
 <body>
 	<section>
@@ -13,15 +14,11 @@
 	</header>
 	
 	<!-- Si master -->
-	<form style="visibility: hidden ; margin-bottom:20px">
+	<form class="container" th:if="${participant.role== T(fr.formation.model.Role).master}">
 		  <div class="form-row">
 			    <div class="col">
-			      <input type="text" class="form-control" placeholder="Indice">
-			    </div>
-			    
-			    <div class="col">
 			      <select class="form-control">
-			      	<option selected>Nb de mots</option>
+			      	<option selected>Nombre de mots</option>
   					<option>0</option>
   					<option>1</option>
   					<option>2</option>
@@ -42,25 +39,250 @@
 		  </div>
 		</form>
 		
-		<!-- Le plateau -->
+		<!--
 		<div class="container" id="plateau">
-			<div class="row">
-				<div class="col">
-					<div th:each=" case : ${cases}">
-						<img th:src="https://i.imgur.com/LRk4Jee.png" />
-						<img th:src="https://i.imgur.com/LRk4Jee.png" />
-						<img th:src="https://i.imgur.com/LRk4Jee.png" />
-						<img th:src="https://i.imgur.com/LRk4Jee.png" />
-						
-						<h1 th:if="${produit.id == 0}">Ajouter un produit</h1>
-	<h1 th:if="${produit.id != 0}">Modifier le produit</h1>
-	
-					</div>
+				<div class="uneCase" th:if="${participant.role == T(fr.formation.model.Role).master}" th:each=" case : ${cases}">
+					<img th:src="${case.image}" />
+					<span class="centered" th:text="${case.mot.libelle}"></span>
 				</div>
-			</div>
-		  	
-		
+					
+				<div class="uneCase" th:if="${participant.role == T(fr.formation.model.Role).agent}" th:each=" case : ${cases}">
+					<img th:src="${case.image}" />
+					<span class="centered" th:text="${case.mot.libelle}"></span>
+				</div>
+		  		
 		</div>
+		-->
+		
+		<!-- Le plateau Master -->
+		<div class="container" id="plateauMaster" th:if="${participant.role == T(fr.formation.model.Role).master}">
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[0].imageMaster}" />
+					<span class="centered" th:text="${cases[0].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[1].imageMaster}" />
+					<span class="centered" th:text="${cases[1].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[2].imageMaster}" />
+					<span class="centered" th:text="${cases[2].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[3].imageMaster}" />
+					<span class="centered" th:text="${cases[3].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[4].imageMaster}" />
+					<span class="centered" th:text="${cases[4].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[5].imageMaster}" />
+					<span class="centered" th:text="${cases[5].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[6].imageMaster}" />
+					<span class="centered" th:text="${cases[6].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[7].imageMaster}" />
+					<span class="centered" th:text="${cases[7].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[8].imageMaster}" />
+					<span class="centered" th:text="${cases[8].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[9].imageMaster}" />
+					<span class="centered" th:text="${cases[9].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[10].imageMaster}" />
+					<span class="centered" th:text="${cases[10].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[11].imageMaster}" />
+					<span class="centered" th:text="${cases[11].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[12].imageMaster}" />
+					<span class="centered" th:text="${cases[12].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[13].imageMaster}" />
+					<span class="centered" th:text="${cases[13].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[14].imageMaster}" />
+					<span class="centered" th:text="${cases[14].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[15].imageMaster}" />
+					<span class="centered" th:text="${cases[15].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[16].imageMaster}" />
+					<span class="centered" th:text="${cases[16].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[17].imageMaster}" />
+					<span class="centered" th:text="${cases[17].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[18].imageMaster}" />
+					<span class="centered" th:text="${cases[18].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[19].imageMaster}" />
+					<span class="centered" th:text="${cases[19].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+  				<div class="col">
+	      			<img th:src="${cases[20].imageMaster}" />
+					<span class="centered" th:text="${cases[20].mot.libelle}"></span>
+	    		</div>
+			    <div class="col">
+      				<img th:src="${cases[21].imageMaster}" />
+					<span class="centered" th:text="${cases[21].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[22].imageMaster}" />
+					<span class="centered" th:text="${cases[22].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[23].imageMaster}" />
+					<span class="centered" th:text="${cases[23].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[24].imageMaster}" />
+					<span class="centered" th:text="${cases[24].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			
+  		</div>
+		
+		<!-- Le plateau Agent -->
+		<div class="container" id="plateauAgent" th:if="${participant.role == T(fr.formation.model.Role).agent}">
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[0].image}" />
+					<span class="centered" th:text="${cases[0].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[1].image}" />
+					<span class="centered" th:text="${cases[1].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[2].image}" />
+					<span class="centered" th:text="${cases[2].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[3].image}" />
+					<span class="centered" th:text="${cases[3].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[4].image}" />
+					<span class="centered" th:text="${cases[4].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[5].image}" />
+					<span class="centered" th:text="${cases[5].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[6].image}" />
+					<span class="centered" th:text="${cases[6].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[7].image}" />
+					<span class="centered" th:text="${cases[7].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[8].image}" />
+					<span class="centered" th:text="${cases[8].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[9].image}" />
+					<span class="centered" th:text="${cases[9].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[10].image}" />
+					<span class="centered" th:text="${cases[10].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[11].image}" />
+					<span class="centered" th:text="${cases[11].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[12].image}" />
+					<span class="centered" th:text="${cases[12].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[13].image}" />
+					<span class="centered" th:text="${cases[13].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[14].image}" />
+					<span class="centered" th:text="${cases[14].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+			    <div class="col">
+      				<img th:src="${cases[15].image}" />
+					<span class="centered" th:text="${cases[15].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[16].image}" />
+					<span class="centered" th:text="${cases[16].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[17].image}" />
+					<span class="centered" th:text="${cases[17].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[18].image}" />
+					<span class="centered" th:text="${cases[18].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[19].image}" />
+					<span class="centered" th:text="${cases[19].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			<div class="row">
+  				<div class="col">
+	      			<img th:src="${cases[20].image}" />
+					<span class="centered" th:text="${cases[20].mot.libelle}"></span>
+	    		</div>
+			    <div class="col">
+      				<img th:src="${cases[21].image}" />
+					<span class="centered" th:text="${cases[21].mot.libelle}"></span>
+    			</div>
+	    		<div class="col">
+	      			<img th:src="${cases[22].image}" />
+					<span class="centered" th:text="${cases[22].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[23].image}" />
+					<span class="centered" th:text="${cases[23].mot.libelle}"></span>
+	    		</div>
+	    		<div class="col">
+	      			<img th:src="${cases[24].image}" />
+					<span class="centered" th:text="${cases[24].mot.libelle}"></span>
+	    		</div>
+  			</div>
+  			
+  		</div>
 	</section>
 </body>
 </html>

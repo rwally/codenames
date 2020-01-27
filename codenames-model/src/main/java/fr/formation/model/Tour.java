@@ -28,8 +28,9 @@ public class Tour {
 	@JoinColumn(name="tour_partie")
 	private Partie partie;
 	
-	@Column(name = "tour_nombre")
-	private int nombreTours;
+	@ManyToOne
+	@JoinColumn(name="tour_equipe")
+	private Equipe equipe;
 	
 
 
@@ -41,12 +42,14 @@ public class Tour {
 		this.partie = partie;
 	}
 
-	public int getNombreTours() {
-		return nombreTours;
+	
+
+	public Equipe getEquipe() {
+		return equipe;
 	}
 
-	public void setNombreTours(int nombreTours) {
-		this.nombreTours = nombreTours;
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
 	}
 
 	public int getId() {
