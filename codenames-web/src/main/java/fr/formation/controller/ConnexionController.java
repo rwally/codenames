@@ -2,6 +2,7 @@ package fr.formation.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fr.formation.dao.IDAOJoueur;
+import fr.formation.dao.IDAOParticipation;
 import fr.formation.model.Joueur;
-import fr.formation.validateur.connexionValidateur;
+import fr.formation.model.Participation;
+import fr.formation.model.Role;
+import fr.formation.validator.connexionValidateur;
 
 @Controller
 public class ConnexionController {
@@ -23,23 +27,23 @@ public class ConnexionController {
 	private IDAOJoueur daoJoueur;
 	
 	@Autowired
+	private IDAOParticipation daoParticipation;
+	
+	@Autowired
 	private connexionValidateur conec;
 	
-//	connexionValidateur valid = new connexionValidateur();
-	
 	@GetMapping("/connexion")
-	public String connexionUtilisateur(
-			Model model) {
+	public String connexionUtilisateur(Model model) {
 		model.addAttribute("joueur",  new Joueur());
-		
-			return "connexion";
+		return "connexion";
 	}
 	
 	@PostMapping("/connexion")
 	public String connexionUtilisateur(
 			@Valid	
 			@ModelAttribute Joueur joueur,
-			BindingResult result) {
+			BindingResult result,
+			HttpSession session) {
 		
 		conec.validate(joueur, result);
 		
@@ -50,6 +54,14 @@ public class ConnexionController {
 			System.out.println(result.getFieldError());
 			return "connexion";
 		}
+		
+		Participation participation = new Participation();
+		participation.setJoueur(daoJoueur.findByUsername(joueur.getUsername()));
+		participation.setRole(Role.agent);
+		
+		daoParticipation.save(participation);
+		
+		session.setAttribute("participation_id", participation.getId());
 		
 		return "redirect:/choixEquipe";
 	}

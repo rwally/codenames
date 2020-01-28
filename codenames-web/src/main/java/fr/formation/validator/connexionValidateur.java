@@ -1,4 +1,4 @@
-package fr.formation.validateur;
+package fr.formation.validator;
 
 import java.util.ArrayList;
 import java.util.List;

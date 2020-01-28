@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +41,9 @@ public class UtilisateurController {
 	@Autowired
 	private IDAOEquipe daoEquipe;
 	
+	@Autowired
+	private UtilisateurValidator utiValid;
+	
 	@GetMapping("/listeJoueurs")
 	public String findAll(Model model) {
 		model.addAttribute("utilisateurs", daoUtilisateur.findAll());
@@ -61,7 +63,7 @@ public class UtilisateurController {
 			BindingResult result, Model model,
 			HttpSession session) {
 		
-		new UtilisateurValidator().validate(utilisateurForm, result);
+		utiValid.validate(utilisateurForm, result);
 		
 		if(result.hasErrors ()) {
 			return "inscription";
@@ -76,9 +78,8 @@ public class UtilisateurController {
 		participation.setJoueurs(joueur);
 		participation.setRole(Role.agent);
 		
-		daoParticipation.save(participation);
 		
-		session.setAttribute("participations", daoParticipation.findAll());
+		daoParticipation.save(participation);
 		
 		session.setAttribute("participation_id", participation.getId());
 		return "redirect:/choixEquipe";

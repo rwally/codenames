@@ -17,7 +17,7 @@
 					
 					<div>
 						<label for="InputId">Identifiant</label>
-						<input  type="text" class="form-control" id="InputId" name="username" aria-describedby="identifiantHelp" placeholder="Entrez votre identifiant"/>
+						<input  type="text" class="form-control" id="InputId" name="username" aria-describedby="identifiantHelp" th:value="${joueur?.username}"/>
 						<small id="identifiantHelp" class="form-text text-muted">Votre "GameTag"</small>
 
 			      		<div class="valid-feedback">
@@ -28,7 +28,7 @@
 					
 					<div>
 						<label for="InputPassword">Mot de passe</label>
-						<input type="password" class="form-control" id="InputPassword" name="password" placeholder="Entrez votre mot de passe"/>
+						<input type="password" class="form-control" id="InputPassword" name="password" placeholder="Entrez votre mot de passe" th:value="${joueur?.password}"/>
 
 			      		<div th:errors="${joueur.password}" class="alert alert-danger" role="alert">Message d'erreur par défaut</div>
 					</div>
