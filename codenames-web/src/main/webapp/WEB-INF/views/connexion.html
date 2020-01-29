@@ -7,7 +7,7 @@
 	<body>
 		
 		<section id ="connexion">
-		<script type="module" src="listeJoueurs.js"></script>
+<!-- 		<script type="module" src="listeJoueurs.js"></script> -->
 		
 			<header>
 				<h1  h1 class="display-4 text-center form-header mb-3">Connexion</h1>
@@ -18,7 +18,7 @@
 					
 					<div>
 						<label for="InputId">Identifiant</label>
-						<input  type="text" class="form-control" id="InputId" name="username" aria-describedby="identifiantHelp" th:value="${joueur?.username}"/>
+						<input  type="text" class="form-control" id="InputId" name="username" placeholder="Entrez votre identifiant" aria-describedby="identifiantHelp" th:value="${joueur?.username}"/>
 						<small id="identifiantHelp" class="form-text text-muted">Votre "GameTag"</small>
 
 			      		<div class="valid-feedback">
@@ -44,6 +44,34 @@
 				</div>
 			
 			</form>
+			
+			
+			<div class="chat-popup">
+					<div class="container">
+<!-- 					<section> -->
+						<form class="form-container" id="monChat">
+							<div class="chat-container overflow-auto" style="height:400px" id="chatId">
+								<div class="messages" id="messages">
+									
+	<!-- 								<div class="datetime">01/01/2020 00:01</div> -->
+	<!-- 					    	<p>Bonne Année !</p> -->
+								</div>
+							 </div>
+							 <div class="form-row mt-2 w-100 mx-auto">
+								 <input class="form-control" type="text" name="monMessage" placeholder="Tapez votre message">
+								 <div class="col-sm-10">
+<!-- 								 	<button type="submit" class="btn mt-1 btn-success" id="sendBtn"> > </button> -->
+								 </div>
+							 		
+							 </div>
+							 <button type="submit" class="btn mt-1 btn-success" id="sendBtn">Envoyer</button>
+							 <button type="button" class="btn cancel form-control" id="closeBtn">Fermer</button>
+								
+						</form>
+						<button type="button" class="btn" id="openBtn">Chat</button>
+<!-- 					</section> -->
+					</div>
+			</div>
 			
 		</section>
 		
