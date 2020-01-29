@@ -44,11 +44,6 @@ public class UtilisateurController {
 	@Autowired
 	private UtilisateurValidator utiValid;
 	
-	@GetMapping("/listeJoueurs")
-	public String findAll(Model model) {
-		model.addAttribute("utilisateurs", daoUtilisateur.findAll());
-		return "listeJoueurs";
-	}
 
 	@GetMapping("/inscription")
 	public String ajouterUtilisateur(Model model) {
