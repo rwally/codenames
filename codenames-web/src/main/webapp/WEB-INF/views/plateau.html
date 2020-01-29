@@ -14,12 +14,11 @@
 	</header>
 	
 	<!-- Si master -->
-	<form class="container" th:if="${participant.role== T(fr.formation.model.Role).master}">
+	<form class="container" method="post" th:if="${participant.role== T(fr.formation.model.Role).master}">
 		  <div class="form-row">
 			    <div class="col">
-			      <select class="form-control">
+			      <select class="form-control" name="tour.nombreMaster">
 			      	<option selected>Nombre de mots</option>
-  					<option>0</option>
   					<option>1</option>
   					<option>2</option>
   					<option>3</option>
@@ -28,7 +27,7 @@
   					<option>6</option>
   					<option>7</option>
   					<option>8</option>
-  					<option>&infin;</option>
+  					<option>9</option>
 			 	</select>
 			   </div>
 			   

@@ -10,14 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import fr.formation.dao.IDAOCase;
 import fr.formation.dao.IDAOGrille;
 import fr.formation.dao.IDAOMot;
 import fr.formation.dao.IDAOParticipation;
 import fr.formation.dao.IDAOPartie;
+import fr.formation.dao.IDAOTour;
 import fr.formation.model.Case;
 import fr.formation.model.Couleur;
 import fr.formation.model.Difficulte;
@@ -25,7 +28,7 @@ import fr.formation.model.Grille;
 import fr.formation.model.Mot;
 import fr.formation.model.Participation;
 import fr.formation.model.Partie;
-import fr.formation.model.Role;
+import fr.formation.model.Tour;
 
 @Controller
 public class PlateauController {
@@ -46,19 +49,20 @@ public class PlateauController {
 	@Autowired
 	IDAOGrille daoGrille;
 	
+	@Autowired
+	IDAOTour daoTour;
 	
-	//Création partie
-	@GetMapping("/plateau")
-	public String creationPlateau(Model model){
 	
+	//Création partie à mapper sur le bouton Création partie (après Connexion/Inscription) de la page Création partie/Rejoindre partie
+	//Ce bouton envoie ensuite sur liste joueurs
+	//@GetMapping("/listeJoueurs")
+	public String creationPartie(Model model){
 		Partie partie = new Partie();
 		Grille grille = new Grille();
 		grille.setDifficulte(Difficulte.facile);//TEST
 		partie.setGrille(grille);
 		
-		/*
-		 * CREER LISTE PARTICIPANTS
-		 */
+		
 		
 		//Création des 25 mots
 		List<Mot> mots = new ArrayList<Mot>();
@@ -100,21 +104,16 @@ public class PlateauController {
 		grille.setCases(cases);
 		daoGrille.save(grille);
 		partie.setGrille(grille);
+		
+		/*
+		 * AJOUTER LA PARTIE AU PARTICIPANT ET SAVE PARTICIPANT
+		 * AJOUTER LE PARTICIPANT
+		 */
+		
 		daoPartie.save(partie);
-
+	
 		
-		//On a besoin que de partie (ou tour)
-		model.addAttribute("cases", cases); //TEST
-		
-		
-		
-		Participation participant = new Participation();//TEST
-		participant.setRole(Role.master);//TEST
-		model.addAttribute("participant", participant);//TEST
-		
-		model.addAttribute("partie", partie);
-		
-		return "plateau";//ON DOIT REDIRIGER VERS LA LISTE DE JOUEURS
+		return "listeJoueurs";//ON DOIT REDIRIGER VERS LA LISTE DE JOUEURS AVEC L'IDPARTIE ET L'IDPARTICIPATION
 	} 
 	
 	
@@ -134,6 +133,52 @@ public class PlateauController {
 
 	 */
 	
-
+	//A mapper sur le bouton de Liste Joueurs qui va lancer la partie
+	public String lancerJeu(Model model, @RequestParam int idPartie, @RequestParam int idParticipant) {
+		Partie partie = daoPartie.findById(idPartie).get();
+		Tour tour = new Tour();
+		tour.setPartie(partie);
+		//On assigne l'equipe au tour (l'equipe bleue commence toujours)
+		for(Participation p : partie.getJoueurs()) {
+			if(p.getJoueur().getEquipe().getNom()=="bleu") {
+				tour.setEquipe(p.getJoueur().getEquipe());
+			}
+		}
+		
+		daoTour.save(tour);
+		daoPartie.save(partie);
+		
+		//On lance le plateau jeu avec l'idTour et l'idParticipant en param ou path variable
+		return "redirect:/plateau";
+		
+	}
+	
+	//Partie en cours
+	@GetMapping("/plateau")
+	public String plateauJeu(Model model, @RequestParam int idTour, @RequestParam int idParticipant) {
+		model.addAttribute("tour", daoTour.findById(idTour).get());
+		model.addAttribute("participant", daoParticipation.findById(idParticipant).get());
+		return "plateau";
+	}
+	
+	
+	/*
+	 * RECUPERE LE NOMBRE DE MOTS A DEVINER
+	 * 
+	 */
+	@PostMapping("/plateau")
+	public String plateauJeu(@ModelAttribute Tour tour) {
+		daoTour.save(tour);
+		//On relance le plateau jeu avec l'idTour et l'idParticipant en param ou path variable
+		return "redirect:/plateau";
+	}
+	
+	
+	/*
+	 * BOUCLE DE JEU
+	 * 
+	 */
+	
+	
 
 }

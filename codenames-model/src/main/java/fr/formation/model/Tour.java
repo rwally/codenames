@@ -1,5 +1,6 @@
 package fr.formation.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+
 
 @Entity
 @Table(name = "tour")
@@ -32,6 +39,9 @@ public class Tour {
 	@JoinColumn(name="tour_equipe")
 	private Equipe equipe;
 	
+	@Column(name="nombreMaster")
+	private int nombreMaster;
+	
 
 
 	public Partie getPartie() {
@@ -42,7 +52,14 @@ public class Tour {
 		this.partie = partie;
 	}
 
-	
+
+	public int getNombreMaster() {
+		return nombreMaster;
+	}
+
+	public void setNombreMaster(int nombreMaster) {
+		this.nombreMaster = nombreMaster;
+	}
 
 	public Equipe getEquipe() {
 		return equipe;
