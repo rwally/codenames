@@ -1,0 +1,27 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org" 
+		th:replace="~{layout.html :: layout(~{::title}, ~{::section})}"> 
+	<head> 
+		<meta charset="ISO-8859-1"> 
+		<title>VICTOIRE</title> 
+	</head> 
+	 
+	<body> 
+		 
+		<section id="pageVictoire"> 
+			<header> 
+				<h1 class="display-4 text-center form-header mb-3">VICTOIRE DE L'EQUIPE</h1> 
+				<h1 class="display-4 text-center form-header mb-3" th:text="${ tour.equipe.nom }" ></h1> 
+			</header> 
+			 
+			<div> 
+				<h2 class="text-center">La partie <span th:text="${partie.id}"></span> est terminée</h2> 
+			</div> 
+			<div> 
+				<a class="btn btn-success" th:href="@{ terminerPartie(id=${ partie.id }) }">Terminer la Partie</a> 
+			</div> 
+		</section> 
+		 
+		 
+	</body> 
+</html>
