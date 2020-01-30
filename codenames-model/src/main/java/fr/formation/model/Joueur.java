@@ -22,7 +22,6 @@ public class Joueur extends Utilisateur {
 //	private Role role;
 //	
 	@OneToOne(mappedBy = "joueur")
-	@JoinColumn(name = "participation")
 	private Participation saParticipation;
 	
 //	public Role getRole() {

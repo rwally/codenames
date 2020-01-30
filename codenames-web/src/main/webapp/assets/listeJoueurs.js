@@ -17,6 +17,7 @@ const compteJoueurs = () => {
 		 let boutonPlateau=document.createElement("button");
 			boutonPlateau.id="boutonPlateau";
 			boutonPlateau.className="btn btn-primary";
+			boutonPlateau.type="submit";
 			boutonPlateau.innerHTML="Jouez !"
 			document.querySelector('table').append(boutonPlateau);
 			

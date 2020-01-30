@@ -6,4 +6,6 @@ import fr.formation.model.Equipe;
 
 
 public interface IDAOEquipe extends JpaRepository<Equipe, Integer>{
+
+	Equipe findFirstByNom(String string);
 }

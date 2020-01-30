@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
+	<head>
+		<title>Choix de la partie</title>
+	</head>
+<body>
+	<section>
+		<header>
+			<h1 class="display-4 text-center form-header mb-3">Choisis ta partie</h1>
+		</header>
+		
+		<form method="post">
+			<div class="form-group mx-auto p-3 w-75">
+				<div class="form-group">
+					<label class="h4" for="trouverPartie">Rejoins une partie</label>
+					<select class="form-control" id="trouverPartie" name="id">
+						<option th:value=0 selected>Trouve l'ID de la partie à rejoindre </option>
+						<option
+							th:each="partie : ${parties}"
+							th:value="${partie.id}"
+							th:text="${partie.id}"/>
+					</select>
+					<div>
+						<input class="btn btn-outline-primary btn-block mt-3" type="submit" id="btnRejoinsPartie" name="button" value="Rejoindre la partie" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="h4">Crée ta propre partie</label>
+					<div>
+						<input class="btn btn-outline-primary btn-block mt-3" type="submit" id="btnNouvellePartie" name="button" value="Créer une nouvelle partie" />
+					</div>
+				</div>
+
+			</div>
+		</form>
+		
+	</section>
+</body>
+</html>

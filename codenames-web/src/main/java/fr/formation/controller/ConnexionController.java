@@ -63,7 +63,7 @@ public class ConnexionController {
 		
 		session.setAttribute("participation_id", participation.getId());
 		
-		return "redirect:/choixEquipe";
+		return "redirect:/choixPartie";
 	}
 	
 	@ModelAttribute("utilisateurs")
