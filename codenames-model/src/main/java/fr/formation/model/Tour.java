@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,8 @@ import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import fr.formation.views.Views;
+
 
 
 @Entity
@@ -31,18 +34,26 @@ public class Tour {
 	private int id;
 	// private List<Mot> CodeNames = new ArrayList<Mot>();
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="tour_partie")
+	@JsonView(Views.Tour.class)
 	private Partie partie;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="tour_equipe")
+	@JsonView(Views.Tour.class)
 	private Equipe equipe;
 	
 	@Column(name="nombreMaster")
+	@JsonView(Views.Tour.class)
 	private int nombreMaster;
 	
+	
 
+
+	public Tour() {
+		
+	}
 
 	public Partie getPartie() {
 		return partie;

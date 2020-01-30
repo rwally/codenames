@@ -1,4 +1,4 @@
-package fr.formation.controller;
+package fr.formation.restcontroller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,20 +8,19 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
 
 import fr.formation.dao.IDAOCase;
 import fr.formation.dao.IDAOEquipe;
@@ -35,17 +34,18 @@ import fr.formation.model.Couleur;
 import fr.formation.model.Difficulte;
 import fr.formation.model.Equipe;
 import fr.formation.model.Grille;
+import fr.formation.model.Joueur;
 import fr.formation.model.Mot;
 import fr.formation.model.Participation;
 import fr.formation.model.Partie;
 import fr.formation.model.Role;
 import fr.formation.model.Tour;
+import fr.formation.views.Views;
 
-
-@Controller
-@RequestMapping("/plateau")
-public class PlateauController {
-	
+@RestController
+@CrossOrigin("*")
+@RequestMapping("/api/plateau")
+public class PlateauRestController {
 	
 	@Autowired
 	IDAOMot daoMot;
@@ -71,7 +71,7 @@ public class PlateauController {
 	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();	
 	
 	@GetMapping("/test")
-	public String testPlateau(HttpSession session) {
+	public Tour testPlateau(HttpSession session) {
 		Partie partie = new Partie();
 		
 		Equipe equipe1= new Equipe();
@@ -104,19 +104,15 @@ public class PlateauController {
 					if(i<9) {
 						maCase.setCouleur(Couleur.bleu);
 						maCase.setImageMaster("https://i.imgur.com/LDcUXHC.png");
-						maCase.setImage("https://i.imgur.com/LDcUXHC.png");
 					}else if(i<17) {
 						maCase.setCouleur(Couleur.rouge);
 						maCase.setImageMaster("https://i.imgur.com/SAcppjf.png");
-						maCase.setImage("https://i.imgur.com/LDcUXHC.png");
 					}else if(i<partie.getGrille().getDifficulte().getValeur()) {
 						maCase.setCouleur(Couleur.blanc);
 						maCase.setImageMaster("https://i.imgur.com/LRk4Jee.png");
-						maCase.setImage("https://i.imgur.com/LDcUXHC.png");
 					}else {
 						maCase.setCouleur(Couleur.noir);
 						maCase.setImageMaster("https://i.imgur.com/AfRrEMz.png");
-						maCase.setImage("https://i.imgur.com/LDcUXHC.png");
 					}			
 					
 					maCase.setGrille(grille);
@@ -143,49 +139,40 @@ public class PlateauController {
 				session.setAttribute("idParticipant", participant1.getId()); 
 				session.setAttribute("idTour", daoTour.save(tour).getId()); 
 				
-				return "redirect:/plateau";
+				return tour;
 	}
 	
 	//Affichage principale
 	@GetMapping
-	@Transactional
-	public String plateauJeu(Model model, HttpSession session) {
-		Tour tour = daoTour.findById(48).get();
-		Participation participant = daoParticipation.findById(87).get();
-		participant.setRole(Role.master);
+	public Tour plateauJeu(Model model, HttpSession session) {
+		Tour tour = daoTour.findById((Integer) session.getAttribute("idTour")).get();
+		Participation participant = daoParticipation.findById((Integer) session.getAttribute("idParticipant")).get();
 		model.addAttribute("participant", participant);
-		model.addAttribute("tour", tour);
-		Hibernate.initialize(tour.getPartie().getGrille().getCases());
 		model.addAttribute("cases", tour.getPartie().getGrille().getCases());
-		return "plateau";
+		return tour;
 	}
 	
 	
 	//Recupere le nombre de mots à deviner
-
 	@PostMapping
-	public String nombreADeviner(Model model, @RequestParam int nombreMaster, HttpSession session) {
-		Tour tour = daoTour.findById(48).get();
-		tour.setNombreMaster(nombreMaster);
+	public void nombreADeviner(Model model, @RequestBody Tour tour, HttpSession session) {
 		daoTour.save(tour);
-		return "redirect:/plateau";
-	}	
+		Participation participant = daoParticipation.findById((Integer) session.getAttribute("idParticipant")).get();
+		model.addAttribute("participant", participant);
+		model.addAttribute("cases", tour.getPartie().getGrille().getCases());
+	}
+	
 	
 	//Boucle de jeu, appelé après le clique sur une case
 	@GetMapping("/{libelle}")
-	@Transactional
-	public String cliqueImage(Model model, @PathVariable String libelle, HttpSession session) {
+	public Tour cliqueImage(Model model, @PathVariable String libelle, HttpSession session) {
 		
-		Participation participant = daoParticipation.findById(87).get();
-		participant.setRole(Role.master);
+		Participation participant = daoParticipation.findById((Integer) session.getAttribute("idParticipant")).get();
 		model.addAttribute("participant", participant);
 		
-	
-		
-		Tour tour = daoTour.findById(48).get();
-		Hibernate.initialize(tour.getPartie().getGrille().getCases());
+		Tour tour = daoTour.findById((Integer) session.getAttribute("idTour")).get();
 		model.addAttribute("cases", tour.getPartie().getGrille().getCases());
-	
+		
 		String equipeJouant = tour.getEquipe().getNom();
 		List<Case> cases = tour.getPartie().getGrille().getCases();
 		
@@ -212,7 +199,7 @@ public class PlateauController {
 			 */
 			if(c.getMot().getLibelle()==libelle) {
 				if(c.getCouleur().toString()==equipeJouant) {
-					if(equipeJouant=="Bleu") {
+					if(equipeJouant=="bleu") {
 						c.setImage(trouverBleu);
 						c.setImageMaster(trouverBleu);
 					}else {
@@ -229,7 +216,7 @@ public class PlateauController {
 					c.setImageMaster(trouverBlanc);
 					tour.setNombreMaster(0);
 				}else {
-					if(equipeJouant=="Bleu") {
+					if(equipeJouant=="bleu") {
 						c.setImage(trouverRouge);
 						c.setImageMaster(trouverRouge);
 					}else {
@@ -244,15 +231,14 @@ public class PlateauController {
 			
 			/*
 			 * VERIF DE FIN DE TOUR
-			 * Créer un nouveau tour
+			 * 
 			 */
-		
 			
 			if(tour.getNombreMaster()==0) {
-				if(equipeJouant=="Bleu") {
-					tour.setEquipe(daoEquipe.findFirstByNom("Rouge"));
+				if(equipeJouant=="bleu") {
+					tour.setEquipe(daoEquipe.findByNom("rouge"));
 				}else {
-					tour.setEquipe(daoEquipe.findFirstByNom("Bleu"));
+					tour.setEquipe(daoEquipe.findByNom("bleu"));
 				}
 			}
 			
@@ -269,32 +255,29 @@ public class PlateauController {
 		
 		/*
 		 * VERIF FIN DE JEU
-		 * Créer un nouveau tour
+		 * 
 		 */
 		
 		if(caseTrouverBleu==9) {
-				tour.setEquipe(daoEquipe.findFirstByNom("Bleu"));
+				tour.setEquipe(daoEquipe.findByNom("bleu"));
 			//ECRAN BLEU A GAGNE
 		} else if(caseTrouverRouge==8) {
-				tour.setEquipe(daoEquipe.findFirstByNom("Rouge"));
+				tour.setEquipe(daoEquipe.findByNom("rouge"));
 			//ECRAN ROUGE A GAGNE
 		} else if(caseTrouverNoir==1) {
-			if(equipeJouant=="Bleu") {
-				tour.setEquipe(daoEquipe.findFirstByNom("Rouge"));
+			if(equipeJouant=="bleu") {
+				tour.setEquipe(daoEquipe.findByNom("rouge"));
 				//ECRAN ROUGE A GAGNE
 			}else {
-				tour.setEquipe(daoEquipe.findFirstByNom("Bleu"));
+				tour.setEquipe(daoEquipe.findByNom("bleu"));
 				//ECRAN BLEU A GAGNE
 			}
 		}
-		
-		
-		
 			
 		
-		
+		daoTour.save(tour);
 
-		/*
+		
 		for(SseEmitter emitter : this.emitters) {
 			try {
 				emitter.send("refresh");
@@ -303,12 +286,11 @@ public class PlateauController {
 				emitter.completeWithError(e);
 			}
 		}
-		*/
-		model.addAttribute("tour", daoTour.save(tour));
-		return "redirect:/plateau";
+		
+		return tour;
 	}
 	
-	/*
+	
 	@GetMapping("/sse")
 	public SseEmitter testSSE() {
 		SseEmitter emitter = new SseEmitter();
@@ -329,22 +311,6 @@ public class PlateauController {
 		
 		return emitter;
 	}
-	*/
+	
 
 }
-
-
-/*
- Master bleu	https://i.imgur.com/LDcUXHC.png
- Master rouge	https://i.imgur.com/SAcppjf.png
- Master noir	https://i.imgur.com/AfRrEMz.png
- Master blanc	https://i.imgur.com/LRk4Jee.png
- 
- Agent			https://i.imgur.com/LRk4Jee.png
- 
- Trouver bleu	https://i.imgur.com/miuPPRe.png
- Trouver rouge	https://i.imgur.com/hTeiagx.png
- Trouver noir 	https://i.imgur.com/QWHCuAR.png
- Trouver blanc	https://i.imgur.com/7MeDbpE.png
-
- */

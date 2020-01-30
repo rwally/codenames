@@ -9,6 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.formation.views.Views;
+
 @Entity
 @Table(name = "mot")
 public class Mot {
@@ -19,6 +23,7 @@ public class Mot {
 	private int id;
 	
 	@Column(name = "libelle", nullable = false)
+	@JsonView(Views.Common.class)
 	private String libelle;
 	
 	@Column(name = "used", nullable = false)

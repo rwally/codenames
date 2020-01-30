@@ -30,6 +30,7 @@ public class Equipe {
 	@Column(name = "toursGagnes")
 	private int toursGagnes;
 	
+	
 	public int getId() {
 		return id;
 	}

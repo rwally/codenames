@@ -1,4 +1,4 @@
-const compteJoueurs = () => {
+/*const compteJoueurs = () => {
 	
 	var compteurBleu=0, compteurRouge=0;
 
@@ -27,4 +27,4 @@ const compteJoueurs = () => {
 	 }
 }
 
-compteJoueurs();
+compteJoueurs(); */

@@ -12,4 +12,6 @@ import fr.formation.model.Mot;
 
 public interface IDAOMot extends JpaRepository<Mot, Integer>{
 	public List<Mot> findByUsed(boolean isUsed);
+
+	public Mot findByLibelle(String libelle);
 }

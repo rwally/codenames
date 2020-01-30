@@ -3,6 +3,7 @@ package fr.formation.model;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.formation.views.Views;
+
 @Entity
 @Table(name = "partie")
 public class Partie {
@@ -22,8 +27,9 @@ public class Partie {
 	@Column(name = "id")
 	private int id;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "grille")
+	@JsonView(Views.Partie.class)
 	private Grille grille;
 
 	@OneToMany(mappedBy = "maPartie")
