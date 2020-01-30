@@ -16,10 +16,10 @@ const compteJoueurs = () => {
 	 if(compteurBleu>=2 && compteurRouge>=2){
 		 let boutonPlateau=document.createElement("button");
 			boutonPlateau.id="boutonPlateau";
-			boutonPlateau.className="btn btn-primary";
 			boutonPlateau.type="submit";
+			boutonPlateau.className="btn btn-primary mb-2";
 			boutonPlateau.innerHTML="Jouez !"
-			document.querySelector('table').append(boutonPlateau);
+			document.querySelector('thead').prepend(boutonPlateau);
 			
 			boutonPlateau.addEventListener('click', () => {
 				 window.location = "plateau.html";	

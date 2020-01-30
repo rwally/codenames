@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout.html :: layout(~{::title}, ~{::section})}">
+	<head>
+		<title>Chat</title>
+	</head>
+	<body>
+		<section id ="chat">
+		
+<!-- 		<script type="module" src="assets/ChatComportement.js"></script> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="assets/ChatMiseEnForme.css" /> -->
+		
+			<div class="chat-popup">
+					<div class="container">
+<!-- 					<section> -->
+						<form class="form-container" id="monChat">
+							<div class="chat-container overflow-auto" style="height:400px" id="chatId">
+								<div class="message">
+	<!-- 								<div class="datetime">01/01/2020 00:01</div> -->
+	<!-- 					    	<p>Bonne Année !</p> -->
+								</div>
+							 </div>
+							 <input type="text" name="monMessage" placeholder="Tapez votre message">
+							 <div>
+							 	<button type="submit" class="btn mt-2" id="sendBtn">Envoyer</button>
+								<button type="button" class="btn cancel" id="closeBtn">Fermer</button>
+							 </div>
+								
+						</form>
+						<button type="button" class="btn" id="openBtn">Chat</button>
+<!-- 					</section> -->
+					</div>
+			</div>
+		</section>
+	</body>
+</html>
