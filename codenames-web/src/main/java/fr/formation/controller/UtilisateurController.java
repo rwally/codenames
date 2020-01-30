@@ -168,17 +168,22 @@ public class UtilisateurController {
 					maCase.setImageMaster("https://i.imgur.com/AfRrEMz.png");
 					maCase.setImage("https://i.imgur.com/LRk4Jee.png");
 				}			
-				
-				
-				daoCase.save(maCase);
+
 				cases.add(maCase);
 			}
 			
 			Collections.shuffle(cases);
 			
+			for (Case c : cases) {
+				c.setGrille(grille);
+				
+				daoGrille.save(grille);
+				daoCase.save(c);
+			}
+			
 			//Le plateau est crée
 			grille.setCases(cases);
-			daoGrille.save(grille);
+//			daoGrille.save(grille);
 			partie.setGrille(grille);
 
 			participation.setMaPartie(partie);

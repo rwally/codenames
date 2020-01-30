@@ -1,4 +1,4 @@
-package fr.formation.restcontroller;
+package fr.formation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-
+import fr.formation.Views.Views;
 import fr.formation.dao.IDAOCase;
 import fr.formation.dao.IDAOEquipe;
 import fr.formation.dao.IDAOGrille;
@@ -40,11 +40,9 @@ import fr.formation.model.Participation;
 import fr.formation.model.Partie;
 import fr.formation.model.Role;
 import fr.formation.model.Tour;
-import fr.formation.views.Views;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/plateau")
 public class PlateauRestController {
 	
 	@Autowired

@@ -27,7 +27,7 @@ public class Partie {
 	@Column(name = "id")
 	private int id;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "grille")
 	@JsonView(Views.Partie.class)
 	private Grille grille;

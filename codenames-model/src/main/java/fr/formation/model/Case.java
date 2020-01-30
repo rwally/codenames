@@ -42,7 +42,7 @@ public class Case {
 	@JsonView(Views.Common.class)
 	private Mot mot;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "grille")
 	private Grille grille;
 	

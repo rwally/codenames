@@ -1,4 +1,4 @@
-/*const compteJoueurs = () => {
+const compteJoueurs = () => {
 	
 	var compteurBleu=0, compteurRouge=0;
 
@@ -17,7 +17,7 @@
 		 let boutonPlateau=document.createElement("button");
 			boutonPlateau.id="boutonPlateau";
 			boutonPlateau.type="submit";
-			boutonPlateau.className="btn btn-primary mb-2";
+			boutonPlateau.className="btn btn-primary";
 			boutonPlateau.innerHTML="Jouez !"
 			document.querySelector('thead').prepend(boutonPlateau);
 			
@@ -27,4 +27,4 @@
 	 }
 }
 
-compteJoueurs(); */
+compteJoueurs();

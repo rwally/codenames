@@ -36,7 +36,7 @@ public class Grille {
 	@JsonView(Views.Grille.class)
 	private Difficulte difficulte;
 	
-	@OneToMany(mappedBy = "grille",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "grille")
 	@JsonView(Views.Grille.class)
 	private List<Case> cases;
 	
