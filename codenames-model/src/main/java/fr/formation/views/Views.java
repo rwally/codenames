@@ -1,6 +1,6 @@
-package fr.formation.views;
+package fr.formation.Views;
 
-import fr.formation.views.Views.Common;
+import fr.formation.Views.Views.Common;
 
 public class Views {
 	
@@ -20,4 +20,7 @@ public class Views {
 	public static class Tour extends Partie {
 	}
 
+	public static class Chat extends Common{
+		
+	}
 }

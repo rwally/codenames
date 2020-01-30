@@ -21,7 +21,7 @@ import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import fr.formation.views.Views;
+import fr.formation.Views.Views;
 
 
 

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import fr.formation.views.Views;
+import fr.formation.Views.Views;
 
 @Entity
 @Table(name = "mot")
