@@ -188,20 +188,20 @@
 	    		</div>
   			</div>
   			<div class="row">
-  				<div class="col">
-	      			<a th:href="@{/plateau/{libelle}(libelle=${cases[20].mot.libelle})}">
+			    <div class="col">
+      				<a th:href="@{/plateau/{libelle}(libelle=${cases[20].mot.libelle})}">
       				<img th:if="${participant.role == T(fr.formation.model.Role).master}" th:src="${cases[20].imageMaster}" />
       				<img th:if="${participant.role == T(fr.formation.model.Role).agent}" th:src="${cases[20].image}" />
 					<span class="centered" th:text="${cases[20].mot.libelle}"></span>
 					</a>
-	    		</div>
-			    <div class="col">
-      				<a th:href="@{/plateau/{libelle}(libelle=${cases[21].mot.libelle})}">
+    			</div>
+	    		<div class="col">
+	      			<a th:href="@{/plateau/{libelle}(libelle=${cases[21].mot.libelle})}">
       				<img th:if="${participant.role == T(fr.formation.model.Role).master}" th:src="${cases[21].imageMaster}" />
       				<img th:if="${participant.role == T(fr.formation.model.Role).agent}" th:src="${cases[21].image}" />
 					<span class="centered" th:text="${cases[21].mot.libelle}"></span>
 					</a>
-    			</div>
+	    		</div>
 	    		<div class="col">
 	      			<a th:href="@{/plateau/{libelle}(libelle=${cases[22].mot.libelle})}">
       				<img th:if="${participant.role == T(fr.formation.model.Role).master}" th:src="${cases[22].imageMaster}" />
@@ -210,7 +210,7 @@
 					</a>
 	    		</div>
 	    		<div class="col">
-	      			<a th:href="@/plateau/{libelle}(libelle=${cases[23].mot.libelle})}">
+	      			<a th:href="@{/plateau/{libelle}(libelle=${cases[23].mot.libelle})}">
       				<img th:if="${participant.role == T(fr.formation.model.Role).master}" th:src="${cases[23].imageMaster}" />
       				<img th:if="${participant.role == T(fr.formation.model.Role).agent}" th:src="${cases[23].image}" />
 					<span class="centered" th:text="${cases[23].mot.libelle}"></span>

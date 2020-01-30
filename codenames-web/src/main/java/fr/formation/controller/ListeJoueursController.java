@@ -82,10 +82,42 @@ public class ListeJoueursController {
 			tour.setPartie(partie);
 			
 			daoTour.save(tour);
+			
+			// Distribution des rôles
+			List<Equipe> equipes = new ArrayList<Equipe>();
+			equipes.add(daoEquipe.findFirstByNom("Bleu"));
+			equipes.add(daoEquipe.findFirstByNom("Rouge"));
+			
+			List<Participation> participations = (List<Participation>) session.getAttribute("participations");
+			
+			for (Equipe e : equipes) {
+				Hibernate.initialize(partie.getJoueurs());
+				
+				List<Joueur> joueurs = new ArrayList<Joueur>();
+				
+				for (int i = 0; i < participations.size(); i++) {
+					Joueur joueur = daoJoueur.findBySaParticipationId(participations.get(i).getId());
+					
+					if (joueur.getEquipe() == e) {
+						joueurs.add(joueur);
+						participations.get(i).setRole(Role.agent);
+						daoParticipation.save(participations.get(i));
+					}
+				}
+
+				e.setJoueurs(joueurs);
+				
+				Joueur j = partie.getRandomElement(joueurs);
+				
+				Participation p = daoParticipation.findByJoueur(j);
+				p.setRole(Role.master);
+				daoParticipation.save(p);	
+			}
 		}
 		else {
 			int dernierElement = partie.getTours().size() - 1;
 			tour = partie.getTours().get(dernierElement);
+			
 		}
 		
 		session.setAttribute("tour_id", tour.getId());
@@ -98,39 +130,6 @@ public class ListeJoueursController {
 		
 		daoTour.save(tour);
 		daoPartie.save(partie);
-		
-		// Distribution des rôles
-		List<Equipe> equipes = new ArrayList<Equipe>();
-		equipes.add(daoEquipe.findById(3).get());
-		equipes.add(daoEquipe.findById(4).get());
-		
-		List<Participation> participations = (List<Participation>) session.getAttribute("participations");
-		
-		for (Equipe e : equipes) {
-			Hibernate.initialize(partie.getJoueurs());
-			
-			List<Joueur> joueurs = new ArrayList<Joueur>();
-			
-			for (int i = 0; i < participations.size(); i++) {
-				Joueur joueur = daoJoueur.findBySaParticipationId(participations.get(i).getId());
-				
-				if (joueur.getEquipe() == e) {
-					joueurs.add(joueur);
-					participations.get(i).setRole(Role.agent);
-					daoParticipation.save(participations.get(i));
-				}
-			}
-
-			e.setJoueurs(joueurs);
-			
-			Joueur j = partie.getRandomElement(joueurs);
-			
-			Participation p = daoParticipation.findByJoueur(j);
-			p.setRole(Role.master);
-			daoParticipation.save(p);
-
-			
-		}
 		
 		return "redirect:/plateau";
 	}
