@@ -132,7 +132,7 @@ public class ListeJoueursController {
 			
 		}
 		
-		return "redirect:/api/plateau";
+		return "redirect:/plateau";
 	}
 
 	

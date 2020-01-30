@@ -154,15 +154,19 @@ public class UtilisateurController {
 				if(i<9) {
 					maCase.setCouleur(Couleur.bleu);
 					maCase.setImageMaster("https://i.imgur.com/LDcUXHC.png");
+					maCase.setImage("https://i.imgur.com/LRk4Jee.png");
 				}else if(i<17) {
 					maCase.setCouleur(Couleur.rouge);
 					maCase.setImageMaster("https://i.imgur.com/SAcppjf.png");
+					maCase.setImage("https://i.imgur.com/LRk4Jee.png");
 				}else if(i<partie.getGrille().getDifficulte().getValeur()) {
 					maCase.setCouleur(Couleur.blanc);
 					maCase.setImageMaster("https://i.imgur.com/LRk4Jee.png");
+					maCase.setImage("https://i.imgur.com/LRk4Jee.png");
 				}else {
 					maCase.setCouleur(Couleur.noir);
 					maCase.setImageMaster("https://i.imgur.com/AfRrEMz.png");
+					maCase.setImage("https://i.imgur.com/LRk4Jee.png");
 				}			
 				
 				
