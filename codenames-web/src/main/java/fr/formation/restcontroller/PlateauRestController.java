@@ -40,6 +40,7 @@ import fr.formation.model.Participation;
 import fr.formation.model.Partie;
 import fr.formation.model.Role;
 import fr.formation.model.Tour;
+import fr.formation.Views.Views;
 
 @RestController
 @CrossOrigin("*")
@@ -68,80 +69,10 @@ public class PlateauRestController {
 	
 	private List<SseEmitter> emitters = new ArrayList<SseEmitter>();	
 	
-	@GetMapping("/test")
-	public Tour testPlateau(HttpSession session) {
-		Partie partie = new Partie();
-		
-		Equipe equipe1= new Equipe();
-		Equipe equipe2= new Equipe();
-		
-		
-		equipe1.setNom("bleu");
-		equipe2.setNom("rouge");
-		
-		
-		Grille grille = new Grille();
-		grille.setDifficulte(Difficulte.facile);//TEST
-		partie.setGrille(grille);
-		
-		//Création des 25 mots
-				List<Mot> mots = new ArrayList<Mot>();
-				List<Integer> nombresRandom = new Random().ints(1, 699).distinct().limit(25).boxed()
-							.collect(Collectors.toList());
-				
-				for(int n : nombresRandom) {
-					mots.add(daoMot.findById(n).get());
-				}
-				
-				//Création des cases 
-				List<Case> cases = new ArrayList<Case>();
-				for(int i = 0; i < 25; i++) {
-					Case maCase = new Case();
-					maCase.setMot(mots.get(i));
-					
-					if(i<9) {
-						maCase.setCouleur(Couleur.bleu);
-						maCase.setImageMaster("https://i.imgur.com/LDcUXHC.png");
-					}else if(i<17) {
-						maCase.setCouleur(Couleur.rouge);
-						maCase.setImageMaster("https://i.imgur.com/SAcppjf.png");
-					}else if(i<partie.getGrille().getDifficulte().getValeur()) {
-						maCase.setCouleur(Couleur.blanc);
-						maCase.setImageMaster("https://i.imgur.com/LRk4Jee.png");
-					}else {
-						maCase.setCouleur(Couleur.noir);
-						maCase.setImageMaster("https://i.imgur.com/AfRrEMz.png");
-					}			
-					
-					maCase.setGrille(grille);
-//					daoCase.save(maCase);
-					cases.add(maCase);
-				}
-				
-				Collections.shuffle(cases);
-				
-				//Le plateau est crée
-				grille.setCases(cases);
-//				daoGrille.save(grille);
-				partie.setGrille(grille);
-				
-				Participation participant1 = new Participation();		
-				participant1.setId(789);
-				participant1.setRole(Role.master);
-				
-				Tour tour = new Tour();
-				tour.setPartie(partie);
-				tour.setEquipe(equipe1);
-				
-			
-				session.setAttribute("idParticipant", participant1.getId()); 
-				session.setAttribute("idTour", daoTour.save(tour).getId()); 
-				
-				return tour;
-	}
+	
 	
 	//Affichage principale
-	@GetMapping
+
 	public Tour plateauJeu(Model model, HttpSession session) {
 		Tour tour = daoTour.findById((Integer) session.getAttribute("idTour")).get();
 		Participation participant = daoParticipation.findById((Integer) session.getAttribute("idParticipant")).get();
@@ -151,8 +82,7 @@ public class PlateauRestController {
 	}
 	
 	
-	//Recupere le nombre de mots à deviner
-	@PostMapping
+	//Recupere le nombre de mots ï¿½ deviner
 	public void nombreADeviner(Model model, @RequestBody Tour tour, HttpSession session) {
 		daoTour.save(tour);
 		Participation participant = daoParticipation.findById((Integer) session.getAttribute("idParticipant")).get();
@@ -161,8 +91,8 @@ public class PlateauRestController {
 	}
 	
 	
-	//Boucle de jeu, appelé après le clique sur une case
-	@GetMapping("/{libelle}")
+	//Boucle de jeu, appelï¿½ aprï¿½s le clique sur une case
+
 	public Tour cliqueImage(Model model, @PathVariable String libelle, HttpSession session) {
 		
 		Participation participant = daoParticipation.findById((Integer) session.getAttribute("idParticipant")).get();

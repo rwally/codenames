@@ -11,6 +11,7 @@
 	<header>
 			<h1  class="display-4 text-center">Codenames</h1>
 			<h3  class="display-8 text-center">Equipe <span th:text="${tour.equipe.nom}"></span>, à vous de jouer !</h3>
+			<h3  class="display-8 text-center"><span th:if="${tour.nombreMaster}==99">Master, envoyez le nombre de mots à deviner</span></h3>
 	</header>
 	
 	<!-- Si master -->

@@ -80,7 +80,7 @@ public class ListeJoueursController {
 		if (partie.getTours().size() == 0) {
 			tour = new Tour();
 			tour.setPartie(partie);
-			
+			tour.setNombreMaster(99);
 			daoTour.save(tour);
 			
 			// Distribution des rôles

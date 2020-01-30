@@ -105,7 +105,7 @@ public class PlateauController {
 			
 		Tour tour = daoTour.findById((Integer) session.getAttribute("tour_id")).get();
 	
-		String equipeJouant = tour.getEquipe().getNom();
+		String equipeJouant = tour.getEquipe().getNom().toLowerCase();
 		List<Case> cases = tour.getPartie().getGrille().getCases();
 		int nombreMaster=tour.getNombreMaster();
 		
@@ -122,69 +122,83 @@ public class PlateauController {
 		int caseTrouverBleu=0, caseTrouverRouge=0, caseTrouverNoir=0;
 		
 		
-		for(Case c : cases) {
+		for(int i=0;i<cases.size();i++) {
 			
 			/*
 			 * REVELE LA CASE ET UPDATE LE NOMBRE MASTER
 			 * 
 			 */
-			if(c.getMot().getLibelle()==libelle) {
-				if(c.getCouleur().toString()==equipeJouant) {
-					if(equipeJouant=="Bleu") {
-						c.setImage(trouverBleu);
-						c.setImageMaster(trouverBleu);
+			
+			
+			if(cases.get(i).getMot().getLibelle().equals(libelle)) {
+				if(cases.get(i).getCouleur().toString().equals(equipeJouant)) {
+					if(equipeJouant.equals("bleu")) {
+						cases.get(i).setImage(trouverBleu);
+						cases.get(i).setImageMaster(trouverBleu);
 					}else {
-						c.setImage(trouverRouge);
-						c.setImageMaster(trouverRouge);
+						cases.get(i).setImage(trouverRouge);
+						cases.get(i).setImageMaster(trouverRouge);
 					}
-					tour.setNombreMaster(nombreMaster--);
-				}else if(c.getCouleur()==Couleur.noir) {
-					c.setImage(trouverNoir);
-					c.setImageMaster(trouverNoir);
+					tour.setNombreMaster(--nombreMaster);
+				}else if(cases.get(i).getCouleur()==Couleur.noir) {
+					cases.get(i).setImage(trouverNoir);
+					cases.get(i).setImageMaster(trouverNoir);
 					tour.setNombreMaster(0);
-				}else if(c.getCouleur()==Couleur.blanc) {
-					c.setImage(trouverBlanc);
-					c.setImageMaster(trouverBlanc);
+				}else if(cases.get(i).getCouleur()==Couleur.blanc) {
+					cases.get(i).setImage(trouverBlanc);
+					cases.get(i).setImageMaster(trouverBlanc);
 					tour.setNombreMaster(0);
 				}else {
-					if(equipeJouant=="Bleu") {
-						c.setImage(trouverRouge);
-						c.setImageMaster(trouverRouge);
+					if(equipeJouant.equals("bleu")) {
+						cases.get(i).setImage(trouverRouge);
+						cases.get(i).setImageMaster(trouverRouge);
 					}else {
-						c.setImage(trouverBleu);
-						c.setImageMaster(trouverBleu);
+						cases.get(i).setImage(trouverBleu);
+						cases.get(i).setImageMaster(trouverBleu);
 					}
 					tour.setNombreMaster(0);
 				}
 
-				c.setTrouver(true);
-				daoCase.save(c);
+				cases.get(i).setTrouver(true);
+				daoCase.save(cases.get(i));
 			}
-			
-			/*
-			 * VERIF DE FIN DE TOUR
-			 * 
-			 */
-		
-			
-			if(tour.getNombreMaster()==0) {
-				if(equipeJouant=="Bleu") {
-					tour.setEquipe(daoEquipe.findFirstByNom("Rouge"));
-				}else {
-					tour.setEquipe(daoEquipe.findFirstByNom("Bleu"));
-				}
-			}
-			
-			if(c.isTrouver() && c.getCouleur()==Couleur.bleu) {
+	
+			if(cases.get(i).isTrouver() && cases.get(i).getCouleur()==Couleur.bleu) {
 				caseTrouverBleu++;
-			} else if(c.isTrouver() && c.getCouleur()==Couleur.rouge) {
+			} else if(cases.get(i).isTrouver() && cases.get(i).getCouleur()==Couleur.rouge) {
 				caseTrouverRouge++;
-			} else if(c.isTrouver() && c.getCouleur()==Couleur.noir) {
+			} else if(cases.get(i).isTrouver() && cases.get(i).getCouleur()==Couleur.noir) {
 				caseTrouverNoir++;
 			}
 		}
 		
 		tour.getPartie().getGrille().setCases(cases);
+		daoTour.save(tour);
+		
+		/*
+		 * VERIF DE FIN DE TOUR
+		 * 
+		 */
+	
+		
+		if(tour.getNombreMaster()==0) {
+			if(equipeJouant.equals("bleu")) {
+					Tour nouveauTour = new Tour();
+					nouveauTour.setPartie(tour.getPartie());
+					nouveauTour.setEquipe((daoEquipe.findFirstByNom("Rouge")));
+					nouveauTour.setNombreMaster(99);
+					daoTour.save(nouveauTour);
+					session.setAttribute("tour_id", nouveauTour.getId());
+			}else {
+				Tour nouveauTour = new Tour();
+				nouveauTour.setPartie(tour.getPartie());
+				nouveauTour.setEquipe((daoEquipe.findFirstByNom("Bleu")));
+				nouveauTour.setNombreMaster(99);
+				daoTour.save(nouveauTour);
+				session.setAttribute("tour_id", nouveauTour.getId());
+			}
+		}
+		
 		
 		/*
 		 * VERIF FIN DE JEU
@@ -208,10 +222,9 @@ public class PlateauController {
 		}
 		
 		
-		//Créer un nouveau tour
-		tour.setId(0);
-		daoTour.save(tour);
-		session.setAttribute("tour_id", tour.getId());
+	
+		
+		
 		
 		
 
