@@ -14,12 +14,14 @@
 				<h1 class="display-4 text-center form-header mb-3" th:text="${ tour.equipe.nom }" ></h1> 
 			</header> 
 			 
+			 <form method="post">
 			<div> 
 				<h2 class="text-center">La partie <span th:text="${partie.id}"></span> est terminée</h2> 
 			</div> 
 			<div> 
-				<a class="btn btn-success" th:href="@{ terminerPartie(id=${ partie.id }) }">Terminer la Partie</a> 
+				<button type="submit" class="btn btn-success">Terminer la partie</button> 
 			</div> 
+			</form>
 		</section> 
 		 
 		 

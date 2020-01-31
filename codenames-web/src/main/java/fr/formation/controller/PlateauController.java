@@ -94,9 +94,10 @@ public class PlateauController {
 	
 	//Recupere le nombre de mots à deviner
 	@PostMapping
-	public String nombreADeviner(@RequestParam int nombreMaster, HttpSession session) {
+	public String nombreADeviner(@RequestParam int nombreMaster, @RequestParam String indice, HttpSession session) {
 		Tour tour = daoTour.findById((Integer) session.getAttribute("tour_id")).get();
 		tour.setNombreMaster(nombreMaster);
+		tour.setIndice(indice);
 		daoTour.save(tour);
 		return "redirect:/plateau";
 	}	

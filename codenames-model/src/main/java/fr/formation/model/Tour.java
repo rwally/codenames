@@ -48,8 +48,17 @@ public class Tour {
 	@JsonView(Views.Tour.class)
 	private int nombreMaster;
 	
+	@Column
+	@JsonView(Views.Tour.class)
+	private String indice;
 	
+	public String getIndice() {
+		return indice;
+	}
 
+	public void setIndice(String indice) {
+		this.indice = indice;
+	}
 
 	public Tour() {
 		

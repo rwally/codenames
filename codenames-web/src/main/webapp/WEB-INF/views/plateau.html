@@ -9,15 +9,20 @@
 	<section>
 	<!-- Haut de page -->
 	<header>
-			<h1  class="display-4 text-center">Codenames</h1>
-			<h3  class="display-8 text-center">Equipe <span th:text="${tour.equipe.nom}"></span>, à vous de jouer !</h3>
-			<h3  class="display-8 text-center" th:if="${tour.nombreMaster}==99">Master, envoyez le nombre de mots à deviner</h3>
-			<h3  class="display-8 text-center" th:if="${tour.nombreMaster}!=99">Agents, vous avez <span th:text="${tour.nombreMaster}"></span> mots à deviner</h3>
+			<h1  class="display-4 text-center">Codenames</h1> 
+			<h3  class="display-8 text-center">Equipe <span th:text="${tour.equipe.nom}"></span>, à vous de jouer !</h3> 
+			<h3  class="display-8 text-center" th:if="${tour.nombreMaster}==99">Master, envoyez le nombre de mots à deviner</h3> 
+			<h3  class="display-8 text-center" th:if="${tour.nombreMaster}!=99">Agents, vous avez <span th:text="${tour.nombreMaster}"></span> mots à deviner avec le mot indice : <span th:text="${tour.indice}"></span></h3>
+			<h3  class="display-8 text-center" th:if="${tour.nombreMaster}!=99">avec le mot indice : <span th:text="${tour.indice}"></span></h3> 
 	</header>
 	
 	<!-- Si master -->
 	<form class="container" method="post" th:if="${participant.role== T(fr.formation.model.Role).master}">
 		  <div class="form-row">
+		   		<div class="col form-group">
+					<input id="indice" class="form-control" type="text" name="indice" placeholder="Mot indice"/>
+			   </div>
+			   
 			    <div class="col">
 			      <select class="form-control" name="nombreMaster">
 			      	<option selected>Nombre de mots</option>
