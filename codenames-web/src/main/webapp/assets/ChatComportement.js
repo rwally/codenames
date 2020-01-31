@@ -13,7 +13,7 @@ const envoyerMessage = (chat) => {
 //	let dateActuelle = new Date();
 	const options = { hour:'2-digit', minute:'2-digit', second:'2-digit' };
 	
-	date.innerHTML = new Date(chat.date).toLocaleDateString('en-US' , options);
+	date.innerHTML = new Date(chat.date).toLocaleDateString('fr-FR' , options);
 //	date.innerHTML = chat.date.toLocaleDateString('en-US' , options);
 	contenu.innerHTML = chat.message;
 	
@@ -24,7 +24,7 @@ const envoyerMessage = (chat) => {
 	document.querySelector('.messages').prepend(msg);
 }
 
-fetch('http://localhost:8081/codenames-web/api/chat')
+fetch('http://localhost:8080/codenames-web/api/chat')
 	.then(resp => resp.json()) 
 	.then(chats => {
 		for(let c of chats) {
@@ -39,36 +39,41 @@ const ajouterMessageAjax = async (event) => {
 			date: new Date()
 	};
 	let messageRecu = await 
-		fetch('http://localhost:8081/codenames-web/api/chat',{
+		fetch('http://localhost:8080/codenames-web/api/chat',{
 		method: 'POST',
 		headers: {
 			'Content-Type':'application/json'
 		},
 		body: JSON.stringify(chat)
 		}).then(resp => resp.json());
-	envoyerMessage(messageRecu);
+//	envoyerMessage(messageRecu);
 }
 
 document.querySelector('#monChat')
 	.addEventListener('submit', ajouterMessageAjax);
 
 
-let eventSource = new EventSource('http://localhost:8081/codenames-web/api/chat/sse');
+let eventSource = new EventSource('http://localhost:8080/codenames-web/api/chat/sse');
 
-eventSource.addEventListener('message', () =>{
+
+
+
+
+eventSource.addEventListener('message', (event) =>{
 //	//Si on a reçu un string
 //	let msg = event.data;
-//	alert(msg);
+	console.log("Nouveau message !");
+	console.log(event);
 //	
 //	//SI on a reçu un objet JSON
-//	let object = JSON.parse(event.data);
+	let object = JSON.parse(event.data);
 //	console.log(object);
 	
 	let chat = {
 		message : event.data,
-		date : new Date()
+		date : event.data
 	}
-	envoyerMessage(chat);
+	envoyerMessage(object);
 	
 });
 
@@ -84,5 +89,4 @@ function closeForm() {
 }
 
 document.querySelector('#openBtn').addEventListener('click',openForm);
-document.querySelector('#sendBtn').addEventListener('click',envoyerMessage);
 document.querySelector('#closeBtn').addEventListener('click',closeForm);

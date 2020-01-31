@@ -43,7 +43,7 @@ public class ChatRestController {
 		
 		for (SseEmitter emitter : this.emitters) {
 			try {
-				emitter.send("UN NOUVEAU MESSAGE");
+				emitter.send(chat);
 			} catch (Exception e) {
 				emitter.completeWithError(e);
 			}
