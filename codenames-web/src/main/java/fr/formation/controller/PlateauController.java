@@ -75,7 +75,10 @@ public class PlateauController {
 	@GetMapping
 	@Transactional
 	public String plateauJeu(Model model, HttpSession session) {
-		Tour tour = daoTour.findById((Integer) session.getAttribute("tour_id")).get();
+		Partie partie = daoPartie.findById((Integer) session.getAttribute("partie_id")).get();
+		int dernierElement = partie.getTours().size() - 1;
+		Tour tour = partie.getTours().get(dernierElement);
+		
 		Participation participant = daoParticipation.findById((Integer) session.getAttribute("participation_id")).get();
 		
 		model.addAttribute("participant", participant);
@@ -222,13 +225,6 @@ public class PlateauController {
 		}
 		
 		
-	
-		
-		
-		
-		
-
-		/*
 		for(SseEmitter emitter : this.emitters) {
 			try {
 				emitter.send("refresh");
@@ -237,12 +233,13 @@ public class PlateauController {
 				emitter.completeWithError(e);
 			}
 		}
-		*/
+	
+
 		return "redirect:/plateau";
 	}
 	
-	/*
-	@GetMapping("/sse")
+	
+	@GetMapping("/{libelle}/sse")
 	public SseEmitter testSSE() {
 		SseEmitter emitter = new SseEmitter();
 		
@@ -262,6 +259,5 @@ public class PlateauController {
 		
 		return emitter;
 	}
-	*/
 }
 

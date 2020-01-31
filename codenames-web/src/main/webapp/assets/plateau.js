@@ -92,10 +92,9 @@ evtSource.addEventListener('message', (event) => {
 });
 */
 
-/*
-var evtSource = new EventSource('http://localhost:8080/codenames-web/plateau/sse');
+
+var evtSource = new EventSource(`http://localhost:8080/codenames-web/plateau/${libelle}/sse`);
 
 evtSource.addEventListener('message', (event) => {
-	alert(msg);
+	window.location = "plateau.html";
 });
-*/

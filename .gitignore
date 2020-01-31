@@ -4,3 +4,5 @@
 build/
 target/
 /bin/
+
+codenames-web/src/main/java/fr/formation/restcontroller/PlateauRestController.java
