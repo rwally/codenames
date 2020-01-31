@@ -48,10 +48,25 @@ public class Tour {
 	@JsonView(Views.Tour.class)
 	private int nombreMaster;
 	
+<<<<<<< Updated upstream
 	@Column
 	@JsonView(Views.Tour.class)
 	private String indice;
+=======
+	@Column(name="indice")
+	@JsonView(Views.Tour.class)
+	private String indice;
 	
+>>>>>>> Stashed changes
+	
+	public String getIndice() {
+		return indice;
+	}
+
+	public void setIndice(String indice) {
+		this.indice = indice;
+	}
+
 	public String getIndice() {
 		return indice;
 	}

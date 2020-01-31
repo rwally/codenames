@@ -48,10 +48,6 @@ public class ConnexionController {
 		conec.validate(joueur, result);
 		
 		if(result.hasErrors ()) {
-			
-			System.out.println("erreur");
-			System.out.println("nb d'erreurs dans result: " +result.getErrorCount());
-			System.out.println(result.getFieldError());
 			return "connexion";
 		}
 		
