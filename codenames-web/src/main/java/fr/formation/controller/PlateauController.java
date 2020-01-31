@@ -239,6 +239,12 @@ public class PlateauController {
 			}
 		}
 		
+		if (caseTrouverBleu==9 || caseTrouverRouge==8 || caseTrouverNoir==1) {
+			session.setAttribute("tour_id", tour.getId());
+			daoTour.save(tour);
+			return "redirect:/pageVictoire";
+		}
+		
 //		for(SseEmitter emitter : this.emitters) {
 //			try {
 //				emitter.send("cliqueImage");

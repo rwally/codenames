@@ -76,8 +76,8 @@ public class VictoireController {
 		
 		Grille grille = partieTermine.getGrille();
 		
-		daoPartie.delete(partieTermine); 
-		daoGrille.delete(grille);
+		//daoPartie.delete(partieTermine); 
+		//daoGrille.delete(grille);
 		return "redirect:/connexion"; 
 	} 
 } 
