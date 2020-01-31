@@ -17,7 +17,7 @@
 	</header>
 	
 	<!-- Si master -->
-	<form class="container" method="post" th:if="${participant.role== T(fr.formation.model.Role).master}">
+	<form class="container" id="nbMaster" method="post" th:if="${participant.role== T(fr.formation.model.Role).master}">
 		  <div class="form-row">
 		   		<div class="col form-group">
 					<input id="indice" class="form-control" type="text" name="indice" placeholder="Mot indice"/>

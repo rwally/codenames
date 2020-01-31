@@ -14,6 +14,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import fr.formation.dao.IDAOCase;
@@ -43,6 +45,7 @@ import fr.formation.model.Tour;
 
 
 @Controller
+@CrossOrigin("*")
 @RequestMapping("/plateau")
 public class PlateauController {
 	
@@ -78,6 +81,7 @@ public class PlateauController {
 		Partie partie = daoPartie.findById((Integer) session.getAttribute("partie_id")).get();
 		int dernierElement = partie.getTours().size() - 1;
 		Tour tour = partie.getTours().get(dernierElement);
+		session.setAttribute("tour_id", tour.getId());
 		
 		Participation participant = daoParticipation.findById((Integer) session.getAttribute("participation_id")).get();
 		
@@ -87,25 +91,35 @@ public class PlateauController {
 		Hibernate.initialize(tour.getPartie().getGrille().getCases());
 		model.addAttribute("cases", tour.getPartie().getGrille().getCases());
 		
-		return "plateau";
-		
+		return "plateau";	
 	}
 	
 	
-	//Recupere le nombre de mots à deviner
+	//Recupere le nombre de mots ï¿½ deviner
 	@PostMapping
 	public String nombreADeviner(@RequestParam int nombreMaster, @RequestParam String indice, HttpSession session) {
 		Tour tour = daoTour.findById((Integer) session.getAttribute("tour_id")).get();
 		tour.setNombreMaster(nombreMaster);
 		tour.setIndice(indice);
 		daoTour.save(tour);
-		return "redirect:/plateau";
+		
+//		for(SseEmitter emitter : this.emitters) {
+//			try {
+//				emitter.send("nombreADeviner");
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				emitter.completeWithError(e);
+//			}
+//		}
+		
+	return "redirect:/plateau";
 	}	
 	
-	//Boucle de jeu, appelé après le clique sur une case
+	//Boucle de jeu, appelï¿½ aprï¿½s le clique sur une case
 	@GetMapping("/{libelle}")
 	@Transactional
-	public String cliqueImage(@PathVariable String libelle, HttpSession session) {
+	//@ResponseBody
+	public String cliqueImage(@PathVariable String libelle, HttpSession session, Model model) {
 			
 		Tour tour = daoTour.findById((Integer) session.getAttribute("tour_id")).get();
 	
@@ -225,22 +239,20 @@ public class PlateauController {
 			}
 		}
 		
-		
-		for(SseEmitter emitter : this.emitters) {
-			try {
-				emitter.send("refresh");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				emitter.completeWithError(e);
-			}
-		}
-	
+//		for(SseEmitter emitter : this.emitters) {
+//			try {
+//				emitter.send("cliqueImage");
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				emitter.completeWithError(e);
+//			}
+//		}
 
 		return "redirect:/plateau";
 	}
 	
 	
-	@GetMapping("/{libelle}/sse")
+	@GetMapping("/sse")
 	public SseEmitter testSSE() {
 		SseEmitter emitter = new SseEmitter();
 		
@@ -260,5 +272,6 @@ public class PlateauController {
 		
 		return emitter;
 	}
+	
 }
 

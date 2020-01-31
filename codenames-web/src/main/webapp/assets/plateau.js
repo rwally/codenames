@@ -93,8 +93,38 @@ evtSource.addEventListener('message', (event) => {
 */
 
 
-var evtSource = new EventSource(`http://localhost:8080/codenames-web/plateau/${libelle}/sse`);
 
-evtSource.addEventListener('message', (event) => {
-	window.location = "plateau.html";
-});
+//if (document.querySelector('#nbMaster') != null) {
+//	document.querySelector('#nbMaster').addEventListener('submit', (event) => {
+//		event.preventDefault();
+//		
+//		fetch('plateau/?nombreMaster=' + document.querySelector('select[name="nombreMaster"]').value, {
+//			method: 'POST'
+//		});
+//	});
+//}
+//
+//
+//
+//document.querySelectorAll('#plateau a').forEach(link => {
+//	link.addEventListener('click', (event) => {
+//		event.preventDefault();
+//		
+//		fetch(event.target.getAttribute('href'));
+//	});
+//});
+
+
+//var evtSource = new EventSource('http://localhost:8080/codenames-web/plateau/sse');
+//
+//evtSource.addEventListener('message', (event) => {
+//	//window.location.reload;// = "plateau.html";
+//	setTimeout(function(){
+//		window.location = "http://localhost:8080/codenames-web/plateau";
+//	//	window.location.reload(true);
+//	}, 1000);
+//	;
+//});
+
+
+
