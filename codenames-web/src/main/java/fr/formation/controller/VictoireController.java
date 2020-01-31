@@ -72,7 +72,7 @@ public class VictoireController {
 		} 
 		
 		daoChat.deleteAll();
-		daoCase.deleteAll();		
+		//daoCase.deleteAll();		
 		
 		Grille grille = partieTermine.getGrille();
 		
